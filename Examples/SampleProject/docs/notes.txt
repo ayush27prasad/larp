@@ -1,0 +1,2 @@
+Plain text file, no extension-specific icon.
+Useful for checking the fallback document glyph.

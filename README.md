@@ -5,8 +5,9 @@ in the middle, and a real shell at the bottom — in one window.
 
 Built with SwiftUI and AppKit, for macOS 15 and later.
 
-> **Status: pre-alpha.** The window shell and build system exist. The three panes
-> are placeholders. See [Roadmap](#roadmap) and [CHANGELOG.md](CHANGELOG.md).
+> **Status: pre-alpha.** You can open a folder, browse its tree, and read files.
+> Editing and the terminal are not implemented yet. See [Roadmap](#roadmap) and
+> [CHANGELOG.md](CHANGELOG.md).
 
 ## Why
 
@@ -60,6 +61,7 @@ iKhalacy/
 │   │   ├── Editor/           # Middle pane — active file
 │   │   └── Terminal/         # Bottom pane — shell session
 │   └── Resources/            # Info.plist, asset catalog
+├── Examples/SampleProject/   # Mixed-language fixture for manual browsing
 └── Tests/iKhalacyTests/      # Swift Testing suites
 ```
 
@@ -67,6 +69,12 @@ Each pane is a self-contained feature folder. Panes never reach into each other;
 they coordinate only through the shared `Workspace` model, which owns the open
 folder and the active file. Adding a feature means adding a folder under
 `Features/` — not threading state through the view hierarchy.
+
+## Trying it
+
+Press ⌘O and pick any folder — or point it at `Examples/SampleProject/`, a small
+mixed-language tree kept in the repo for exactly this. Click a file to read it.
+The folder and file you had open are restored next launch.
 
 ## Architecture decisions
 
@@ -86,6 +94,12 @@ pure Swift, no native dependencies, and mature enough that full-screen terminal
 apps work correctly from the start. We own only the pane, its lifecycle, and the
 integration with the open folder.
 
+**The tree loads eagerly.** Lazy per-expansion loading needs expansion callbacks
+`OutlineGroup` does not provide, so the whole tree is walked on open. A skip list
+(`.git`, `node_modules`, `.build`, `DerivedData`, `__pycache__`) and a 20,000-entry
+budget keep that bounded; the explorer says so when the budget is hit. Other
+dotfiles stay visible — `.gitignore` and `.env` are files people open.
+
 **Syntax highlighting is deferred.** v0.1 renders plain monospaced text. The
 engine choice — incremental parsing versus pattern matching — is deliberately
 left open until file loading and the terminal are solid.
@@ -99,8 +113,8 @@ time the project structure changes.
 Ordered, and deliberately narrow. Each milestone is independently usable.
 
 - [x] **0.1** — Project scaffold, build system, three-pane window shell
-- [ ] **0.2** — Explorer: open a folder, browse the tree, persist the selection
-- [ ] **0.3** — Editor: load, display, and save text files
+- [x] **0.2** — Explorer: open a folder, browse the tree, persist the selection
+- [ ] **0.3** — Editor: editing and saving (read-only display already works)
 - [ ] **0.4** — Terminal: PTY + SwiftTerm, rooted at the open folder
 - [ ] **0.5** — Syntax highlighting
 - [ ] **0.6** — Tabs, find in file, pane show/hide

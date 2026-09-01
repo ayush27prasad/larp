@@ -7,14 +7,13 @@ struct TerminalPane: View {
         ContentUnavailableView(
             "Terminal pending",
             systemImage: "apple.terminal",
-            description: Text("A shell session will run here.")
-        )
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.black.opacity(0.03))
+            description: Text("A shell session will run here."))
+            .frame(maxWidth: .infinity)
+            .background(.black.opacity(0.03))
     }
 }
 
 #Preview {
     TerminalPane()
-        .frame(width: 700, height: 220)
+        .frame(width: 700, height: 200)
 }

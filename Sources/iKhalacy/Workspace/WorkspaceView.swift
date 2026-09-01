@@ -11,12 +11,13 @@ struct WorkspaceView: View {
         } detail: {
             VSplitView {
                 EditorPane()
-                    .frame(minHeight: 160)
+                    .frame(minHeight: 200, maxHeight: .infinity)
                 TerminalPane()
-                    .frame(minHeight: 100, idealHeight: 220)
+                    .frame(minHeight: 80, idealHeight: 200)
             }
         }
         .navigationTitle(workspace.rootURL?.lastPathComponent ?? "iKhalacy")
+        .navigationSubtitle(workspace.activeFileURL?.lastPathComponent ?? "")
     }
 }
 
