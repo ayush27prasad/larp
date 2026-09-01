@@ -1,0 +1,79 @@
+name: iKhalacy
+
+options:
+  bundleIdPrefix: in.ayush27prasad
+  deploymentTarget:
+    macOS: "15.0"
+  createIntermediateGroups: true
+  groupSortPosition: top
+  generateEmptyDirectories: true
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    SWIFT_STRICT_CONCURRENCY: complete
+    SWIFT_UPCOMING_FEATURE_EXISTENTIAL_ANY: YES
+    SWIFT_TREAT_WARNINGS_AS_ERRORS: YES
+    GCC_TREAT_WARNINGS_AS_ERRORS: YES
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    DEAD_CODE_STRIPPING: YES
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+    CODE_SIGN_STYLE: Automatic
+    CODE_SIGN_IDENTITY: "-"
+  configs:
+    debug:
+      SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEBUG
+      ONLY_ACTIVE_ARCH: YES
+    release:
+      SWIFT_COMPILATION_MODE: wholemodule
+
+targets:
+  iKhalacy:
+    type: application
+    platform: macOS
+    sources:
+      - path: Sources/iKhalacy
+        excludes: ["**/.DS_Store"]
+    settings:
+      base:
+        PRODUCT_NAME: iKhalacy
+        PRODUCT_BUNDLE_IDENTIFIER: in.ayush27prasad.iKhalacy
+        INFOPLIST_FILE: Sources/iKhalacy/Resources/Info.plist
+        # Unsandboxed by design: the app spawns a login shell and opens
+        # arbitrary user-chosen folders. See docs in README.
+        ENABLE_APP_SANDBOX: NO
+        ENABLE_HARDENED_RUNTIME: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        COMBINE_HIDPI_IMAGES: YES
+
+  iKhalacyTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: Tests/iKhalacyTests
+    dependencies:
+      - target: iKhalacy
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: in.ayush27prasad.iKhalacy.tests
+        GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  iKhalacy:
+    build:
+      targets:
+        iKhalacy: all
+        iKhalacyTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: true
+      targets:
+        - iKhalacyTests
+    profile:
+      config: Release
+    archive:
+      config: Release

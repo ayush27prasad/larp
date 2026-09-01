@@ -1,0 +1,4 @@
+* text=auto eol=lf
+*.pbxproj -text merge=union linguist-generated
+*.png binary
+*.icns binary
