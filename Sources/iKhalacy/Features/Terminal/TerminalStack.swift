@@ -31,6 +31,9 @@ struct TerminalStack: NSViewRepresentable {
         for session in store.sessions {
             let host = coordinator.hosts[session.id] ?? {
                 let host = TerminalHostView()
+                host.onExit = { [weak store] cleanly in
+                    store?.shellExited(session.id, cleanly: cleanly)
+                }
                 host.startShell(in: session.workingDirectory)
                 coordinator.hosts[session.id] = host
                 return host

@@ -106,6 +106,24 @@ struct TerminalStoreTests {
         #expect(store.sessions.map(\.title) == ["server"])
     }
 
+    @Test func aCleanShellExitClosesItsTab() {
+        let store = TerminalStore()
+        let first = store.newSession(in: directory)
+        let second = store.newSession(in: directory)
+
+        store.shellExited(second.id, cleanly: true)
+        #expect(store.sessions.map(\.id) == [first.id])
+        #expect(store.activeSessionID == first.id)
+    }
+
+    @Test func aFailedShellExitKeepsItsTab() {
+        let store = TerminalStore()
+        let session = store.newSession(in: directory)
+
+        store.shellExited(session.id, cleanly: false)
+        #expect(store.sessions.map(\.id) == [session.id])
+    }
+
     @Test func reportsNoFocusWithoutAContainer() {
         let store = TerminalStore()
         #expect(store.hasFocus == false)

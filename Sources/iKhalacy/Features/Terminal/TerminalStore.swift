@@ -51,6 +51,14 @@ final class TerminalStore {
         activeSessionID = sessions.isEmpty ? nil : sessions[max(0, index - 1)].id
     }
 
+    /// A shell ended by itself — `exit`, ⌃D. A clean exit closes the tab, as
+    /// Terminal.app does by default; a failing one leaves it open, so whatever
+    /// the shell printed about the failure can still be read.
+    func shellExited(_ id: TerminalSession.ID, cleanly: Bool) {
+        guard cleanly else { return }
+        close(id)
+    }
+
     func closeAll() {
         sessions.removeAll()
         activeSessionID = nil

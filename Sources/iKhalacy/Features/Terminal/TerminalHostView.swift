@@ -13,6 +13,10 @@ final class TerminalHostView: NSView {
     private let terminal = LocalProcessTerminalView(frame: .zero)
     private var pendingResize: DispatchWorkItem?
 
+    /// Called when the shell exits by itself, with whether it exited cleanly.
+    /// Not called for shells stopped through `terminate()`.
+    var onExit: ((_ cleanly: Bool) -> Void)?
+
     /// How long the width must hold steady before the PTY is told about it.
     /// Long enough to outlast a sidebar animation, short enough to feel instant.
     private static let settleDelay: TimeInterval = 0.15
@@ -22,6 +26,7 @@ final class TerminalHostView: NSView {
         clipsToBounds = true
         terminal.nativeBackgroundColor = .textBackgroundColor
         terminal.nativeForegroundColor = .textColor
+        terminal.processDelegate = self
         addSubview(terminal)
     }
 
@@ -72,4 +77,20 @@ final class TerminalHostView: NSView {
         pendingResize?.cancel()
         terminal.terminate()
     }
+}
+
+// SwiftTerm delivers these on the main queue.
+extension TerminalHostView: @preconcurrency LocalProcessTerminalViewDelegate {
+    func processTerminated(source: TerminalView, exitCode: Int32?) {
+        // `exitCode` is the raw waitpid status, which is zero only for exit(0).
+        let cleanly = exitCode == 0
+        if !cleanly {
+            terminal.feed(text: "\r\n[Process completed]\r\n")
+        }
+        onExit?(cleanly)
+    }
+
+    func sizeChanged(source: LocalProcessTerminalView, newCols: Int, newRows: Int) {}
+    func setTerminalTitle(source: LocalProcessTerminalView, title: String) {}
+    func hostCurrentDirectoryUpdate(source: TerminalView, directory: String?) {}
 }

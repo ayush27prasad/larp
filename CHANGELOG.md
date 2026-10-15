@@ -21,6 +21,10 @@ While the major version is `0`, minor bumps may include breaking changes.
   stripping it.
 - A failed save is reported in an alert. ⌘S used to discard the error, so a save
   into a deleted folder or a read-only location looked like it had worked.
+- A shell that exits — `exit`, ⌃D — closes its terminal tab, as Terminal.app
+  does, instead of leaving a dead tab behind. One that exits with an error
+  keeps its tab and output, marked `[Process completed]`, so the error can
+  still be read.
 
 ## [0.3.0] - 2026-09-01
 

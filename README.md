@@ -93,8 +93,9 @@ started in the open project folder, so your profile, `PATH` and prompt all apply
 
 ⌘T or the tab bar's + button opens another session. Every shell stays alive in
 the background — switching tabs hides a view rather than respawning the process.
-Double-click a tab to rename it. Opening a different project folder closes the
-shells and starts a fresh one rooted there.
+Double-click a tab to rename it. Exiting a shell closes its tab; if it exits
+with an error the tab stays open so you can read why. Opening a different
+project folder closes the shells and starts a fresh one rooted there.
 
 Resizes are coalesced before they reach the PTY. Every layout pass otherwise
 raises `SIGWINCH`, and animating the sidebar open or closed walks through dozens
