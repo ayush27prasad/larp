@@ -19,13 +19,16 @@ final class OpenDocument: Identifiable {
     private var savedText: String
     private(set) var isDirty = false
 
+    private let hasByteOrderMark: Bool
+
     nonisolated var id: URL { url }
     var name: String { url.lastPathComponent }
 
-    init(url: URL, text: String) {
+    init(url: URL, text: String, hasByteOrderMark: Bool = false) {
         self.url = url
         self.text = text
         self.savedText = text
+        self.hasByteOrderMark = hasByteOrderMark
         // The prefix lets extensionless files be detected by shebang or modeline.
         self.language = CodeLanguage.detectLanguageFrom(
             url: url,
@@ -33,7 +36,9 @@ final class OpenDocument: Identifiable {
     }
 
     func save() throws {
-        try text.write(to: url, atomically: true, encoding: .utf8)
+        var data = hasByteOrderMark ? TextFileLoader.byteOrderMark : Data()
+        data.append(contentsOf: text.utf8)
+        try data.write(to: url, options: .atomic)
         savedText = text
         isDirty = false
     }

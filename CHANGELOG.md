@@ -12,6 +12,13 @@ While the major version is `0`, minor bumps may include breaking changes.
 - Selecting a file that can't be opened — binary, over 4 MB, or unreadable —
   explains why in the editor pane again. 0.3 dropped the explanation 0.2 showed,
   so the click appeared to do nothing.
+- Files that aren't UTF-8 are refused instead of corrupted. A UTF-16 fallback
+  accepted almost any bytes, so a Latin-1 or Windows-1252 file opened as
+  mojibake, and ⌘S — enabled even with no edits — overwrote the original with
+  it. UTF-16 files are refused too; they only opened when they happened to
+  contain no zero bytes, and were silently saved back as UTF-8.
+- Saving keeps a UTF-8 byte-order mark if the file had one, rather than
+  stripping it.
 
 ## [0.3.0] - 2026-09-01
 

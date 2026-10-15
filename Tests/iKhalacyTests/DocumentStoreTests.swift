@@ -153,6 +153,34 @@ struct OpenDocumentTests {
         #expect(try String(contentsOf: file, encoding: .utf8) == "hello world")
     }
 
+    /// Saving an untouched file must reproduce it byte for byte.
+    @Test(arguments: [
+        Data("line one\r\nline two — ünïcode\r\n".utf8),
+        TextFileLoader.byteOrderMark + Data("// with BOM\n".utf8),
+    ])
+    func savingRoundTripsTheBytes(_ original: Data) async throws {
+        let temp = try TempDirectory()
+        let file = try temp.write(original, to: "a.txt")
+
+        let store = DocumentStore()
+        try await store.open(file)
+        try store.activeDocument?.save()
+
+        #expect(try Data(contentsOf: file) == original)
+    }
+
+    @Test func editsKeepTheByteOrderMark() async throws {
+        let temp = try TempDirectory()
+        let file = try temp.write(TextFileLoader.byteOrderMark + Data("hi".utf8), to: "a.txt")
+
+        let store = DocumentStore()
+        let document = try await store.open(file)
+        document.text = "hi there"
+        try document.save()
+
+        #expect(try Data(contentsOf: file) == TextFileLoader.byteOrderMark + Data("hi there".utf8))
+    }
+
     @Test func editingBackToTheSavedContentClearsDirty() async throws {
         let temp = try TempDirectory()
         let file = try temp.write("hello", to: "a.txt")

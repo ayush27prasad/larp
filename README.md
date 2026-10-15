@@ -16,7 +16,8 @@ that are normally three apps: browse a project, read and edit a text file, and r
 commands against it — without Electron, and without a plugin ecosystem.
 
 Target file types are text and code: Markdown, Python, JavaScript, Java, Swift,
-and similar. Binary formats are out of scope.
+and similar. Binary formats are out of scope. Files must be UTF-8 — other
+encodings are refused rather than risk being rewritten as UTF-8 on save.
 
 ## Requirements
 

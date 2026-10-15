@@ -48,15 +48,18 @@ final class DocumentStore {
             return existing
         }
 
-        let text: String
+        let contents: TextFileLoader.Contents
         do {
-            text = try await TextFileLoader.load(url)
+            contents = try await TextFileLoader.load(url)
         } catch {
             let reason = (error as? TextFileLoader.Failure).map(TextFileLoader.describe)
             refusal = Refusal(url: url, reason: reason ?? error.localizedDescription)
             throw error
         }
-        let document = OpenDocument(url: url, text: text)
+        let document = OpenDocument(
+            url: url,
+            text: contents.text,
+            hasByteOrderMark: contents.hasByteOrderMark)
 
         if preview,
            let replacing = previewDocumentID,

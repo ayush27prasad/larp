@@ -8,7 +8,29 @@ struct TextFileLoaderTests {
         let temp = try TempDirectory()
         let file = try temp.write("hello — world\n", to: "notes.md")
 
-        #expect(try await TextFileLoader.load(file) == "hello — world\n")
+        #expect(try await TextFileLoader.load(file) == .init(text: "hello — world\n", hasByteOrderMark: false))
+    }
+
+    @Test func keepsTheByteOrderMarkOutOfTheText() async throws {
+        let temp = try TempDirectory()
+        let file = try temp.write(TextFileLoader.byteOrderMark + Data("hi\n".utf8), to: "bom.txt")
+
+        #expect(try await TextFileLoader.load(file) == .init(text: "hi\n", hasByteOrderMark: true))
+    }
+
+    /// Both used to "succeed" via a UTF-16 fallback, and saving then rewrote
+    /// the file as UTF-8 — garbling the Latin-1 one outright.
+    @Test(arguments: [
+        "café naïve\n".data(using: .isoLatin1)!,
+        Data([0xFF, 0xFE]) + "日本語".data(using: .utf16LittleEndian)!,
+    ])
+    func refusesOtherEncodings(_ data: Data) async throws {
+        let temp = try TempDirectory()
+        let file = try temp.write(data, to: "legacy.txt")
+
+        await #expect(throws: TextFileLoader.Failure.notUTF8) {
+            try await TextFileLoader.load(file)
+        }
     }
 
     @Test func rejectsBinaryContent() async throws {
