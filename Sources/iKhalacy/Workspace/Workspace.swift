@@ -142,8 +142,22 @@ final class Workspace {
         }
     }
 
-    func saveActiveDocument() throws {
-        try editor.activeDocument?.save()
+    /// A save that failed, for the window to report. The document stays dirty,
+    /// so nothing is lost by dismissing it.
+    struct SaveFailure: Equatable {
+        let fileName: String
+        let reason: String
+    }
+
+    var saveFailure: SaveFailure?
+
+    func saveActiveDocument() {
+        guard let document = editor.activeDocument else { return }
+        do {
+            try document.save()
+        } catch {
+            saveFailure = SaveFailure(fileName: document.name, reason: error.localizedDescription)
+        }
     }
 
     func activate(_ url: URL) {

@@ -136,6 +136,36 @@ struct WorkspaceTests {
         #expect(workspace.rootURL == nil)
         #expect(workspace.treeState == .empty)
     }
+
+    @Test func savingWritesTheActiveDocument() async throws {
+        let temp = try TempDirectory()
+        let file = try temp.write("old", to: "a.txt")
+
+        let workspace = makeWorkspace()
+        await workspace.open(folder: temp.url)
+        await workspace.openFile(file)
+        workspace.editor.activeDocument?.text = "new"
+        workspace.saveActiveDocument()
+
+        #expect(workspace.saveFailure == nil)
+        #expect(try String(contentsOf: file, encoding: .utf8) == "new")
+    }
+
+    @Test func aFailedSaveIsReportedAndKeepsTheEdits() async throws {
+        let temp = try TempDirectory()
+        let folder = try temp.makeDirectory("gone")
+        let file = try temp.write("old", to: "gone/a.txt")
+
+        let workspace = makeWorkspace()
+        await workspace.open(folder: temp.url)
+        await workspace.openFile(file)
+        workspace.editor.activeDocument?.text = "new"
+        try FileManager.default.removeItem(at: folder)
+        workspace.saveActiveDocument()
+
+        #expect(workspace.saveFailure?.fileName == "a.txt")
+        #expect(workspace.editor.activeDocument?.isDirty == true)
+    }
 }
 
 @MainActor

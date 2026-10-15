@@ -30,5 +30,16 @@ struct WorkspaceView: View {
             await workspace.restoreLastFolder()
             workspace.ensureTerminal()
         }
+        .alert(
+            "Couldn't save \(workspace.saveFailure?.fileName ?? "the file")",
+            isPresented: Binding(
+                get: { workspace.saveFailure != nil },
+                set: { if !$0 { workspace.saveFailure = nil } }),
+            presenting: workspace.saveFailure
+        ) { _ in
+            Button("OK") {}
+        } message: { failure in
+            Text(failure.reason)
+        }
     }
 }

@@ -30,7 +30,7 @@ struct iKhalacyApp: App {
                     .disabled(!workspace.hasOpenFolder)
             }
             CommandGroup(replacing: .saveItem) {
-                Button("Save") { try? workspace.saveActiveDocument() }
+                Button("Save") { workspace.saveActiveDocument() }
                     .keyboardShortcut("s")
                     .disabled(workspace.editor.activeDocument == nil)
                 Button("New Terminal") { workspace.newTerminal() }

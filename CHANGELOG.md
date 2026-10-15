@@ -19,6 +19,8 @@ While the major version is `0`, minor bumps may include breaking changes.
   contain no zero bytes, and were silently saved back as UTF-8.
 - Saving keeps a UTF-8 byte-order mark if the file had one, rather than
   stripping it.
+- A failed save is reported in an alert. ⌘S used to discard the error, so a save
+  into a deleted folder or a read-only location looked like it had worked.
 
 ## [0.3.0] - 2026-09-01
 
