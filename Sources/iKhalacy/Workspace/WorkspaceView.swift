@@ -16,7 +16,9 @@ struct WorkspaceView: View {
                 EditorPane()
             }
             .navigationTitle(workspace.rootURL?.lastPathComponent ?? "iKhalacy")
-            .navigationSubtitle(workspace.editor.activeDocument?.name ?? "")
+            .navigationSubtitle(
+                workspace.editor.refusal?.url.lastPathComponent
+                    ?? workspace.editor.activeDocument?.name ?? "")
             .frame(minHeight: 200, maxHeight: .infinity)
 
             TerminalPane()

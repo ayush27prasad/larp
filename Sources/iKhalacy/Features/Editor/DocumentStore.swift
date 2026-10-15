@@ -10,9 +10,22 @@ import Observation
 @Observable
 @MainActor
 final class DocumentStore {
+    /// A file that was asked for but couldn't be opened, and why.
+    struct Refusal: Equatable {
+        let url: URL
+        let reason: String
+    }
+
     private(set) var documents: [OpenDocument] = []
     private(set) var previewDocumentID: URL?
-    var activeDocumentID: URL?
+
+    /// Shown in place of the editor until a tab is chosen, so a click on a
+    /// binary file explains itself instead of appearing to do nothing.
+    private(set) var refusal: Refusal?
+
+    var activeDocumentID: URL? {
+        didSet { refusal = nil }
+    }
 
     var activeDocument: OpenDocument? {
         documents.first { $0.id == activeDocumentID }
@@ -35,7 +48,14 @@ final class DocumentStore {
             return existing
         }
 
-        let text = try await TextFileLoader.load(url)
+        let text: String
+        do {
+            text = try await TextFileLoader.load(url)
+        } catch {
+            let reason = (error as? TextFileLoader.Failure).map(TextFileLoader.describe)
+            refusal = Refusal(url: url, reason: reason ?? error.localizedDescription)
+            throw error
+        }
         let document = OpenDocument(url: url, text: text)
 
         if preview,

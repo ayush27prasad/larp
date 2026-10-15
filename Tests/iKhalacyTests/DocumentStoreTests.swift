@@ -82,6 +82,51 @@ struct DocumentStoreTests {
         }
         #expect(store.hasOpenDocuments == false)
     }
+
+    @Test func aRefusedFileSaysWhy() async throws {
+        let temp = try TempDirectory()
+        let file = try temp.write(Data([0x00, 0x01, 0x02]), to: "blob.bin")
+
+        let store = DocumentStore()
+        _ = try? await store.open(file)
+
+        #expect(store.refusal == .init(url: file, reason: TextFileLoader.describe(.notText)))
+    }
+
+    @Test func choosingATabClearsTheRefusal() async throws {
+        let temp = try TempDirectory()
+        let text = try temp.write("1", to: "a.txt")
+        let binary = try temp.write(Data([0x00]), to: "blob.bin")
+
+        let store = DocumentStore()
+        try await store.open(text)
+        _ = try? await store.open(binary)
+        #expect(store.refusal != nil)
+        // The tab was already active; choosing it again must still clear.
+        store.activeDocumentID = text
+        #expect(store.refusal == nil)
+    }
+
+    @Test func openingAnotherFileClearsTheRefusal() async throws {
+        let temp = try TempDirectory()
+        let binary = try temp.write(Data([0x00]), to: "blob.bin")
+        let text = try temp.write("1", to: "a.txt")
+
+        let store = DocumentStore()
+        _ = try? await store.open(binary)
+        try await store.open(text, preview: true)
+        #expect(store.refusal == nil)
+    }
+
+    @Test func closingEverythingClearsTheRefusal() async throws {
+        let temp = try TempDirectory()
+        let binary = try temp.write(Data([0x00]), to: "blob.bin")
+
+        let store = DocumentStore()
+        _ = try? await store.open(binary)
+        store.closeAll()
+        #expect(store.refusal == nil)
+    }
 }
 
 @MainActor

@@ -8,8 +8,10 @@ While the major version is `0`, minor bumps may include breaking changes.
 
 ## [Unreleased]
 
-### Added
-- Nothing yet.
+### Fixed
+- Selecting a file that can't be opened — binary, over 4 MB, or unreadable —
+  explains why in the editor pane again. 0.3 dropped the explanation 0.2 showed,
+  so the click appeared to do nothing.
 
 ## [0.3.0] - 2026-09-01
 

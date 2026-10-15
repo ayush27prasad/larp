@@ -13,14 +13,21 @@ struct EditorPane: View {
             if workspace.editor.hasOpenDocuments {
                 EditorTabBar(
                     documents: workspace.editor.documents,
-                    activeID: workspace.editor.activeDocumentID,
+                    // No tab looks selected while a refusal stands in for them.
+                    activeID: workspace.editor.refusal == nil ? workspace.editor.activeDocumentID : nil,
                     previewID: workspace.editor.previewDocumentID,
                     onSelect: { workspace.activate($0) },
                     onClose: { workspace.closeFile($0) })
                 Divider()
             }
 
-            if let document = workspace.editor.activeDocument {
+            if let refusal = workspace.editor.refusal {
+                ContentUnavailableView {
+                    Label(refusal.url.lastPathComponent, systemImage: "doc.questionmark")
+                } description: {
+                    Text(refusal.reason)
+                }
+            } else if let document = workspace.editor.activeDocument {
                 editor(for: document)
             } else {
                 ContentUnavailableView(
