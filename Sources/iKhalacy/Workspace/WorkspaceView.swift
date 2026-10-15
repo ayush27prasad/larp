@@ -1,28 +1,32 @@
 import SwiftUI
 
-/// The window shell: explorer on the left, editor above terminal on the right.
+/// The window shell.
+///
+/// Explorer and editor share the upper half; the terminal spans the full width
+/// beneath both, rather than being boxed into the column right of the sidebar.
 struct WorkspaceView: View {
     @Environment(Workspace.self) private var workspace
 
     var body: some View {
-        NavigationSplitView {
-            ExplorerPane()
-                .navigationSplitViewColumnWidth(min: 180, ideal: 240, max: 420)
-        } detail: {
-            VSplitView {
+        VSplitView {
+            NavigationSplitView {
+                ExplorerPane()
+                    .navigationSplitViewColumnWidth(min: 180, ideal: 240, max: 420)
+            } detail: {
                 EditorPane()
-                    .frame(minHeight: 200, maxHeight: .infinity)
-                TerminalPane()
-                    .frame(minHeight: 80, idealHeight: 200)
             }
-        }
-        .navigationTitle(workspace.rootURL?.lastPathComponent ?? "iKhalacy")
-        .navigationSubtitle(workspace.activeFileURL?.lastPathComponent ?? "")
-    }
-}
+            .navigationTitle(workspace.rootURL?.lastPathComponent ?? "iKhalacy")
+            .navigationSubtitle(workspace.editor.activeDocument?.name ?? "")
+            .frame(minHeight: 200, maxHeight: .infinity)
 
-#Preview {
-    WorkspaceView()
-        .environment(Workspace())
-        .frame(width: 900, height: 600)
+            TerminalPane()
+                .frame(minHeight: 80, idealHeight: 220)
+        }
+        // Restoring here, not in a pane: the panes swap views as the tree loads,
+        // which would cancel the task partway through.
+        .task {
+            await workspace.restoreLastFolder()
+            workspace.ensureTerminal()
+        }
+    }
 }

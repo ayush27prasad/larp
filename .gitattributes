@@ -2,3 +2,5 @@
 *.pbxproj -text merge=union linguist-generated
 *.png binary
 *.icns binary
+*.ai binary
+*.pdf binary

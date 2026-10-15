@@ -1,62 +1,53 @@
+import CodeEditSourceEditor
 import SwiftUI
 
-/// Middle pane: contents of the active file.
-///
-/// Read-only for now — editing and saving arrive in the next milestone.
+/// Middle pane: tabs across the top, the active file's source below.
 struct EditorPane: View {
     @Environment(Workspace.self) private var workspace
+    @Environment(\.colorScheme) private var colorScheme
 
-    @State private var contents = ""
-    @State private var failureMessage: String?
+    @State private var editorState = SourceEditorState()
 
     var body: some View {
-        Group {
-            if let url = workspace.activeFileURL {
-                if let failureMessage {
-                    ContentUnavailableView {
-                        Label(url.lastPathComponent, systemImage: "doc.questionmark")
-                    } description: {
-                        Text(failureMessage)
-                    }
-                } else {
-                    TextEditor(text: .constant(contents))
-                        .font(.system(.body, design: .monospaced))
-                        .textEditorStyle(.plain)
-                        .scrollContentBackground(.hidden)
-                }
+        VStack(spacing: 0) {
+            if workspace.editor.hasOpenDocuments {
+                EditorTabBar(
+                    documents: workspace.editor.documents,
+                    activeID: workspace.editor.activeDocumentID,
+                    previewID: workspace.editor.previewDocumentID,
+                    onSelect: { workspace.activate($0) },
+                    onClose: { workspace.closeFile($0) })
+                Divider()
+            }
+
+            if let document = workspace.editor.activeDocument {
+                editor(for: document)
             } else {
                 ContentUnavailableView(
                     "No file open",
                     systemImage: "doc.text",
-                    description: Text("Select a file in the explorer to view it here."))
+                    description: Text("Select a file in the explorer to open it."))
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.background)
-        .task(id: workspace.activeFileURL) { await loadActiveFile() }
     }
 
-    private func loadActiveFile() async {
-        guard let url = workspace.activeFileURL else {
-            contents = ""
-            failureMessage = nil
-            return
-        }
-        do {
-            contents = try await TextFileLoader.load(url)
-            failureMessage = nil
-        } catch let failure as TextFileLoader.Failure {
-            contents = ""
-            failureMessage = TextFileLoader.describe(failure)
-        } catch {
-            contents = ""
-            failureMessage = error.localizedDescription
-        }
-    }
-}
+    private func editor(for document: OpenDocument) -> some View {
+        @Bindable var document = document
 
-#Preview {
-    EditorPane()
-        .environment(Workspace())
-        .frame(width: 700, height: 400)
+        return SourceEditor(
+            $document.text,
+            language: document.language,
+            configuration: SourceEditorConfiguration(
+                appearance: .init(
+                    theme: colorScheme == .dark ? .iKhalacyDark : .iKhalacyLight,
+                    font: .monospacedSystemFont(ofSize: 12, weight: .regular),
+                    lineHeightMultiple: 1.3,
+                    wrapLines: false,
+                    tabWidth: 4),
+                peripherals: .init(showMinimap: false)),
+            state: $editorState)
+            // Rebuild per file so undo history and scroll don't leak across tabs.
+            .id(document.id)
+    }
 }

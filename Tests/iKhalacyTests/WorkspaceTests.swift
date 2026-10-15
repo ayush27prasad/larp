@@ -14,7 +14,7 @@ struct WorkspaceTests {
     @Test func startsWithNoOpenFolder() {
         let workspace = makeWorkspace()
         #expect(workspace.rootURL == nil)
-        #expect(workspace.activeFileURL == nil)
+        #expect(workspace.selectedFileURL == nil)
         #expect(workspace.hasOpenFolder == false)
         #expect(workspace.treeState == .empty)
     }
@@ -45,19 +45,6 @@ struct WorkspaceTests {
         }
     }
 
-    @Test func clearsTheActiveFileWhenOpeningAnotherFolder() async throws {
-        let temp = try TempDirectory()
-        try temp.write("", to: "a.txt")
-
-        let workspace = makeWorkspace()
-        await workspace.open(folder: temp.url)
-        workspace.activeFileURL = temp.url.appendingPathComponent("a.txt")
-
-        let other = try TempDirectory()
-        await workspace.open(folder: other.url)
-        #expect(workspace.activeFileURL == nil)
-    }
-
     @Test func restoresTheFolderFromTheLastSession() async throws {
         let temp = try TempDirectory()
         try temp.write("", to: "a.txt")
@@ -80,33 +67,64 @@ struct WorkspaceTests {
         #expect(workspace.hasOpenFolder == false)
     }
 
-    @Test func restoresTheActiveFileFromTheLastSession() async throws {
+    @Test func restoresOpenTabsFromTheLastSession() async throws {
         let temp = try TempDirectory()
-        let file = try temp.write("hi", to: "a.txt")
+        let a = try temp.write("1", to: "a.txt")
+        let b = try temp.write("2", to: "b.txt")
 
         let suite = UserDefaults(suiteName: "iKhalacyTests-\(UUID().uuidString)")!
         let first = Workspace(defaults: suite)
         await first.open(folder: temp.url)
-        first.activeFileURL = file
+        await first.openFile(a)
+        await first.openFile(b)
 
         let second = Workspace(defaults: suite)
         await second.restoreLastFolder()
-        #expect(second.activeFileURL?.path == file.path)
+        #expect(second.editor.openURLs == [a, b])
+        #expect(second.editor.activeDocumentID == b)
     }
 
-    @Test func doesNotRestoreAnActiveFileThatWasDeleted() async throws {
+    @Test func doesNotRestoreATabWhoseFileWasDeleted() async throws {
         let temp = try TempDirectory()
-        let file = try temp.write("hi", to: "a.txt")
+        let a = try temp.write("1", to: "a.txt")
+        let b = try temp.write("2", to: "b.txt")
 
         let suite = UserDefaults(suiteName: "iKhalacyTests-\(UUID().uuidString)")!
         let first = Workspace(defaults: suite)
         await first.open(folder: temp.url)
-        first.activeFileURL = file
-        try FileManager.default.removeItem(at: file)
+        await first.openFile(a)
+        await first.openFile(b)
+        try FileManager.default.removeItem(at: b)
 
         let second = Workspace(defaults: suite)
         await second.restoreLastFolder()
-        #expect(second.activeFileURL == nil)
+        #expect(second.editor.openURLs == [a])
+    }
+
+    @Test func openingAnotherFolderClosesEveryTab() async throws {
+        let temp = try TempDirectory()
+        let file = try temp.write("1", to: "a.txt")
+
+        let workspace = makeWorkspace()
+        await workspace.open(folder: temp.url)
+        await workspace.openFile(file)
+        #expect(workspace.editor.hasOpenDocuments)
+
+        let other = try TempDirectory()
+        await workspace.open(folder: other.url)
+        #expect(workspace.editor.hasOpenDocuments == false)
+    }
+
+    @Test func terminalStartsInTheProjectFolder() async throws {
+        let temp = try TempDirectory()
+        let workspace = makeWorkspace()
+        await workspace.open(folder: temp.url)
+        #expect(workspace.terminalWorkingDirectory == temp.url)
+    }
+
+    @Test func terminalFallsBackToHomeWithNoFolderOpen() {
+        let workspace = makeWorkspace()
+        #expect(workspace.terminalWorkingDirectory == FileManager.default.homeDirectoryForCurrentUser)
     }
 
     @Test func closingAFolderResetsState() async throws {
@@ -117,5 +135,42 @@ struct WorkspaceTests {
 
         #expect(workspace.rootURL == nil)
         #expect(workspace.treeState == .empty)
+    }
+}
+
+@MainActor
+struct FinderOpenTests {
+    private func makeWorkspace() -> Workspace {
+        let suite = UserDefaults(suiteName: "iKhalacyTests-\(UUID().uuidString)")!
+        return Workspace(defaults: suite)
+    }
+
+    @Test func opensAFolderAsTheProjectRoot() async throws {
+        let temp = try TempDirectory()
+        try temp.write("hi", to: "a.txt")
+
+        let workspace = makeWorkspace()
+        await workspace.open(finderURL: temp.url)
+
+        #expect(workspace.rootURL == temp.url)
+        #expect(workspace.editor.hasOpenDocuments == false)
+    }
+
+    @Test func opensAFileAsItsFolderPlusATab() async throws {
+        let temp = try TempDirectory()
+        let file = try temp.write("hi", to: "src/a.txt")
+
+        let workspace = makeWorkspace()
+        await workspace.open(finderURL: file)
+
+        #expect(workspace.rootURL?.lastPathComponent == "src")
+        #expect(workspace.editor.openURLs == [file])
+        #expect(workspace.editor.activeDocumentID == file)
+    }
+
+    @Test func ignoresPathsThatDoNotExist() async {
+        let workspace = makeWorkspace()
+        await workspace.open(finderURL: URL(fileURLWithPath: "/nope-\(UUID().uuidString)"))
+        #expect(workspace.hasOpenFolder == false)
     }
 }
