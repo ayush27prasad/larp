@@ -17,6 +17,8 @@ While the major version is `0`, minor bumps may include breaking changes.
   the `terminal.plainShell` default lives under the new ID.
 - The app shows the default macOS icon until larp has its own logo. iKhalacy's
   stock-art logo and the icons made from it are not in this repository.
+- `Package.resolved` is committed, so every clone builds the same dependency
+  versions instead of whatever is newest in each allowed range.
 
 ### Fixed
 - A fresh clone failed to build: SwiftPM resolved SwiftTerm 1.99, whose

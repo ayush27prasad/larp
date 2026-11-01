@@ -21,7 +21,12 @@ xcodebuild -scheme Larp -destination 'platform=macOS' -skipPackagePluginValidati
 
 - XcodeGen globs `Sources/` and `Tests/`, so a new file is invisible to the
   build until `bootstrap.sh` regenerates the project. Never edit
-  `Larp.xcodeproj` — it is generated and gitignored.
+  `Larp.xcodeproj` — it is generated and gitignored, apart from the committed
+  `Package.resolved` inside it.
+- Dependencies are pinned by that `Package.resolved`. To move one, change its
+  range in `project.yml`, run `bootstrap.sh`, then
+  `xcodebuild -resolvePackageDependencies -scheme Larp`, and commit the
+  lockfile alongside the code that needs the new version.
 - `Running SwiftLint for CodeEditTextView / CodeEditSourceEditor` is reported as
   a failed command on every build. That is the dependencies linting themselves;
   it is expected. Judge the result by `** BUILD SUCCEEDED **` / `** TEST SUCCEEDED **`.

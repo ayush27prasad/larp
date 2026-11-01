@@ -70,6 +70,10 @@ open Larp.xcodeproj
 never commit it — edit [`project.yml`](project.yml) and re-run the bootstrap
 script. This keeps the repository free of `project.pbxproj` merge conflicts.
 
+The one committed file inside it is SwiftPM's lockfile,
+`project.xcworkspace/xcshareddata/swiftpm/Package.resolved`, which pins every
+dependency so each clone builds the same versions. XcodeGen leaves it alone.
+
 Command-line build and test:
 
 ```sh
