@@ -55,7 +55,7 @@ final class TerminalHostView: NSView {
         let name = (shell as NSString).lastPathComponent
 
         // Opt out of the user's shell config when their prompt misbehaves:
-        //   defaults write in.ayush27prasad.iKhalacy terminal.plainShell -bool YES
+        //   defaults write in.ayush27prasad.larp terminal.plainShell -bool YES
         let plain = UserDefaults.standard.bool(forKey: "terminal.plainShell")
 
         terminal.startProcess(

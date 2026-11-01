@@ -1,13 +1,13 @@
 import Foundation
 import Testing
 
-@testable import iKhalacy
+@testable import Larp
 
 @MainActor
 struct WorkspaceTests {
     /// Isolated defaults so tests never touch the real app's stored folder.
     private func makeWorkspace() -> Workspace {
-        let suite = UserDefaults(suiteName: "iKhalacyTests-\(UUID().uuidString)")!
+        let suite = UserDefaults(suiteName: "LarpTests-\(UUID().uuidString)")!
         return Workspace(defaults: suite)
     }
 
@@ -49,7 +49,7 @@ struct WorkspaceTests {
         let temp = try TempDirectory()
         try temp.write("", to: "a.txt")
 
-        let suite = UserDefaults(suiteName: "iKhalacyTests-\(UUID().uuidString)")!
+        let suite = UserDefaults(suiteName: "LarpTests-\(UUID().uuidString)")!
         let first = Workspace(defaults: suite)
         await first.open(folder: temp.url)
 
@@ -59,7 +59,7 @@ struct WorkspaceTests {
     }
 
     @Test func doesNotRestoreAFolderThatNoLongerExists() async {
-        let suite = UserDefaults(suiteName: "iKhalacyTests-\(UUID().uuidString)")!
+        let suite = UserDefaults(suiteName: "LarpTests-\(UUID().uuidString)")!
         suite.set("/nonexistent-\(UUID().uuidString)", forKey: "workspace.lastFolderPath")
 
         let workspace = Workspace(defaults: suite)
@@ -72,7 +72,7 @@ struct WorkspaceTests {
         let a = try temp.write("1", to: "a.txt")
         let b = try temp.write("2", to: "b.txt")
 
-        let suite = UserDefaults(suiteName: "iKhalacyTests-\(UUID().uuidString)")!
+        let suite = UserDefaults(suiteName: "LarpTests-\(UUID().uuidString)")!
         let first = Workspace(defaults: suite)
         await first.open(folder: temp.url)
         await first.openFile(a)
@@ -89,7 +89,7 @@ struct WorkspaceTests {
         let a = try temp.write("1", to: "a.txt")
         let b = try temp.write("2", to: "b.txt")
 
-        let suite = UserDefaults(suiteName: "iKhalacyTests-\(UUID().uuidString)")!
+        let suite = UserDefaults(suiteName: "LarpTests-\(UUID().uuidString)")!
         let first = Workspace(defaults: suite)
         await first.open(folder: temp.url)
         await first.openFile(a)
@@ -171,7 +171,7 @@ struct WorkspaceTests {
 @MainActor
 struct FinderOpenTests {
     private func makeWorkspace() -> Workspace {
-        let suite = UserDefaults(suiteName: "iKhalacyTests-\(UUID().uuidString)")!
+        let suite = UserDefaults(suiteName: "LarpTests-\(UUID().uuidString)")!
         return Workspace(defaults: suite)
     }
 

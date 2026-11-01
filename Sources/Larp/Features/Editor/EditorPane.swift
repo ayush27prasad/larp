@@ -47,7 +47,7 @@ struct EditorPane: View {
             language: document.language,
             configuration: SourceEditorConfiguration(
                 appearance: .init(
-                    theme: colorScheme == .dark ? .iKhalacyDark : .iKhalacyLight,
+                    theme: colorScheme == .dark ? .larpDark : .larpLight,
                     font: .monospacedSystemFont(ofSize: 12, weight: .regular),
                     lineHeightMultiple: 1.3,
                     wrapLines: false,

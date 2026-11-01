@@ -1,4 +1,4 @@
-name: iKhalacy
+name: Larp
 
 options:
   bundleIdPrefix: in.ayush27prasad
@@ -39,20 +39,20 @@ packages:
     maxVersion: 2.0.0
 
 targets:
-  iKhalacy:
+  Larp:
     type: application
     platform: macOS
     sources:
-      - path: Sources/iKhalacy
+      - path: Sources/Larp
         excludes: ["**/.DS_Store"]
     dependencies:
       - package: CodeEditSourceEditor
       - package: SwiftTerm
     settings:
       base:
-        PRODUCT_NAME: iKhalacy
-        PRODUCT_BUNDLE_IDENTIFIER: in.ayush27prasad.iKhalacy
-        INFOPLIST_FILE: Sources/iKhalacy/Resources/Info.plist
+        PRODUCT_NAME: Larp
+        PRODUCT_BUNDLE_IDENTIFIER: in.ayush27prasad.larp
+        INFOPLIST_FILE: Sources/Larp/Resources/Info.plist
         # Unsandboxed by design: the app spawns a login shell and opens
         # arbitrary user-chosen folders. See docs in README.
         ENABLE_APP_SANDBOX: NO
@@ -61,31 +61,31 @@ targets:
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
         COMBINE_HIDPI_IMAGES: YES
 
-  iKhalacyTests:
+  LarpTests:
     type: bundle.unit-test
     platform: macOS
     sources:
-      - path: Tests/iKhalacyTests
+      - path: Tests/LarpTests
     dependencies:
-      - target: iKhalacy
+      - target: Larp
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: in.ayush27prasad.iKhalacy.tests
+        PRODUCT_BUNDLE_IDENTIFIER: in.ayush27prasad.larp.tests
         GENERATE_INFOPLIST_FILE: YES
 
 schemes:
-  iKhalacy:
+  Larp:
     build:
       targets:
-        iKhalacy: all
-        iKhalacyTests: [test]
+        Larp: all
+        LarpTests: [test]
     run:
       config: Debug
     test:
       config: Debug
       gatherCoverageData: true
       targets:
-        - iKhalacyTests
+        - LarpTests
     profile:
       config: Release
     archive:

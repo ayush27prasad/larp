@@ -1,7 +1,7 @@
 import Foundation
 import Testing
 
-@testable import iKhalacy
+@testable import Larp
 
 struct TextFileLoaderTests {
     @Test func readsUTF8Text() async throws {

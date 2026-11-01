@@ -6,7 +6,7 @@ struct TempDirectory: ~Copyable {
 
     init() throws {
         url = FileManager.default.temporaryDirectory
-            .appendingPathComponent("iKhalacyTests-\(UUID().uuidString)", isDirectory: true)
+            .appendingPathComponent("LarpTests-\(UUID().uuidString)", isDirectory: true)
         try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
     }
 

@@ -1,22 +1,27 @@
-# iKhalacy
+# larp
 
-Native macOS code editor — explorer, tabbed editor, terminal — in SwiftUI + AppKit.
-Read [README.md](README.md) first: its *Architecture decisions* section explains
-why the app is unsandboxed, why the tree loads eagerly, and why the editor and
-terminal are CodeEditSourceEditor and SwiftTerm. Don't relitigate those without
-a reason the README doesn't already answer.
+Your Local Agent Review Pal: a native macOS IDE for reviewing and walking
+through code that Claude Code or Codex wrote, with a sidecar chat that works for
+that master agent. Today it is the editor foundation — explorer, tabbed editor,
+terminal — in SwiftUI + AppKit; review, walkthroughs and the sidecar are the
+roadmap. It was called iKhalacy before 0.4.
+
+Read [README.md](README.md) first: *Why* is the product direction, and
+*Architecture decisions* explains why the app is unsandboxed, all Swift, free of
+web views, and built on CodeEditSourceEditor and SwiftTerm. Don't relitigate
+those without a reason the README doesn't already answer.
 
 ## Build and test
 
 ```sh
 ./Scripts/bootstrap.sh    # after adding, removing or renaming any file
-xcodebuild -scheme iKhalacy -destination 'platform=macOS' -skipPackagePluginValidation build
-xcodebuild -scheme iKhalacy -destination 'platform=macOS' -skipPackagePluginValidation test
+xcodebuild -scheme Larp -destination 'platform=macOS' -skipPackagePluginValidation build
+xcodebuild -scheme Larp -destination 'platform=macOS' -skipPackagePluginValidation test
 ```
 
 - XcodeGen globs `Sources/` and `Tests/`, so a new file is invisible to the
   build until `bootstrap.sh` regenerates the project. Never edit
-  `iKhalacy.xcodeproj` — it is generated and gitignored.
+  `Larp.xcodeproj` — it is generated and gitignored.
 - `Running SwiftLint for CodeEditTextView / CodeEditSourceEditor` is reported as
   a failed command on every build. That is the dependencies linting themselves;
   it is expected. Judge the result by `** BUILD SUCCEEDED **` / `** TEST SUCCEEDED **`.
@@ -33,6 +38,13 @@ xcodebuild -scheme iKhalacy -destination 'platform=macOS' -skipPackagePluginVali
   they never touch the real app's defaults.
 - Comments explain *why*. Match the existing density, which is low.
 - UserDefaults keys are namespaced by feature: `workspace.*`, `terminal.*`.
+
+## Memory is a feature
+
+Lightweight is a product promise, with a budget in the README. A change that
+holds new state — a view, a cache, scrollback, a chat history — should say how
+it stays bounded. Measure with `footprint <pid>` on a running app, not RSS;
+launch it in the foreground, since a background launch never builds the window.
 
 ## Docs move with the code
 

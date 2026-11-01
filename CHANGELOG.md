@@ -1,12 +1,22 @@
 # Changelog
 
-All notable changes to iKhalacy are documented here.
+All notable changes to larp are documented here. Releases up to 0.3.0 shipped
+under the name iKhalacy, and their entries use it.
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 While the major version is `0`, minor bumps may include breaking changes.
 
 ## [Unreleased]
+
+### Changed
+- Renamed iKhalacy to larp — Your Local Agent Review Pal — and refocused it on
+  reviewing and walking through code written by Claude Code and Codex. The app
+  is `Larp.app`, the module `Larp`, the bundle ID `in.ayush27prasad.larp`.
+  The new bundle ID means settings and the restored session start fresh, and
+  the `terminal.plainShell` default lives under the new ID.
+- The app shows the default macOS icon until larp has its own logo. iKhalacy's
+  stock-art logo and the icons made from it are not in this repository.
 
 ### Fixed
 - Selecting a file that can't be opened — binary, over 4 MB, or unreadable —
@@ -134,7 +144,7 @@ themselves are placeholders.
 - The app is intentionally unsandboxed so it can spawn a shell and open
   arbitrary folders. Hardened Runtime is enabled.
 
-[Unreleased]: https://github.com/ayush27prasad/iKhalacy/compare/v0.3.0...HEAD
-[0.3.0]: https://github.com/ayush27prasad/iKhalacy/compare/v0.2.0...v0.3.0
-[0.2.0]: https://github.com/ayush27prasad/iKhalacy/compare/v0.1.0...v0.2.0
-[0.1.0]: https://github.com/ayush27prasad/iKhalacy/releases/tag/v0.1.0
+[Unreleased]: https://github.com/ayush27prasad/larp/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/ayush27prasad/larp/compare/v0.2.0...v0.3.0
+[0.2.0]: https://github.com/ayush27prasad/larp/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/ayush27prasad/larp/releases/tag/v0.1.0

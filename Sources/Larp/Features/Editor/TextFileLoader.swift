@@ -49,11 +49,11 @@ enum TextFileLoader {
         case .tooLarge(let byteCount):
             let limit = ByteCountFormatter.string(fromByteCount: Int64(maximumByteCount), countStyle: .file)
             let actual = ByteCountFormatter.string(fromByteCount: Int64(byteCount), countStyle: .file)
-            return "This file is \(actual). iKhalacy opens files up to \(limit)."
+            return "This file is \(actual). Larp opens files up to \(limit)."
         case .notText:
             return "This doesn't look like a text file."
         case .notUTF8:
-            return "iKhalacy only opens UTF-8 text, and this file uses another encoding."
+            return "Larp only opens UTF-8 text, and this file uses another encoding."
         case .unreadable(let reason):
             return reason
         }

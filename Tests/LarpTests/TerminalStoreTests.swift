@@ -1,7 +1,7 @@
 import Foundation
 import Testing
 
-@testable import iKhalacy
+@testable import Larp
 
 @MainActor
 struct TerminalStoreTests {
@@ -133,7 +133,7 @@ struct TerminalStoreTests {
 @MainActor
 struct WorkspaceTerminalTests {
     private func makeWorkspace() -> Workspace {
-        let suite = UserDefaults(suiteName: "iKhalacyTests-\(UUID().uuidString)")!
+        let suite = UserDefaults(suiteName: "LarpTests-\(UUID().uuidString)")!
         return Workspace(defaults: suite)
     }
 

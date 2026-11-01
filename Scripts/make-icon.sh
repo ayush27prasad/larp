@@ -7,12 +7,12 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 SOURCE="${1:-Design/logo.ai}"
-ICONSET="${2:-Sources/iKhalacy/Resources/Assets.xcassets/AppIcon.appiconset}"
+ICONSET="${2:-Sources/Larp/Resources/Assets.xcassets/AppIcon.appiconset}"
 
 [ -f "$SOURCE" ] || { echo "error: no such file: $SOURCE" >&2; exit 1; }
 mkdir -p "$ICONSET"
 
-MASTER=$(mktemp -t ikhalacy-icon).png
+MASTER=$(mktemp -t larp-icon).png
 trap 'rm -f "$MASTER"' EXIT
 xcrun swift Scripts/make-icon.swift "$SOURCE" "$MASTER" 1024 "${MODE:-fill}"
 

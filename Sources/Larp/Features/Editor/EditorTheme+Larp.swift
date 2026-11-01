@@ -20,7 +20,7 @@ extension EditorTheme.Attribute {
 
 extension EditorTheme {
     /// Xcode's default light palette.
-    static var iKhalacyLight: EditorTheme {
+    static var larpLight: EditorTheme {
         EditorTheme(
             text: .init(hex: 0x0000_00),
             insertionPoint: NSColor(hex: 0x0000_00),
@@ -41,7 +41,7 @@ extension EditorTheme {
     }
 
     /// Unused while the app is pinned to light, kept for a future preference.
-    static var iKhalacyDark: EditorTheme {
+    static var larpDark: EditorTheme {
         EditorTheme(
             text: .init(hex: 0xDFDF_E0),
             insertionPoint: NSColor(hex: 0xDFDF_E0),

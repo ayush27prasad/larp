@@ -15,7 +15,7 @@ struct WorkspaceView: View {
             } detail: {
                 EditorPane()
             }
-            .navigationTitle(workspace.rootURL?.lastPathComponent ?? "iKhalacy")
+            .navigationTitle(workspace.rootURL?.lastPathComponent ?? "Larp")
             .navigationSubtitle(
                 workspace.editor.refusal?.url.lastPathComponent
                     ?? workspace.editor.activeDocument?.name ?? "")

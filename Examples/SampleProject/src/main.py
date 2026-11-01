@@ -4,7 +4,7 @@ from utils.strings import shout
 
 
 def main() -> None:
-    for line in ("hello", "from", "ikhalacy"):
+    for line in ("hello", "from", "larp"):
         print(shout(line))
 
 

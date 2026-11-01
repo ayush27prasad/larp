@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Regenerates iKhalacy.xcodeproj from project.yml.
+# Regenerates Larp.xcodeproj from project.yml.
 # Run after pulling changes or whenever files are added or removed.
 set -euo pipefail
 
@@ -11,4 +11,4 @@ if ! command -v xcodegen >/dev/null 2>&1; then
 fi
 
 xcodegen generate
-echo "Generated iKhalacy.xcodeproj — open it with: open iKhalacy.xcodeproj"
+echo "Generated Larp.xcodeproj — open it with: open Larp.xcodeproj"

@@ -1,7 +1,7 @@
 import AppKit
 
 /// Receives folders opened from Finder — "Open With", drag onto the icon, or
-/// `open -a iKhalacy <path>` — and hands them to the workspace.
+/// `open -a Larp <path>` — and hands them to the workspace.
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
     private var workspace: Workspace?

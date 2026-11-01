@@ -2,7 +2,7 @@ import AppKit
 import SwiftUI
 
 @main
-struct iKhalacyApp: App {
+struct LarpApp: App {
     @State private var workspace = Workspace()
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 

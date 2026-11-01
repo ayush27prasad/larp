@@ -1,7 +1,7 @@
 import Foundation
 import Testing
 
-@testable import iKhalacy
+@testable import Larp
 
 @MainActor
 struct DocumentStoreTests {
