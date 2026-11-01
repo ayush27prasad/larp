@@ -75,14 +75,15 @@ final class TerminalHostView: NSView {
 
     func terminate() {
         pendingResize?.cancel()
+        // SwiftTerm reports a shell it was told to kill like any other exit.
+        terminal.processDelegate = nil
         terminal.terminate()
     }
 }
 
-// SwiftTerm delivers these on the main queue.
-extension TerminalHostView: @preconcurrency LocalProcessTerminalViewDelegate {
+extension TerminalHostView: LocalProcessTerminalViewDelegate {
     func processTerminated(source: TerminalView, exitCode: Int32?) {
-        // `exitCode` is the raw waitpid status, which is zero only for exit(0).
+        // nil when a signal ended the shell, so only a real exit(0) is clean.
         let cleanly = exitCode == 0
         if !cleanly {
             terminal.feed(text: "\r\n[Process completed]\r\n")

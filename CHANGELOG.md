@@ -19,6 +19,9 @@ While the major version is `0`, minor bumps may include breaking changes.
   stock-art logo and the icons made from it are not in this repository.
 
 ### Fixed
+- A fresh clone failed to build: SwiftPM resolved SwiftTerm 1.99, whose
+  delegate protocol is main-actor isolated, and the code still targeted 1.20.
+  larp now requires 1.99.2.
 - Selecting a file that can't be opened — binary, over 4 MB, or unreadable —
   explains why in the editor pane again. 0.3 dropped the explanation 0.2 showed,
   so the click appeared to do nothing.
