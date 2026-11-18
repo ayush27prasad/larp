@@ -6,10 +6,15 @@ that master agent. Today it is the editor foundation — explorer, tabbed editor
 terminal — in SwiftUI + AppKit; review, walkthroughs and the sidecar are the
 roadmap. It was called iKhalacy before 0.4.
 
-Read [README.md](README.md) first: *Why* is the product direction, and
-*Architecture decisions* explains why the app is unsandboxed, all Swift, free of
-web views, and built on CodeEditSourceEditor and SwiftTerm. Don't relitigate
-those without a reason the README doesn't already answer.
+**Read [docs/PRODUCT.md](docs/PRODUCT.md) first.** It is the maintained
+reference for what larp is, every decision (and whether the user decided it or
+it is only proposed), and the status of every feature. Features are built one
+at a time; when one is specified, changed or shipped, update its row there in
+the same commit. Never treat a *Proposed* item as decided.
+
+Then [README.md](README.md): *Architecture decisions* explains why the app is
+unsandboxed, all Swift, and built on CodeEditSourceEditor and SwiftTerm. Don't
+relitigate those without a reason neither document already answers.
 
 ## Build and test
 
