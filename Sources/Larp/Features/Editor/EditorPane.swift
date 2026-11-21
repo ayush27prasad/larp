@@ -19,13 +19,20 @@ struct EditorPane: View {
                 onSelect: { workspace.activate($0) },
                 onClose: { workspace.closeFile($0) })
             content
+                // Fill the rest, so the tab strip stays pinned to the top even
+                // when the placeholder alone would be shorter than the pane.
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .background(Color(nsColor: Chrome.contentBackground), ignoresSafeAreaEdges: [])
     }
 
-    @ViewBuilder
     private var content: some View {
+        VStack(spacing: 0) { contentRows }
+    }
+
+    @ViewBuilder
+    private var contentRows: some View {
         if let refusal = workspace.editor.refusal {
             ContentUnavailableView {
                 Label(refusal.url.lastPathComponent, systemImage: "doc.questionmark")

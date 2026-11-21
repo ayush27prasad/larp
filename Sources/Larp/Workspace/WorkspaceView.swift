@@ -14,6 +14,10 @@ struct WorkspaceView: View {
     @AppStorage(Layout.sidebarVisibleKey) private var sidebarIsVisible = true
     @State private var dragStartHeight: Double?
     @State private var dragStartWidth: Double?
+    @State private var isFullScreen = false
+
+    /// Room for the window buttons, which full screen hides.
+    private var windowButtonsWidth: CGFloat { isFullScreen ? 8 : Layout.windowButtonsWidth }
 
     private static let minimumTerminalHeight = 90.0
     private static let minimumEditorHeight = 200.0
@@ -31,12 +35,12 @@ struct WorkspaceView: View {
                         verticalDivider
                     }
                     EditorPane()
-                        .environment(\.tabStripLeadingInset, sidebarIsVisible ? 0 : Layout.windowButtonsWidth + 32)
+                        .environment(\.tabStripLeadingInset, sidebarIsVisible ? 0 : windowButtonsWidth + 32)
                         .overlay(alignment: .topLeading) {
                             if !sidebarIsVisible {
                                 SidebarToggle()
                                     .frame(height: Chrome.tabBarHeight)
-                                    .padding(.leading, Layout.windowButtonsWidth)
+                                    .padding(.leading, windowButtonsWidth)
                             }
                         }
                 }
@@ -50,6 +54,12 @@ struct WorkspaceView: View {
         }
         .ignoresSafeArea(.container, edges: .top)
         .navigationTitle(workspace.rootURL?.lastPathComponent ?? "Larp")
+        .onReceive(NotificationCenter.default.publisher(for: NSWindow.willEnterFullScreenNotification)) { _ in
+            isFullScreen = true
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSWindow.willExitFullScreenNotification)) { _ in
+            isFullScreen = false
+        }
         .tint(Color(nsColor: Chrome.accent))
         // Restoring here, not in a pane: the panes swap views as the tree loads,
         // which would cancel the task partway through.
@@ -74,7 +84,7 @@ struct WorkspaceView: View {
     private var sidebar: some View {
         VStack(spacing: 0) {
             HStack(spacing: 6) {
-                Color.clear.frame(width: Layout.windowButtonsWidth - 8)
+                Color.clear.frame(width: windowButtonsWidth - 8)
                 Text(workspace.rootURL?.lastPathComponent ?? "Larp")
                     .font(.system(size: 12, weight: .semibold))
                     .lineLimit(1)
