@@ -10,6 +10,12 @@ While the major version is `0`, minor bumps may include breaking changes.
 ## [Unreleased]
 
 ### Added
+- Find in Files (⇧⌘F), after IntelliJ's: a floating panel with match-case,
+  whole-word and regex options, results grouped by file with the hits
+  highlighted, and the lines around the selected match. ↑↓ move, ↩ opens the
+  file with the cursor on the match, esc closes. It searches the files the
+  explorer shows, in any supported encoding, restarts as you type, and stops at
+  2,000 matches.
 - Files in other encodings open instead of being refused. UTF-16 with a
   byte-order mark, and Windows 1252 / Latin-1 for text that isn't valid UTF-8,
   are read and saved back in the same encoding, byte for byte; the status bar
@@ -22,7 +28,7 @@ While the major version is `0`, minor bumps may include breaking changes.
   The app zoom is held to 90%–150%, so the smallest interface text stays at
   Apple's 10pt legibility floor and bars still fit a laptop screen; a file or
   shell ranges 50%–300%, like Safari's page zoom. Past a limit it beeps.
-  While zooming, a pill — "App − 110% + Reset", or File / Terminal — shows the
+  While zooming, a pill — "− 110% + Reset", labelled File or Terminal for a pane — shows the
   level beside what is being zoomed; its buttons work too, and it fades out
   shortly after the last change.
 - Dark mode, and View ▸ Appearance to choose System, Light or Dark. Dark is
@@ -39,6 +45,8 @@ While the major version is `0`, minor bumps may include breaking changes.
   a Mermaid diagram, and deliberate binary and Latin-1 files.
 
 ### Changed
+- The sidebar header marks the project name with a folder icon, and the app
+  zoom pill shows just the level.
 - Refusals state the rule instead of speaking as the app: "Only UTF-8 text
   is supported.", "Only files up to 4 MB are supported."
 - The title bar and toolbar are gone. The sidebar has its own header with the

@@ -73,7 +73,8 @@ struct EditorPane: View {
                     wrapLines: false,
                     tabWidth: 4),
                 peripherals: .init(showMinimap: false)),
-            state: $editorState)
+            state: $editorState,
+            coordinators: [document.bridge])
             // Rebuild per file so undo history and scroll don't leak across tabs.
             .id(document.id)
     }

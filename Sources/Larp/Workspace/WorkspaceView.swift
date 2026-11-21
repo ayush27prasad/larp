@@ -86,6 +86,24 @@ struct WorkspaceView: View {
                     }
             }
         }
+        .overlay {
+            if workspace.search.isPresented {
+                ZStack(alignment: .top) {
+                    // Click outside to close, as with IntelliJ's popup.
+                    Color.black.opacity(0.25)
+                        .contentShape(.rect)
+                        .onTapGesture { workspace.search.dismiss() }
+                    FindInFilesPanel(search: workspace.search, root: workspace.rootURL) { match in
+                        Task { await workspace.open(match) }
+                    }
+                    .frame(maxWidth: 820, maxHeight: 560)
+                    .padding(.horizontal, 60)
+                    .padding(.top, 70)
+                    .padding(.bottom, 60)
+                }
+                .transition(.opacity)
+            }
+        }
         .ignoresSafeArea(.container, edges: .top)
         .navigationTitle(workspace.rootURL?.lastPathComponent ?? "Larp")
         .onReceive(NotificationCenter.default.publisher(for: NSWindow.willEnterFullScreenNotification)) { _ in

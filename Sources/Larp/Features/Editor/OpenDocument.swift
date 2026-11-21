@@ -24,6 +24,15 @@ final class OpenDocument: Identifiable {
     /// Read once on open; saving keeps whatever endings the text has.
     let usesCRLF: Bool
 
+    /// Where to put the cursor and scroll to, e.g. a search result. Applied —
+    /// and cleared — by `bridge` once this document's editor is on screen.
+    var pendingReveal: TextLocation? {
+        didSet { bridge.revealPending() }
+    }
+
+    /// Connects this document to its editor view while one is showing.
+    @ObservationIgnored let bridge = EditorBridge()
+
     /// This file's own zoom, on top of the app's; ⌘-scroll over the editor.
     var zoom = 1.0
 
@@ -46,6 +55,7 @@ final class OpenDocument: Identifiable {
         self.language = language
         self.showsPreview = language.id == .markdown
         self.usesCRLF = text.contains("\r\n")
+        bridge.document = self
     }
 
     func save() throws {

@@ -38,6 +38,7 @@ final class Workspace {
 
     let editor = DocumentStore()
     let terminals = TerminalStore()
+    let search = SearchStore()
 
     private let defaults: UserDefaults
     private static let lastFolderKey = "workspace.lastFolderPath"
@@ -46,6 +47,28 @@ final class Workspace {
 
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
+        search.files = { [weak self] in self?.projectFiles ?? [] }
+    }
+
+    /// Every file in the tree, in explorer order — what Find in Files searches.
+    /// The tree's skip list keeps .git, node_modules and the like out.
+    var projectFiles: [URL] {
+        guard case .loaded(let root, _) = treeState else { return [] }
+        var files: [URL] = []
+        func collect(_ node: FileNode) {
+            guard let children = node.children else { return files.append(node.url) }
+            children.forEach(collect)
+        }
+        collect(root)
+        return files
+    }
+
+    /// Opens a search result in a regular tab, cursor on the match.
+    func open(_ match: ProjectSearch.Match) async {
+        search.dismiss()
+        guard await openFile(match.url) else { return }
+        editor.activeDocument?.pendingReveal = TextLocation(
+            line: match.line, column: match.column, length: match.length)
     }
 
     var hasOpenFolder: Bool { rootURL != nil }
@@ -78,6 +101,8 @@ final class Workspace {
             // A newer open() may have superseded this one while we walked disk.
             guard folderGeneration == generation else { return generation }
             treeState = .loaded(tree.root, isTruncated: tree.isTruncated)
+            // A search opened while the tree loaded saw no files; rerun it.
+            search.refresh()
         } catch {
             guard folderGeneration == generation else { return generation }
             treeState = .failed(error.localizedDescription)

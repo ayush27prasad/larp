@@ -47,6 +47,11 @@ struct LarpApp: App {
                 Button("Close Tab") { workspace.closeFocusedTab() }
                     .keyboardShortcut("w")
             }
+            CommandGroup(after: .textEditing) {
+                Button("Find in Files…") { workspace.search.present() }
+                    .keyboardShortcut("f", modifiers: [.command, .shift])
+                    .disabled(!workspace.hasOpenFolder)
+            }
             CommandGroup(replacing: .sidebar) {
                 Button(sidebarIsVisible ? "Hide Sidebar" : "Show Sidebar") {
                     withAnimation(.easeInOut(duration: 0.18)) { sidebarIsVisible.toggle() }
