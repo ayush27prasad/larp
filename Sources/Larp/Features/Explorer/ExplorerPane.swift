@@ -93,11 +93,14 @@ private struct FileTreeRow: View {
         }
     }
 
+    /// Icon and name laid out by hand rather than as a Label: a sidebar list
+    /// reserves a fixed slot for a Label's icon, which a zoomed icon outgrows
+    /// until it runs into the disclosure arrow.
     private var label: some View {
-        Label {
-            Text(node.name)
-        } icon: {
+        HStack(spacing: 6 * zoom) {
             FileIcon.image(for: node.url, isDirectory: node.isDirectory)
+                .frame(width: 18 * zoom)
+            Text(node.name)
         }
         // On the row, not the List: sidebar lists ignore a font set on the list.
         .font(.system(size: 13 * zoom))

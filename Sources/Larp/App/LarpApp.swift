@@ -8,7 +8,8 @@ struct LarpApp: App {
     @AppStorage(Appearance.defaultsKey) private var appearance: Appearance = .system
     @AppStorage(Layout.sidebarVisibleKey) private var sidebarIsVisible = true
     @Environment(\.openWindow) private var openWindow
-    @AppStorage(Zoom.appKey) private var appZoom = 1.0
+    @AppStorage(Zoom.appKey) private var storedAppZoom = 1.0
+    private var appZoom: Double { Zoom.clamped(storedAppZoom, in: .app) }
 
     var body: some Scene {
         // A single Window, not a WindowGroup: a WindowGroup opens an extra
@@ -61,12 +62,15 @@ struct LarpApp: App {
                 Divider()
                 // The keys themselves are caught first by ZoomInputMonitor, which
                 // also accepts ⌘+ (⌘⇧=); these items make the zoom discoverable.
-                Button("Zoom In") { appZoom = Zoom.stepped(appZoom, by: 1) }
+                Button("Zoom In") { storedAppZoom = Zoom.stepped(appZoom, by: 1, in: .app) }
                     .keyboardShortcut("=")
-                Button("Zoom Out") { appZoom = Zoom.stepped(appZoom, by: -1) }
+                    .disabled(appZoom >= Zoom.Scope.app.range.upperBound)
+                Button("Zoom Out") { storedAppZoom = Zoom.stepped(appZoom, by: -1, in: .app) }
                     .keyboardShortcut("-")
-                Button("Actual Size") { appZoom = 1 }
+                    .disabled(appZoom <= Zoom.Scope.app.range.lowerBound)
+                Button("Actual Size") { storedAppZoom = 1 }
                     .keyboardShortcut("0")
+                    .disabled(appZoom == 1)
                 Divider()
 
                 Picker("Appearance", selection: $appearance) {

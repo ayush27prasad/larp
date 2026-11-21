@@ -61,7 +61,7 @@ final class TerminalStore {
 
     func zoom(_ id: TerminalSession.ID, by steps: Int) {
         guard let index = sessions.firstIndex(where: { $0.id == id }) else { return }
-        sessions[index].zoom = Zoom.stepped(sessions[index].zoom, by: steps)
+        Zoom.step(&sessions[index].zoom, by: steps, in: .content)
     }
 
     func closeAll() {

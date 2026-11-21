@@ -19,6 +19,9 @@ While the major version is `0`, minor bumps may include breaking changes.
   terminal — and the level is remembered. ⌘-scroll or a pinch over the editor
   zooms the active file, and over the terminal the active shell, on top of the
   app zoom; the status bar shows a file's own zoom when it isn't 100%.
+  The app zoom is held to 90%–150%, so the smallest interface text stays at
+  Apple's 10pt legibility floor and bars still fit a laptop screen; a file or
+  shell ranges 50%–300%, like Safari's page zoom. Past a limit it beeps.
 - Dark mode, and View ▸ Appearance to choose System, Light or Dark. Dark is
   neon on true black; light is Apple-calm, after Xcode and apple.com.
 - A markdown preview, rendered natively, on by default for `.md` files. ⇧⌘V or

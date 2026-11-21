@@ -6,14 +6,47 @@ import SwiftUI
 /// applied on top.
 enum Zoom {
     static let appKey = "zoom.app"
-    static let range = 0.5...3.0
     static let step = 0.1
 
-    /// `steps` notches from `value`, kept to tenths so repeated zooming
-    /// lands back exactly on 100%.
-    static func stepped(_ value: Double, by steps: Int) -> Double {
-        let next = ((value + Double(steps) * step) * 10).rounded() / 10
-        return min(max(next, range.lowerBound), range.upperBound)
+    enum Scope {
+        /// The whole interface. 90% keeps the smallest UI text — the 11pt
+        /// status bar — at the 10pt Apple treats as the legible minimum on
+        /// the Mac; past 150% the bars and tabs crowd a laptop screen.
+        case app
+        /// A file or a shell: only text in a scrolling view, so it can range
+        /// as widely as Safari's page zoom.
+        case content
+
+        var range: ClosedRange<Double> {
+            switch self {
+            case .app: 0.9...1.5
+            case .content: 0.5...3.0
+            }
+        }
+    }
+
+    /// `steps` notches from `value`, kept to tenths so repeated zooming lands
+    /// back exactly on 100%, and held inside the scope's range.
+    static func stepped(_ value: Double, by steps: Int, in scope: Scope) -> Double {
+        clamped((value + Double(steps) * step) * 10, in: scope, tenths: true)
+    }
+
+    /// For values read back from settings, which may predate the limits.
+    static func clamped(_ value: Double, in scope: Scope) -> Double {
+        clamped(value, in: scope, tenths: false)
+    }
+
+    private static func clamped(_ value: Double, in scope: Scope, tenths: Bool) -> Double {
+        let value = tenths ? value.rounded() / 10 : value
+        return min(max(value, scope.range.lowerBound), scope.range.upperBound)
+    }
+
+    /// Steps `value` in place, beeping at a limit the way macOS does when a
+    /// command has nowhere left to go.
+    static func step(_ value: inout Double, by steps: Int, in scope: Scope) {
+        let next = stepped(value, by: steps, in: scope)
+        if next == value, steps != 0 { NSSound.beep() }
+        value = next
     }
 
     static func percent(_ value: Double) -> String {

@@ -16,7 +16,9 @@ struct WorkspaceView: View {
     @State private var dragStartWidth: Double?
     @State private var isFullScreen = false
 
-    @AppStorage(Zoom.appKey) private var appZoom = 1.0
+    @AppStorage(Zoom.appKey) private var storedAppZoom = 1.0
+    /// Clamped on read: a stored level may predate the limits.
+    private var appZoom: Double { Zoom.clamped(storedAppZoom, in: .app) }
     /// Which pane ⌘-scroll and pinch zoom: the one under the pointer.
     @State private var pointerPane: PointerPane?
     @State private var zoomInput = ZoomInputMonitor()
@@ -104,13 +106,15 @@ struct WorkspaceView: View {
     private func handleZoom(_ command: ZoomInputMonitor.Command) -> Bool {
         switch command {
         case .app(let steps):
-            appZoom = steps.map { Zoom.stepped(appZoom, by: $0) } ?? 1
+            var zoom = appZoom
+            if let steps { Zoom.step(&zoom, by: steps, in: .app) } else { zoom = 1 }
+            storedAppZoom = zoom
             return true
         case .pointer(let steps):
             switch pointerPane {
             case .editor:
                 guard let document = workspace.editor.activeDocument else { return false }
-                if steps != 0 { document.zoom = Zoom.stepped(document.zoom, by: steps) }
+                if steps != 0 { Zoom.step(&document.zoom, by: steps, in: .content) }
                 return true
             case .terminal:
                 guard let id = workspace.terminals.activeSessionID else { return false }
