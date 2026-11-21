@@ -42,6 +42,16 @@ enum Chrome {
         }
     }
 
+    /// A dynamic colour pinned to one appearance, for layers, which take a
+    /// fixed CGColor and wouldn't follow a light/dark switch on their own.
+    static func resolved(_ color: NSColor, for appearance: NSAppearance) -> NSColor {
+        var resolved = color
+        appearance.performAsCurrentDrawingAppearance {
+            resolved = color.usingColorSpace(.sRGB) ?? color
+        }
+        return resolved
+    }
+
     static func rgb(_ hex: UInt32) -> NSColor {
         NSColor(
             srgbRed: CGFloat((hex >> 16) & 0xFF) / 255,

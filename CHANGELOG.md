@@ -13,8 +13,9 @@ While the major version is `0`, minor bumps may include breaking changes.
 - A find bar of larp's own for ⌘F, replacing the editor's stock panel: the
   query with an "N of M" count, match-case / whole-word / regex toggles, next
   and previous (↩, ⇧↩, ⌘G, ⇧⌘G), and a replace row (⌥⌘F) with Replace and
-  Replace All, undoable, with `$1` groups for regex. Matches are highlighted
-  in the text and follow edits; a single-line selection seeds the query.
+  Replace All, undoable, with `$1` groups for regex. Matches are tinted in the
+  theme's accent — the current one outlined — rather than the system's yellow,
+  and follow edits; a single-line selection seeds the query.
   The toggles have VS Code's shortcuts — ⌥⌘C, ⌥⌘W, ⌥⌘R — in both finds, and
   every icon button highlights on hover and names its shortcut in its tooltip.
   Tooltips appear after 0.35 s rather than macOS's default of about a second.

@@ -35,6 +35,15 @@ struct EditorPane: View {
         .onChange(of: workspace.editor.activeDocument?.text) {
             workspace.editor.find.refresh(revealing: false)
         }
+        // Highlights are layers with fixed colours and positions: recolour
+        // them on an appearance switch, and re-place them when zoom re-lays
+        // the text out.
+        .onChange(of: colorScheme) {
+            workspace.editor.find.refresh(revealing: false)
+        }
+        .onChange(of: zoom * (workspace.editor.activeDocument?.zoom ?? 1)) {
+            DispatchQueue.main.async { workspace.editor.find.refresh(revealing: false) }
+        }
     }
 
     private var content: some View {
