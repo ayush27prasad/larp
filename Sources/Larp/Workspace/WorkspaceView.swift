@@ -25,6 +25,15 @@ struct WorkspaceView: View {
 
     private enum PointerPane { case editor, terminal }
 
+    /// What a zoom acts on, and which pill shows it.
+    private enum ZoomTarget { case app, editor, terminal }
+    @State private var zoomHUD: ZoomTarget?
+    @State private var zoomHUDGeneration = 0
+    @State private var zoomHUDIsHovered = false
+
+    /// How long the pill lingers after the last change.
+    private static let zoomHUDLinger = Duration.milliseconds(1_500)
+
     /// Room for the window buttons, which full screen hides.
     private var windowButtonsWidth: CGFloat { isFullScreen ? 8 : Layout.windowButtonsWidth }
 
@@ -45,6 +54,13 @@ struct WorkspaceView: View {
                     }
                     EditorPane()
                         .onHover { track(.editor, isInside: $0) }
+                        .overlay(alignment: .topTrailing) {
+                            if let target = zoomHUD, target != .terminal {
+                                zoomPill(for: target)
+                                    .padding(.top, (Chrome.tabBarHeight + 28) * appZoom + 10)
+                                    .padding(.trailing, 14)
+                            }
+                        }
                         .environment(\.tabStripLeadingInset, sidebarIsVisible ? 0 : windowButtonsWidth + 32)
                         .overlay(alignment: .topLeading) {
                             if !sidebarIsVisible {
@@ -61,6 +77,13 @@ struct WorkspaceView: View {
                 TerminalPane()
                     .frame(height: height)
                     .onHover { track(.terminal, isInside: $0) }
+                    .overlay(alignment: .topTrailing) {
+                        if zoomHUD == .terminal {
+                            zoomPill(for: .terminal)
+                                .padding(.top, Chrome.tabBarHeight * appZoom + 10)
+                                .padding(.trailing, 14)
+                        }
+                    }
             }
         }
         .ignoresSafeArea(.container, edges: .top)
@@ -106,23 +129,84 @@ struct WorkspaceView: View {
     private func handleZoom(_ command: ZoomInputMonitor.Command) -> Bool {
         switch command {
         case .app(let steps):
-            var zoom = appZoom
-            if let steps { Zoom.step(&zoom, by: steps, in: .app) } else { zoom = 1 }
-            storedAppZoom = zoom
+            zoom(.app, by: steps)
             return true
         case .pointer(let steps):
+            let target: ZoomTarget
             switch pointerPane {
             case .editor:
-                guard let document = workspace.editor.activeDocument else { return false }
-                if steps != 0 { Zoom.step(&document.zoom, by: steps, in: .content) }
-                return true
+                guard workspace.editor.activeDocument != nil else { return false }
+                target = .editor
             case .terminal:
-                guard let id = workspace.terminals.activeSessionID else { return false }
-                if steps != 0 { workspace.terminals.zoom(id, by: steps) }
-                return true
+                guard workspace.terminals.activeSessionID != nil else { return false }
+                target = .terminal
             case nil:
                 return false
             }
+            // A trackpad reports many tiny deltas per step; only whole steps zoom.
+            if steps != 0 { zoom(target, by: steps) }
+            return true
+        }
+    }
+
+    /// One zoom change, from the keyboard, the pointer or the pill.
+    /// - Parameter steps: nil resets to 100%.
+    private func zoom(_ target: ZoomTarget, by steps: Int?) {
+        switch target {
+        case .app:
+            var level = appZoom
+            if let steps { Zoom.step(&level, by: steps, in: .app) } else { level = 1 }
+            storedAppZoom = level
+        case .editor:
+            guard let document = workspace.editor.activeDocument else { return }
+            if let steps { Zoom.step(&document.zoom, by: steps, in: .content) } else { document.zoom = 1 }
+        case .terminal:
+            guard let id = workspace.terminals.activeSessionID else { return }
+            if let steps { workspace.terminals.zoom(id, by: steps) } else { workspace.terminals.resetZoom(id) }
+        }
+        showZoomHUD(for: target)
+    }
+
+    private func level(of target: ZoomTarget) -> Double {
+        switch target {
+        case .app: appZoom
+        case .editor: workspace.editor.activeDocument?.zoom ?? 1
+        case .terminal: workspace.terminals.activeSession?.zoom ?? 1
+        }
+    }
+
+    private func zoomPill(for target: ZoomTarget) -> some View {
+        let title = switch target {
+        case .app: "App"
+        case .editor: "File"
+        case .terminal: "Terminal"
+        }
+        return ZoomHUD(
+            title: title,
+            level: level(of: target),
+            range: target == .app ? Zoom.Scope.app.range : Zoom.Scope.content.range,
+            onStep: { zoom(target, by: $0) },
+            onReset: { zoom(target, by: nil) })
+            .onHover { isInside in
+                zoomHUDIsHovered = isInside
+                if !isInside { scheduleZoomHUDHide() }
+            }
+            .transition(.opacity.combined(with: .scale(scale: 0.96)))
+    }
+
+    private func showZoomHUD(for target: ZoomTarget) {
+        withAnimation(.easeOut(duration: 0.12)) { zoomHUD = target }
+        scheduleZoomHUDHide()
+    }
+
+    /// Hides the pill once zooming has paused, unless the pointer is on it.
+    private func scheduleZoomHUDHide() {
+        zoomHUDGeneration += 1
+        let generation = zoomHUDGeneration
+        Task {
+            try? await Task.sleep(for: Self.zoomHUDLinger)
+            guard generation == zoomHUDGeneration, !zoomHUDIsHovered else { return }
+            withAnimation(.easeIn(duration: 0.2)) { zoomHUD = nil }
         }
     }
 
