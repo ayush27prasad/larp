@@ -19,6 +19,10 @@ final class DocumentStore {
     private(set) var documents: [OpenDocument] = []
     private(set) var previewDocumentID: URL?
 
+    /// Bumped by closeAll, so a load still in flight from before is dropped
+    /// rather than landing as a tab in whatever folder is open now.
+    private var generation = 0
+
     /// Shown in place of the editor until a tab is chosen, so a click on a
     /// binary file explains itself instead of appearing to do nothing.
     private(set) var refusal: Refusal?
@@ -41,21 +45,25 @@ final class DocumentStore {
     ///   next preview; a pinned one is not.
     @discardableResult
     func open(_ url: URL, preview: Bool = false) async throws -> OpenDocument {
-        if let existing = documents.first(where: { $0.url == url }) {
-            activeDocumentID = existing.id
-            // Double-clicking a preview tab pins it.
-            if !preview, previewDocumentID == existing.id { previewDocumentID = nil }
-            return existing
-        }
+        if let existing = focusExisting(url, preview: preview) { return existing }
 
+        let generation = self.generation
         let contents: TextFileLoader.Contents
         do {
             contents = try await TextFileLoader.load(url)
         } catch {
+            guard generation == self.generation else { throw CancellationError() }
             let reason = (error as? TextFileLoader.Failure).map(TextFileLoader.describe)
             refusal = Refusal(url: url, reason: reason ?? error.localizedDescription)
             throw error
         }
+
+        // The load suspended, so the world may have moved on: everything was
+        // closed for another folder, or a second open of this file — a click
+        // and a double-click — finished first.
+        guard generation == self.generation else { throw CancellationError() }
+        if let existing = focusExisting(url, preview: preview) { return existing }
+
         let document = OpenDocument(
             url: url,
             text: contents.text,
@@ -80,6 +88,14 @@ final class DocumentStore {
         return document
     }
 
+    private func focusExisting(_ url: URL, preview: Bool) -> OpenDocument? {
+        guard let existing = documents.first(where: { $0.url == url }) else { return nil }
+        activeDocumentID = existing.id
+        // Double-clicking a preview tab pins it.
+        if !preview, previewDocumentID == existing.id { previewDocumentID = nil }
+        return existing
+    }
+
     /// Promotes a preview tab to a permanent one.
     func pin(_ id: URL) {
         guard previewDocumentID == id else { return }
@@ -97,6 +113,7 @@ final class DocumentStore {
     }
 
     func closeAll() {
+        generation += 1
         documents.removeAll()
         activeDocumentID = nil
         previewDocumentID = nil

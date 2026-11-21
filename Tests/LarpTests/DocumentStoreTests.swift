@@ -83,6 +83,19 @@ struct DocumentStoreTests {
         #expect(store.hasOpenDocuments == false)
     }
 
+    @Test func twoOpensOfTheSameFileAtOnceMakeOneTab() async throws {
+        let temp = try TempDirectory()
+        let file = try temp.write("1", to: "a.txt")
+
+        let store = DocumentStore()
+        // A single click (preview) and a double click (pin) racing.
+        async let first = store.open(file, preview: true)
+        async let second = store.open(file)
+        _ = try await (first, second)
+
+        #expect(store.openURLs == [file])
+    }
+
     @Test func aRefusedFileSaysWhy() async throws {
         let temp = try TempDirectory()
         let file = try temp.write(Data([0x00, 0x01, 0x02]), to: "blob.bin")

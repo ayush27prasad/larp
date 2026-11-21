@@ -84,6 +84,24 @@ struct WorkspaceTests {
         #expect(second.editor.activeDocumentID == b)
     }
 
+    @Test func finderReopeningTheSameFolderMidRestoreStopsTheRestore() async throws {
+        let temp = try TempDirectory()
+        let old = try temp.write("old", to: "old.txt")
+        let wanted = try temp.write("wanted", to: "wanted.txt")
+
+        let defaults = UserDefaults(suiteName: "LarpTests-\(UUID().uuidString)")!
+        let first = Workspace(defaults: defaults)
+        await first.open(folder: temp.url)
+        await first.openFile(old)
+
+        let workspace = Workspace(defaults: defaults)
+        async let restore: Void = workspace.restoreLastFolder()
+        async let finder: Void = workspace.open(finderURL: wanted)
+        _ = await (restore, finder)
+
+        #expect(workspace.editor.openURLs == [wanted])
+    }
+
     @Test func doesNotRestoreATabWhoseFileWasDeleted() async throws {
         let temp = try TempDirectory()
         let a = try temp.write("1", to: "a.txt")

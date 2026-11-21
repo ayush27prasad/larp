@@ -14,6 +14,10 @@ final class Workspace {
     }
 
     private(set) var rootURL: URL?
+
+    /// Counts folder opens and closes. Comparing rootURL can't tell a restore
+    /// apart from Finder reopening the very same folder mid-restore.
+    private var folderGeneration = 0
     private(set) var treeState: TreeState = .empty
 
     /// Highlighted row in the explorer, file or folder. Selecting a file opens
@@ -53,7 +57,12 @@ final class Workspace {
 
     // MARK: - Folders
 
-    func open(folder url: URL) async {
+    /// - Returns: this open's generation, for callers that must notice being
+    ///   superseded while it ran.
+    @discardableResult
+    func open(folder url: URL) async -> Int {
+        folderGeneration += 1
+        let generation = folderGeneration
         rootURL = url
         selectedURL = nil
         editor.closeAll()
@@ -67,12 +76,13 @@ final class Workspace {
         do {
             let tree = try await FileTreeLoader.load(root: url)
             // A newer open() may have superseded this one while we walked disk.
-            guard rootURL == url else { return }
+            guard folderGeneration == generation else { return generation }
             treeState = .loaded(tree.root, isTruncated: tree.isTruncated)
         } catch {
-            guard rootURL == url else { return }
+            guard folderGeneration == generation else { return generation }
             treeState = .failed(error.localizedDescription)
         }
+        return generation
     }
 
     /// Opens something Finder handed us: a folder as the project root, or a
@@ -92,6 +102,7 @@ final class Workspace {
     }
 
     func closeFolder() {
+        folderGeneration += 1
         rootURL = nil
         selectedURL = nil
         editor.closeAll()
@@ -185,11 +196,15 @@ final class Workspace {
         let openPaths = defaults.stringArray(forKey: Self.openFilesKey) ?? []
         let activePath = defaults.string(forKey: Self.activeFileKey)
 
-        await open(folder: URL(fileURLWithPath: folderPath, isDirectory: true))
+        let generation = await open(folder: URL(fileURLWithPath: folderPath, isDirectory: true))
 
+        // A folder or file handed over by Finder while this ran wins — even
+        // the same folder — so stop rather than mixing the old tabs in.
         for path in openPaths where FileManager.default.fileExists(atPath: path) {
+            guard folderGeneration == generation else { return }
             _ = try? await editor.open(URL(fileURLWithPath: path))
         }
+        guard folderGeneration == generation else { return }
         if let activePath, editor.openURLs.contains(URL(fileURLWithPath: activePath)) {
             editor.activeDocumentID = URL(fileURLWithPath: activePath)
         }
