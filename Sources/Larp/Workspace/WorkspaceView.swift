@@ -21,7 +21,7 @@ struct WorkspaceView: View {
     private var appZoom: Double { Zoom.clamped(storedAppZoom, in: .app) }
     /// Which pane ⌘-scroll and pinch zoom: the one under the pointer.
     @State private var pointerPane: PointerPane?
-    @State private var zoomInput = ZoomInputMonitor()
+    @State private var input = InputMonitor()
 
     private enum PointerPane { case editor, terminal }
 
@@ -114,8 +114,13 @@ struct WorkspaceView: View {
         }
         .tint(Color(nsColor: Chrome.accent))
         .environment(\.uiZoom, appZoom)
-        .onAppear { zoomInput.start(handleZoom) }
-        .onDisappear { zoomInput.stop() }
+        .onAppear { input.start(handleInput) }
+        .onDisappear { input.stop() }
+        // Each editor that appears registers its own key monitor, which runs
+        // ahead of ours; re-register so ⌘F and friends reach larp first.
+        .onReceive(NotificationCenter.default.publisher(for: EditorBridge.editorDidAppear)) { _ in
+            input.restart()
+        }
         // Restoring here, not in a pane: the panes swap views as the tree loads,
         // which would cancel the task partway through.
         .task {
@@ -143,13 +148,22 @@ struct WorkspaceView: View {
         }
     }
 
-    /// - Returns: whether the input was used, so it doesn't also scroll.
-    private func handleZoom(_ command: ZoomInputMonitor.Command) -> Bool {
+    /// - Returns: whether the input was used, so nothing else acts on it.
+    private func handleInput(_ command: InputMonitor.Command) -> Bool {
         switch command {
-        case .app(let steps):
+        case .appZoom(let steps):
             zoom(.app, by: steps)
             return true
-        case .pointer(let steps):
+        case .find(let replace):
+            // ⌘F in the terminal stays the terminal's.
+            guard !workspace.terminals.hasFocus else { return false }
+            return workspace.showFind(replace: replace)
+        case .findAgain(let forward):
+            let find = workspace.editor.find
+            guard find.isVisible, !find.matches.isEmpty else { return false }
+            forward ? find.next() : find.previous()
+            return true
+        case .pointerZoom(let steps):
             let target: ZoomTarget
             switch pointerPane {
             case .editor:

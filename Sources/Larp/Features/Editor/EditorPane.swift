@@ -26,6 +26,15 @@ struct EditorPane: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .background(Color(nsColor: Chrome.contentBackground), ignoresSafeAreaEdges: [])
+        // The find bar follows the active file, and its matches follow edits.
+        .onChange(of: workspace.editor.activeDocumentID, initial: true) {
+            let document = workspace.editor.activeDocument
+            document?.findModel = workspace.editor.find
+            workspace.editor.find.document = document
+        }
+        .onChange(of: workspace.editor.activeDocument?.text) {
+            workspace.editor.find.refresh(revealing: false)
+        }
     }
 
     private var content: some View {
@@ -43,6 +52,9 @@ struct EditorPane: View {
         } else if let document = workspace.editor.activeDocument {
             PathBar(document: document, root: workspace.rootURL)
             Divider()
+            if workspace.editor.find.isVisible {
+                FindBar(find: workspace.editor.find)
+            }
             if document.isMarkdown && document.showsPreview {
                 MarkdownPreview(document: document) { url in
                     Task { await workspace.openFile(url) }

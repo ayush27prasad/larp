@@ -63,6 +63,17 @@ final class Workspace {
         return files
     }
 
+    /// Opens ⌘F's find bar on the active file, seeded with the selection.
+    /// - Returns: false with no file open, so the key passes through.
+    @discardableResult
+    func showFind(replace: Bool) -> Bool {
+        guard let document = editor.activeDocument else { return false }
+        // Find works on the source; leave the rendered preview for it.
+        if document.isMarkdown && document.showsPreview { document.showsPreview = false }
+        editor.find.show(replace: replace, prefill: document.bridge.selectedText)
+        return true
+    }
+
     /// Opens a search result in a regular tab, cursor on the match.
     func open(_ match: ProjectSearch.Match) async {
         search.dismiss()

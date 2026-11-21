@@ -48,6 +48,20 @@ struct LarpApp: App {
                     .keyboardShortcut("w")
             }
             CommandGroup(after: .textEditing) {
+                // The keys reach InputMonitor first; these make them discoverable.
+                Button("Find…") { workspace.showFind(replace: false) }
+                    .keyboardShortcut("f")
+                    .disabled(workspace.editor.activeDocument == nil)
+                Button("Find and Replace…") { workspace.showFind(replace: true) }
+                    .keyboardShortcut("f", modifiers: [.command, .option])
+                    .disabled(workspace.editor.activeDocument == nil)
+                Button("Find Next") { workspace.editor.find.next() }
+                    .keyboardShortcut("g")
+                    .disabled(workspace.editor.find.matches.isEmpty)
+                Button("Find Previous") { workspace.editor.find.previous() }
+                    .keyboardShortcut("g", modifiers: [.command, .shift])
+                    .disabled(workspace.editor.find.matches.isEmpty)
+                Divider()
                 Button("Find in Files…") { workspace.search.present() }
                     .keyboardShortcut("f", modifiers: [.command, .shift])
                     .disabled(!workspace.hasOpenFolder)
@@ -65,7 +79,7 @@ struct LarpApp: App {
                 .disabled(workspace.editor.activeDocument?.isMarkdown != true)
 
                 Divider()
-                // The keys themselves are caught first by ZoomInputMonitor, which
+                // The keys themselves are caught first by InputMonitor, which
                 // also accepts ⌘+ (⌘⇧=); these items make the zoom discoverable.
                 Button("Zoom In") { storedAppZoom = Zoom.stepped(appZoom, by: 1, in: .app) }
                     .keyboardShortcut("=")

@@ -17,6 +17,9 @@ final class DocumentStore {
     }
 
     private(set) var documents: [OpenDocument] = []
+
+    /// ⌘F's find bar, which follows the active document.
+    let find = FindModel()
     private(set) var previewDocumentID: URL?
 
     /// Bumped by closeAll, so a load still in flight from before is dropped

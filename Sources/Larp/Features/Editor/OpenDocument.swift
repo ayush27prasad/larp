@@ -30,6 +30,9 @@ final class OpenDocument: Identifiable {
         didSet { bridge.revealPending() }
     }
 
+    /// The find bar, while it is searching this document.
+    @ObservationIgnored weak var findModel: FindModel?
+
     /// Connects this document to its editor view while one is showing.
     @ObservationIgnored let bridge = EditorBridge()
 

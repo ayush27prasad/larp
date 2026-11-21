@@ -10,6 +10,11 @@ While the major version is `0`, minor bumps may include breaking changes.
 ## [Unreleased]
 
 ### Added
+- A find bar of larp's own for ⌘F, replacing the editor's stock panel: the
+  query with an "N of M" count, match-case / whole-word / regex toggles, next
+  and previous (↩, ⇧↩, ⌘G, ⇧⌘G), and a replace row (⌥⌘F) with Replace and
+  Replace All, undoable, with `$1` groups for regex. Matches are highlighted
+  in the text and follow edits; a single-line selection seeds the query.
 - Find in Files (⇧⌘F), after IntelliJ's: a floating panel with match-case,
   whole-word and regex options, results grouped by file with the hits
   highlighted, and the lines around the selected match. ↑↓ move, ↩ opens the

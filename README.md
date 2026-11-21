@@ -228,7 +228,8 @@ README lists which larp features each part exercises.
 | Show or hide the sidebar | ⌃⌘S, or the sidebar button; drag its edge to resize |
 | Move the window | drag the empty part of the tab strip or the sidebar header |
 | Markdown preview / source | ⇧⌘V |
-| Find in the file | ⌘F |
+| Find in the file | ⌘F — ↩ / ⇧↩ or ⌘G / ⇧⌘G to move, esc to close |
+| Find and replace | ⌥⌘F — regex replacements take `$1` groups |
 | Find in files | ⇧⌘F — ↑↓ to move, ↩ to open at the match |
 | Zoom the whole app | ⌘+ / ⌘− / ⌘0, 90%–150% — remembered |
 | Zoom one file or terminal | ⌘-scroll or pinch over it, 50%–300% |
