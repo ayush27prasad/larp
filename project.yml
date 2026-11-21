@@ -33,6 +33,10 @@ packages:
     url: https://github.com/CodeEditApp/CodeEditSourceEditor
     minVersion: 0.15.2
     maxVersion: 0.16.0
+  MarkdownUI:
+    url: https://github.com/gonzalezreal/swift-markdown-ui
+    minVersion: 2.4.0
+    maxVersion: 3.0.0
   SwiftTerm:
     url: https://github.com/migueldeicaza/SwiftTerm
     minVersion: 1.99.2
@@ -48,6 +52,7 @@ targets:
     dependencies:
       - package: CodeEditSourceEditor
       - package: SwiftTerm
+      - package: MarkdownUI
     settings:
       base:
         PRODUCT_NAME: Larp

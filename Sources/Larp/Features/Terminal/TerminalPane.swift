@@ -13,15 +13,15 @@ struct TerminalPane: View {
                 onClose: { workspace.terminals.close($0) },
                 onRename: { workspace.terminals.rename($0, to: $1) },
                 onAdd: { workspace.newTerminal() })
-            Divider()
             TerminalStack(store: workspace.terminals)
         }
         .frame(maxWidth: .infinity)
+        .background(Color(nsColor: Chrome.contentBackground), ignoresSafeAreaEdges: [])
     }
 }
 
-/// Tabs share the width evenly — one fills the bar, two take half each, and so
-/// on — with the add button pinned at a fixed width on the right.
+/// Left-aligned tabs sized to their titles, the way editor tabs are, with the
+/// add button straight after them.
 private struct TerminalTabBar: View {
     let sessions: [TerminalSession]
     let activeID: TerminalSession.ID?
@@ -32,26 +32,33 @@ private struct TerminalTabBar: View {
 
     var body: some View {
         HStack(spacing: 0) {
-            ForEach(sessions) { session in
-                TerminalTab(
-                    session: session,
-                    isActive: session.id == activeID,
-                    onSelect: { onSelect(session.id) },
-                    onClose: { onClose(session.id) },
-                    onRename: { onRename(session.id, $0) })
-                    .frame(maxWidth: .infinity)
-                Divider().frame(height: 14)
+            ScrollView(.horizontal) {
+                HStack(spacing: 0) {
+                    ForEach(sessions) { session in
+                        TerminalTab(
+                            session: session,
+                            isActive: session.id == activeID,
+                            onSelect: { onSelect(session.id) },
+                            onClose: { onClose(session.id) },
+                            onRename: { onRename(session.id, $0) })
+                    }
+                    Button(action: onAdd) {
+                        Image(systemName: "plus")
+                            .font(.system(size: 11, weight: .medium))
+                            .foregroundStyle(.secondary)
+                            .frame(width: 32, height: Chrome.tabBarHeight)
+                            .contentShape(.rect)
+                    }
+                    .buttonStyle(.plain)
+                    .help("New Terminal (⌘T)")
+                }
             }
-
-            Button(action: onAdd) {
-                Image(systemName: "plus").font(.system(size: 10, weight: .semibold))
-            }
-            .buttonStyle(.plain)
-            .frame(width: 28)
-            .help("New Terminal (⌘T)")
+            .scrollIndicators(.never)
+            Spacer(minLength: 0)
         }
-        .frame(height: 28)
-        .background(.quaternary.opacity(0.4))
+        .frame(height: Chrome.tabBarHeight)
+        .background(Color(nsColor: Chrome.barBackground), ignoresSafeAreaEdges: [])
+        .overlay(alignment: .bottom) { Rectangle().fill(Color(nsColor: Chrome.separator)).frame(height: 1) }
     }
 }
 
@@ -62,50 +69,38 @@ private struct TerminalTab: View {
     let onClose: () -> Void
     let onRename: (String) -> Void
 
-    @State private var isHovered = false
     @State private var isRenaming = false
     @State private var draft = ""
     @FocusState private var fieldIsFocused: Bool
 
     var body: some View {
-        HStack(spacing: 6) {
-            Button(action: onClose) {
-                Image(systemName: "xmark")
-                    .font(.system(size: 8, weight: .bold))
-                    .frame(width: 14, height: 14)
-            }
-            .buttonStyle(.plain)
-            .opacity(isHovered || isRenaming ? 1 : 0)
-            .frame(width: 14, height: 14)
-
-            if isRenaming {
-                TextField("", text: $draft)
-                    .textFieldStyle(.plain)
+        PaneTab(isActive: isActive) { isHovered in
+            HStack(spacing: 6) {
+                Image(systemName: "terminal")
                     .font(.system(size: 11))
-                    .focused($fieldIsFocused)
-                    .onSubmit(commit)
-                    // Escape abandons the edit and keeps the old name.
-                    .onExitCommand { isRenaming = false }
-                    .onChange(of: fieldIsFocused) { _, focused in
-                        if !focused { commit() }
-                    }
-            } else {
-                Text(session.title)
-                    .font(.system(size: 11))
-                    .lineLimit(1)
-                    .truncationMode(.middle)
+                if isRenaming {
+                    TextField("", text: $draft)
+                        .textFieldStyle(.plain)
+                        .frame(minWidth: 80, maxWidth: 160)
+                        .focused($fieldIsFocused)
+                        .onSubmit(commit)
+                        // Escape abandons the edit and keeps the old name.
+                        .onExitCommand { isRenaming = false }
+                        .onChange(of: fieldIsFocused) { _, focused in
+                            if !focused { commit() }
+                        }
+                } else {
+                    Text(session.title)
+                        .lineLimit(1)
+                        .truncationMode(.middle)
+                        .frame(maxWidth: 180)
+                }
+                TabCloseButton(isVisible: isHovered || isActive || isRenaming, action: onClose)
             }
-
-            Spacer(minLength: 0)
         }
-        .padding(.horizontal, 10)
-        .frame(height: 28)
-        .background(isActive ? AnyShapeStyle(.background) : AnyShapeStyle(.clear))
-        .contentShape(.rect)
         .onTapGesture(count: 2, perform: beginRenaming)
         .onTapGesture(perform: onSelect)
-        .onHover { isHovered = $0 }
-        .help(isRenaming ? "" : session.workingDirectory.path)
+        .help(isRenaming ? "" : "\(session.workingDirectory.path) — double-click to rename")
     }
 
     private func beginRenaming() {

@@ -19,6 +19,14 @@ final class OpenDocument: Identifiable {
     private var savedText: String
     private(set) var isDirty = false
 
+    var isMarkdown: Bool { language.id == .markdown }
+
+    /// Read once on open; saving keeps whatever endings the text has.
+    let usesCRLF: Bool
+
+    /// Markdown opens rendered; ⇧⌘V flips to the source and back.
+    var showsPreview: Bool
+
     private let hasByteOrderMark: Bool
 
     nonisolated var id: URL { url }
@@ -30,9 +38,10 @@ final class OpenDocument: Identifiable {
         self.savedText = text
         self.hasByteOrderMark = hasByteOrderMark
         // The prefix lets extensionless files be detected by shebang or modeline.
-        self.language = CodeLanguage.detectLanguageFrom(
-            url: url,
-            prefixBuffer: String(text.prefix(1_024)))
+        let language = LanguageDetection.language(for: url, prefix: String(text.prefix(1_024)))
+        self.language = language
+        self.showsPreview = language.id == .markdown
+        self.usesCRLF = text.contains("\r\n")
     }
 
     func save() throws {

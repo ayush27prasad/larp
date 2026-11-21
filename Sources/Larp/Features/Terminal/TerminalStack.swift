@@ -65,16 +65,6 @@ struct TerminalStack: NSViewRepresentable {
         coordinator.hosts.removeAll()
     }
 
-    /// VSplitView divides space by each child's ideal height; a representable
-    /// reports none, so without this the terminal takes half the window.
-    func sizeThatFits(
-        _ proposal: ProposedViewSize,
-        nsView: NSView,
-        context: Context
-    ) -> CGSize? {
-        CGSize(width: proposal.width ?? 600, height: proposal.height ?? 220)
-    }
-
     @MainActor
     final class Coordinator {
         var hosts: [TerminalSession.ID: TerminalHostView] = [:]

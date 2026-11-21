@@ -1,7 +1,8 @@
 import CodeEditSourceEditor
 import SwiftUI
 
-/// Middle pane: tabs across the top, the active file's source below.
+/// Middle pane: tabs across the top, the active file below — as source, or
+/// rendered when it is markdown — with its path above and status beneath.
 struct EditorPane: View {
     @Environment(Workspace.self) private var workspace
     @Environment(\.colorScheme) private var colorScheme
@@ -18,25 +19,38 @@ struct EditorPane: View {
                     previewID: workspace.editor.previewDocumentID,
                     onSelect: { workspace.activate($0) },
                     onClose: { workspace.closeFile($0) })
-                Divider()
             }
-
-            if let refusal = workspace.editor.refusal {
-                ContentUnavailableView {
-                    Label(refusal.url.lastPathComponent, systemImage: "doc.questionmark")
-                } description: {
-                    Text(refusal.reason)
-                }
-            } else if let document = workspace.editor.activeDocument {
-                editor(for: document)
-            } else {
-                ContentUnavailableView(
-                    "No file open",
-                    systemImage: "doc.text",
-                    description: Text("Select a file in the explorer to open it."))
-            }
+            content
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(nsColor: Chrome.contentBackground), ignoresSafeAreaEdges: [])
+    }
+
+    @ViewBuilder
+    private var content: some View {
+        if let refusal = workspace.editor.refusal {
+            ContentUnavailableView {
+                Label(refusal.url.lastPathComponent, systemImage: "doc.questionmark")
+            } description: {
+                Text(refusal.reason)
+            }
+        } else if let document = workspace.editor.activeDocument {
+            PathBar(document: document, root: workspace.rootURL)
+            Divider()
+            if document.isMarkdown && document.showsPreview {
+                MarkdownPreview(document: document) { url in
+                    Task { await workspace.openFile(url) }
+                }
+            } else {
+                editor(for: document)
+            }
+            StatusBar(document: document, cursor: editorState.cursorPositions?.first)
+        } else {
+            ContentUnavailableView(
+                "No file open",
+                systemImage: "doc.text",
+                description: Text("Select a file in the explorer to open it."))
+        }
     }
 
     private func editor(for document: OpenDocument) -> some View {
@@ -48,8 +62,8 @@ struct EditorPane: View {
             configuration: SourceEditorConfiguration(
                 appearance: .init(
                     theme: colorScheme == .dark ? .larpDark : .larpLight,
-                    font: .monospacedSystemFont(ofSize: 12, weight: .regular),
-                    lineHeightMultiple: 1.3,
+                    font: .monospacedSystemFont(ofSize: 12.5, weight: .regular),
+                    lineHeightMultiple: 1.35,
                     wrapLines: false,
                     tabWidth: 4),
                 peripherals: .init(showMinimap: false)),

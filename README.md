@@ -53,6 +53,7 @@ Resolved by SwiftPM; declared in [`project.yml`](project.yml).
 |---|---|---|
 | [CodeEditSourceEditor](https://github.com/CodeEditApp/CodeEditSourceEditor) | MIT | Source editor: tree-sitter highlighting, gutter, indentation |
 | [SwiftTerm](https://github.com/migueldeicaza/SwiftTerm) | MIT | VT100/xterm emulator for the terminal pane |
+| [MarkdownUI](https://github.com/gonzalezreal/swift-markdown-ui) | MIT | Renders markdown with native SwiftUI views — no web view |
 
 The first build clones ~43 tree-sitter grammars via CodeEditLanguages and takes
 several minutes. Later builds are incremental.
@@ -101,10 +102,26 @@ continuous-corner mask for older systems. It crops to a centred square by
 default so the art reaches every edge; `MODE=fit ./Scripts/make-icon.sh`
 letterboxes instead, cropping nothing.
 
-The asset catalogue's accent colour was taken from iKhalacy's artwork; revisit
-it alongside the logo. The editor keeps Xcode's default syntax
-palette. The app is pinned to light appearance (`NSApp.appearance = .aqua`); the
-dark palette stays in the source for whenever an appearance preference lands.
+**View ▸ Appearance** picks System, Light or Dark; System follows macOS.
+
+- **Light** is Apple-calm: white content on apple.com's `#F5F5F7` greys, Apple
+  blue (`#0071E3`) as the accent, and Xcode's default syntax colours.
+- **Dark** is neon on true black, after Synthwave '84 and Cyberpunk themes on a
+  Warp-style black base: neon pink accent with a glow on the active tab, a green
+  caret, and syntax in pink keywords, green strings, cyan functions, violet
+  types and amber numbers.
+
+Every colour lives in `Design/Chrome.swift` (panes) and
+`Features/Editor/EditorTheme+Larp.swift` (syntax), so the editor, markdown
+preview and terminal share one surface. larp draws its own accent explicitly,
+because macOS replaces an app's accent colour with the system accent unless
+that is set to Multicolor; system controls such as the sidebar selection follow
+the system accent, as Mac apps should. The terminal keeps the standard ANSI
+colours, since prompts like Powerlevel10k are designed against them.
+
+Markdown opens rendered — natively, with no web view — and ⇧⌘V or the
+Preview/Source switch above it flips to the source. Links to other files in
+the project open in larp.
 
 ## Terminal
 
@@ -165,7 +182,8 @@ larp/
 │   ├── bootstrap.sh          # Regenerates the .xcodeproj
 │   └── make-icon.sh          # Regenerates the app icon from Design/logo.ai
 ├── Sources/Larp/
-│   ├── App/                  # Entry point and app-level scene wiring
+│   ├── App/                  # Entry point, scene wiring, appearance
+│   ├── Design/               # Shared colours, tab styling, file icons
 │   ├── Workspace/            # Shared state + the three-pane window shell
 │   ├── Features/
 │   │   ├── Explorer/         # Left pane — file tree
@@ -175,7 +193,7 @@ larp/
 ├── Examples/
 │   ├── Production/           # Orderly: the realistic project larp is tested on
 │   └── SampleProject/        # Tiny mixed-language fixture
-└── Tests/LarpTests/      # Swift Testing suites
+└── Tests/LarpTests/          # Swift Testing suites
 ```
 
 Each pane is a self-contained feature folder. Panes never reach into each other;
@@ -199,6 +217,9 @@ README lists which larp features each part exercises.
 | Save | ⌘S |
 | New terminal | ⌘T |
 | Rename a terminal | double-click its tab |
+| Resize the terminal | drag the line above it — the height is remembered |
+| Markdown preview / source | ⇧⌘V |
+| Light, dark or system appearance | View ▸ Appearance |
 | Close tab | ⌘W — closes the terminal tab if the terminal has focus, otherwise the editor tab |
 | Close folder | ⇧⌘W |
 
@@ -251,7 +272,10 @@ is weeks of work for a worse result. The cost is real: it pulls in
 CodeEditTextView, CodeEditLanguages, CodeEditSymbols and TextFormation, and the
 bundled grammars dominate the app's size. Highlighting comes free with it —
 `CodeLanguage.detectLanguageFrom(url:)` picks the grammar per file, falling back
-to a shebang or modeline for extensionless files.
+to a shebang or modeline for extensionless files. For everyday files it leaves
+as plain text, `LanguageDetection` borrows a close grammar: Makefiles and `.env`
+as shell, XML and plists as HTML, `.jsonc` as JSON, `.ini` as TOML. Approximate
+highlighting beats none. Protocol Buffers still has no grammar.
 
 **No web views.** The chat and the diff views will be rendered natively, never
 in a `WKWebView`. Each web view runs its own web-content process, which alone

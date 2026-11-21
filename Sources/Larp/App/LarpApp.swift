@@ -5,19 +5,19 @@ import SwiftUI
 struct LarpApp: App {
     @State private var workspace = Workspace()
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
-
-    init() {
-        // Pin the whole app to light, AppKit-hosted panes included — SwiftUI's
-        // preferredColorScheme alone doesn't reach the editor or terminal views.
-        NSApplication.shared.appearance = NSAppearance(named: .aqua)
-    }
+    @AppStorage(Appearance.defaultsKey) private var appearance: Appearance = .system
 
     var body: some Scene {
-        WindowGroup {
+        // A single Window, not a WindowGroup: a WindowGroup opens an extra
+        // window for every folder or file handed over by Finder or `open -a`,
+        // all sharing one workspace and each starting its own shells.
+        Window("Larp", id: "main") {
             WorkspaceView()
                 .environment(workspace)
-                .preferredColorScheme(.light)
                 .task { appDelegate.attach(workspace) }
+                .onChange(of: appearance, initial: true) {
+                    NSApp.appearance = appearance.nsAppearance
+                }
         }
         .windowToolbarStyle(.unified)
         .defaultSize(width: 1_280, height: 800)
@@ -37,6 +37,17 @@ struct LarpApp: App {
                     .keyboardShortcut("t")
                 Button("Close Tab") { workspace.closeFocusedTab() }
                     .keyboardShortcut("w")
+            }
+            CommandGroup(after: .sidebar) {
+                Button("Toggle Markdown Preview") {
+                    workspace.editor.activeDocument?.showsPreview.toggle()
+                }
+                .keyboardShortcut("v", modifiers: [.command, .shift])
+                .disabled(workspace.editor.activeDocument?.isMarkdown != true)
+
+                Picker("Appearance", selection: $appearance) {
+                    ForEach(Appearance.allCases) { Text($0.title).tag($0) }
+                }
             }
         }
     }

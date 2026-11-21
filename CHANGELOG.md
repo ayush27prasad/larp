@@ -10,12 +10,27 @@ While the major version is `0`, minor bumps may include breaking changes.
 ## [Unreleased]
 
 ### Added
+- Dark mode, and View ▸ Appearance to choose System, Light or Dark. Dark is
+  neon on true black; light is Apple-calm, after Xcode and apple.com.
+- A markdown preview, rendered natively, on by default for `.md` files. ⇧⌘V or
+  the Preview/Source switch toggles it; links to project files open in larp.
+- Syntax highlighting for Makefiles, `.env` files, Dockerfiles, XML and plists,
+  `.jsonc`, `.ini`/`.cfg` and `.mjs`/`.cjs`, by borrowing a close grammar.
+- A path bar above the editor and a status bar below it: line and column,
+  language, encoding, line endings.
 - `Examples/Production/`: Orderly, a realistic multi-language monorepo to test
   larp on — services in Python, Go, Java and Rust, web, iOS and Android
   clients, SQL migrations with a SQLite dev database, a large JSON catalogue,
   a Mermaid diagram, and deliberate binary and Latin-1 files.
 
 ### Changed
+- The interface is redesigned: tabs carry file-type icons and a clear active
+  state, the explorer's icons are coloured by language, and the editor,
+  markdown preview and terminal share one background. The terminal gets
+  padding, matching tabs sized to their titles, and themed colours that follow
+  the appearance.
+- The terminal is resized by dragging the line above it, and its height is
+  remembered. It used to take half the window.
 - Renamed iKhalacy to larp — Your Local Agent Review Pal — and refocused it on
   reviewing and walking through code written by Claude Code and Codex. The app
   is `Larp.app`, the module `Larp`, the bundle ID `in.ayush27prasad.larp`.
@@ -27,6 +42,12 @@ While the major version is `0`, minor bumps may include breaking changes.
   versions instead of whatever is newest in each allowed range.
 
 ### Fixed
+- Opening a file or folder from Finder, or with `open -a`, opened a second
+  window on the same project, each with its own copies of the shells. larp is
+  now a single window.
+- Opening a file from Finder while the last session was being restored mixed
+  the old session's tabs into the new folder, and a click and a double-click on
+  the same file could open it in two tabs.
 - Clicking a folder in the explorer tried to open it as a file and showed
   "couldn't be opened" in the editor. Selecting a folder now only highlights
   it, and double-clicking a folder expands or collapses it, as its arrow does.

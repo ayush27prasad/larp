@@ -44,6 +44,7 @@ struct ExplorerPane: View {
                     }
                 }
                 .listStyle(.sidebar)
+                .scrollContentBackground(.hidden)
 
             case .failed(let message):
                 ContentUnavailableView {
@@ -54,6 +55,7 @@ struct ExplorerPane: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(nsColor: Chrome.sidebarBackground))
         // A different folder is a different tree; nothing should stay open.
         .onChange(of: workspace.rootURL) { expanded = [] }
     }
@@ -90,7 +92,11 @@ private struct FileTreeRow: View {
     }
 
     private var label: some View {
-        Label(node.name, systemImage: FileIcon.symbolName(for: node))
+        Label {
+            Text(node.name)
+        } icon: {
+            FileIcon.image(for: node.url, isDirectory: node.isDirectory)
+        }
     }
 
     private var isExpanded: Binding<Bool> {

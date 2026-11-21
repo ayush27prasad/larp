@@ -21,13 +21,40 @@ final class TerminalHostView: NSView {
     /// Long enough to outlast a sidebar animation, short enough to feel instant.
     private static let settleDelay: TimeInterval = 0.15
 
+    /// Breathing room between the pane's edge and the text.
+    private static let padding = NSEdgeInsets(top: 6, left: 10, bottom: 4, right: 6)
+
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         clipsToBounds = true
-        terminal.nativeBackgroundColor = .textBackgroundColor
-        terminal.nativeForegroundColor = .textColor
+        wantsLayer = true
         terminal.processDelegate = self
         addSubview(terminal)
+        applyPalette()
+    }
+
+    override func viewDidChangeEffectiveAppearance() {
+        super.viewDidChangeEffectiveAppearance()
+        applyPalette()
+    }
+
+    /// SwiftTerm resolves colours when they are set, so a dynamic NSColor would
+    /// not follow a light/dark switch; the palette is reapplied instead.
+    private func applyPalette() {
+        let palette = TerminalPalette.forAppearance(effectiveAppearance)
+        terminal.nativeBackgroundColor = palette.background
+        terminal.nativeForegroundColor = palette.foreground
+        terminal.caretColor = palette.caret
+        terminal.selectedTextBackgroundColor = palette.selection
+        layer?.backgroundColor = palette.background.cgColor
+    }
+
+    private var terminalFrame: NSRect {
+        let p = Self.padding
+        return NSRect(
+            x: p.left, y: p.bottom,
+            width: max(0, bounds.width - p.left - p.right),
+            height: max(0, bounds.height - p.top - p.bottom))
     }
 
     @available(*, unavailable)
@@ -37,14 +64,14 @@ final class TerminalHostView: NSView {
         super.layout()
 
         // First pass: size immediately, or the shell starts against a zero grid.
+        let target = terminalFrame
         guard !terminal.frame.isEmpty else {
-            terminal.frame = bounds
+            terminal.frame = target
             return
         }
-        guard terminal.frame.size != bounds.size else { return }
+        guard terminal.frame != target else { return }
 
         pendingResize?.cancel()
-        let target = bounds
         let work = DispatchWorkItem { [weak self] in self?.terminal.frame = target }
         pendingResize = work
         DispatchQueue.main.asyncAfter(deadline: .now() + Self.settleDelay, execute: work)

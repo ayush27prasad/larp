@@ -19,7 +19,7 @@ extension EditorTheme.Attribute {
 }
 
 extension EditorTheme {
-    /// Xcode's default light palette.
+    /// Xcode's default light palette — the most familiar one on the Mac.
     static var larpLight: EditorTheme {
         EditorTheme(
             text: .init(hex: 0x0000_00),
@@ -40,24 +40,25 @@ extension EditorTheme {
             comments: .init(hex: 0x2675_07, italic: true))
     }
 
-    /// Unused while the app is pinned to light, kept for a future preference.
+    /// Neon on black: keywords pink, strings green, functions cyan, types
+    /// violet, numbers amber, comments a dim slate that stays out of the way.
     static var larpDark: EditorTheme {
         EditorTheme(
-            text: .init(hex: 0xDFDF_E0),
-            insertionPoint: NSColor(hex: 0xDFDF_E0),
-            invisibles: .init(hex: 0x5360_6E),
-            background: NSColor(hex: 0x1F1F_24),
-            lineHighlight: NSColor(hex: 0x2F2F_35),
-            selection: NSColor(hex: 0x4551_63),
-            keywords: .init(hex: 0xFC5F_A3),
-            commands: .init(hex: 0xA167_E6),
-            types: .init(hex: 0x5DD8_FF),
-            attributes: .init(hex: 0xA167_E6),
-            variables: .init(hex: 0x41A1_C0),
-            values: .init(hex: 0xD0BF_69),
-            numbers: .init(hex: 0xD0BF_69),
-            strings: .init(hex: 0xFC6A_5D),
-            characters: .init(hex: 0xD0BF_69),
-            comments: .init(hex: 0x6C79_86, italic: true))
+            text: .init(hex: 0xE4E4EA),
+            insertionPoint: NSColor(hex: 0x00FF9C),
+            invisibles: .init(hex: 0x2A2A33),
+            background: NSColor(hex: 0x050507),
+            lineHighlight: NSColor(hex: 0x0E0E14),
+            selection: NSColor(hex: 0x203A33),
+            keywords: .init(hex: 0xFF3CAC),
+            commands: .init(hex: 0x3DE8FF),
+            types: .init(hex: 0xB388FF),
+            attributes: .init(hex: 0xFF9E64),
+            variables: .init(hex: 0x9CFFD9),
+            values: .init(hex: 0xFFD166),
+            numbers: .init(hex: 0xFFB020),
+            strings: .init(hex: 0x39FF88),
+            characters: .init(hex: 0xFFB020),
+            comments: .init(hex: 0x5C6573, italic: true))
     }
 }

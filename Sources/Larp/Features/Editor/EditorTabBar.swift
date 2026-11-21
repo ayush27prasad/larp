@@ -16,15 +16,16 @@ struct EditorTabBar: View {
                         document: document,
                         isActive: document.id == activeID,
                         isPreview: document.id == previewID,
-                        onSelect: { onSelect(document.id) },
                         onClose: { onClose(document.id) })
-                    Divider().frame(height: 14)
+                        .onTapGesture { onSelect(document.id) }
                 }
             }
         }
         .scrollIndicators(.never)
-        .frame(height: 32)
-        .background(.quaternary.opacity(0.4))
+        .frame(height: Chrome.tabBarHeight)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color(nsColor: Chrome.barBackground), ignoresSafeAreaEdges: [])
+        .overlay(alignment: .bottom) { Rectangle().fill(Color(nsColor: Chrome.separator)).frame(height: 1) }
     }
 }
 
@@ -32,45 +33,22 @@ private struct EditorTab: View {
     let document: OpenDocument
     let isActive: Bool
     let isPreview: Bool
-    let onSelect: () -> Void
     let onClose: () -> Void
 
-    @State private var isHovered = false
-
     var body: some View {
-        HStack(spacing: 6) {
-            closeOrDirtyIndicator
-            Text(document.name)
-                .font(.system(size: 12))
-                .italic(isPreview)
-                .lineLimit(1)
-        }
-        .padding(.horizontal, 10)
-        .frame(height: 32)
-        .background(isActive ? AnyShapeStyle(.background) : AnyShapeStyle(.clear))
-        .contentShape(.rect)
-        .onTapGesture(perform: onSelect)
-        .onHover { isHovered = $0 }
-        .help(document.url.path)
-    }
-
-    /// One slot: a dot for unsaved changes, swapping to a close button on hover.
-    @ViewBuilder
-    private var closeOrDirtyIndicator: some View {
-        if isHovered || !document.isDirty {
-            Button(action: onClose) {
-                Image(systemName: "xmark")
-                    .font(.system(size: 8, weight: .bold))
-                    .frame(width: 14, height: 14)
+        PaneTab(isActive: isActive) { isHovered in
+            HStack(spacing: 6) {
+                FileIcon.image(for: document.url)
+                    .font(.system(size: 11))
+                Text(document.name)
+                    .italic(isPreview)
+                    .lineLimit(1)
+                TabCloseButton(
+                    isVisible: isHovered || (isActive && !document.isDirty),
+                    showsDirtyDot: document.isDirty,
+                    action: onClose)
             }
-            .buttonStyle(.plain)
-            .opacity(isHovered ? 1 : 0)
-            .frame(width: 14, height: 14)
-        } else {
-            Circle()
-                .fill(.secondary)
-                .frame(width: 7, height: 7)
-                .frame(width: 14, height: 14)
         }
+        .help(document.url.path)
     }
 }

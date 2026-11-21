@@ -10,7 +10,7 @@ struct FileIconTests {
         ("config.json", "curlybraces"),
         ("main.py", "chevron.left.forwardslash.chevron.right"),
         ("Widget.java", "chevron.left.forwardslash.chevron.right"),
-        ("LICENSE", "doc"),
+        ("LICENSE", "checkmark.seal"), ("notes.unknownext", "doc"),
     ])
     func picksASymbolPerFileType(name: String, expected: String) {
         let node = FileNode(url: URL(fileURLWithPath: "/tmp/\(name)"), children: nil)
