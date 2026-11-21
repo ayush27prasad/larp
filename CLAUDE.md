@@ -16,6 +16,17 @@ Then [README.md](README.md): *Architecture decisions* explains why the app is
 unsandboxed, all Swift, and built on CodeEditSourceEditor and SwiftTerm. Don't
 relitigate those without a reason neither document already answers.
 
+## How features ship
+
+1. The user describes a feature; agree its scope under its row in
+   `docs/PRODUCT.md` before building.
+2. Build it on a branch (`feature/F<n>-<slug>`), with tests and doc updates,
+   until the build is clean and the tests pass.
+3. Push the branch and ask the user to merge it — give them a short try-it
+   checklist. Pushing feature branches is pre-approved; **never push or merge
+   to `main` yourself**. The user merges.
+4. Refinements after their review go on the same branch.
+
 ## Build and test
 
 ```sh
