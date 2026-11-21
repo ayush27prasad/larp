@@ -16,6 +16,13 @@ struct WorkspaceView: View {
     @State private var dragStartWidth: Double?
     @State private var isFullScreen = false
 
+    @AppStorage(Zoom.appKey) private var appZoom = 1.0
+    /// Which pane ⌘-scroll and pinch zoom: the one under the pointer.
+    @State private var pointerPane: PointerPane?
+    @State private var zoomInput = ZoomInputMonitor()
+
+    private enum PointerPane { case editor, terminal }
+
     /// Room for the window buttons, which full screen hides.
     private var windowButtonsWidth: CGFloat { isFullScreen ? 8 : Layout.windowButtonsWidth }
 
@@ -35,11 +42,12 @@ struct WorkspaceView: View {
                         verticalDivider
                     }
                     EditorPane()
+                        .onHover { track(.editor, isInside: $0) }
                         .environment(\.tabStripLeadingInset, sidebarIsVisible ? 0 : windowButtonsWidth + 32)
                         .overlay(alignment: .topLeading) {
                             if !sidebarIsVisible {
                                 SidebarToggle()
-                                    .frame(height: Chrome.tabBarHeight)
+                                    .frame(height: Chrome.tabBarHeight * appZoom)
                                     .padding(.leading, windowButtonsWidth)
                             }
                         }
@@ -50,6 +58,7 @@ struct WorkspaceView: View {
 
                 TerminalPane()
                     .frame(height: height)
+                    .onHover { track(.terminal, isInside: $0) }
             }
         }
         .ignoresSafeArea(.container, edges: .top)
@@ -61,6 +70,9 @@ struct WorkspaceView: View {
             isFullScreen = false
         }
         .tint(Color(nsColor: Chrome.accent))
+        .environment(\.uiZoom, appZoom)
+        .onAppear { zoomInput.start(handleZoom) }
+        .onDisappear { zoomInput.stop() }
         // Restoring here, not in a pane: the panes swap views as the tree loads,
         // which would cancel the task partway through.
         .task {
@@ -80,20 +92,50 @@ struct WorkspaceView: View {
         }
     }
 
+    private func track(_ pane: PointerPane, isInside: Bool) {
+        if isInside {
+            pointerPane = pane
+        } else if pointerPane == pane {
+            pointerPane = nil
+        }
+    }
+
+    /// - Returns: whether the input was used, so it doesn't also scroll.
+    private func handleZoom(_ command: ZoomInputMonitor.Command) -> Bool {
+        switch command {
+        case .app(let steps):
+            appZoom = steps.map { Zoom.stepped(appZoom, by: $0) } ?? 1
+            return true
+        case .pointer(let steps):
+            switch pointerPane {
+            case .editor:
+                guard let document = workspace.editor.activeDocument else { return false }
+                if steps != 0 { document.zoom = Zoom.stepped(document.zoom, by: steps) }
+                return true
+            case .terminal:
+                guard let id = workspace.terminals.activeSessionID else { return false }
+                if steps != 0 { workspace.terminals.zoom(id, by: steps) }
+                return true
+            case nil:
+                return false
+            }
+        }
+    }
+
     /// The explorer under its header: window buttons, project name, toggle.
     private var sidebar: some View {
         VStack(spacing: 0) {
             HStack(spacing: 6) {
                 Color.clear.frame(width: windowButtonsWidth - 8)
                 Text(workspace.rootURL?.lastPathComponent ?? "Larp")
-                    .font(.system(size: 12, weight: .semibold))
+                    .font(.system(size: 12 * appZoom, weight: .semibold))
                     .lineLimit(1)
                     .truncationMode(.middle)
                 Spacer(minLength: 0)
                 SidebarToggle()
             }
             .padding(.trailing, 6)
-            .frame(height: Chrome.tabBarHeight)
+            .frame(height: Chrome.tabBarHeight * appZoom)
             .contentShape(.rect)
             .dragsWindow()
             .overlay(alignment: .bottom) {

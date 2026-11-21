@@ -72,6 +72,8 @@ private struct FileTreeRow: View {
     let node: FileNode
     @Binding var expanded: Set<URL>
 
+    @Environment(\.uiZoom) private var zoom
+
     var body: some View {
         if let children = node.children {
             DisclosureGroup(isExpanded: isExpanded) {
@@ -97,6 +99,8 @@ private struct FileTreeRow: View {
         } icon: {
             FileIcon.image(for: node.url, isDirectory: node.isDirectory)
         }
+        // On the row, not the List: sidebar lists ignore a font set on the list.
+        .font(.system(size: 13 * zoom))
     }
 
     private var isExpanded: Binding<Bool> {

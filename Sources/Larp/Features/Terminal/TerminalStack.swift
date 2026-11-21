@@ -50,6 +50,7 @@ struct TerminalStack: NSViewRepresentable {
                 ])
             }
             host.isHidden = session.id != store.activeSessionID
+            host.setFontScale(context.environment.uiZoom * session.zoom)
         }
 
         // Typing should land in the tab you just switched to.

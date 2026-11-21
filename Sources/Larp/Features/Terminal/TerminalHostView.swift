@@ -11,6 +11,9 @@ import SwiftTerm
 /// settled turns that storm into a single redraw.
 final class TerminalHostView: NSView {
     private let terminal = LocalProcessTerminalView(frame: .zero)
+
+    /// SwiftTerm's own font, kept so zoom always scales from it.
+    private lazy var baseFont = terminal.font
     private var pendingResize: DispatchWorkItem?
 
     /// Called when the shell exits by itself, with whether it exited cleanly.
@@ -93,6 +96,14 @@ final class TerminalHostView: NSView {
             // profile — and therefore their PATH — is sourced.
             execName: plain ? name : "-" + name,
             currentDirectory: directory.path)
+    }
+
+    /// The app zoom times this shell's own. Changing the font changes the
+    /// grid, so SwiftTerm resizes the PTY as it would for a layout change.
+    func setFontScale(_ scale: Double) {
+        let size = (baseFont.pointSize * scale * 2).rounded() / 2
+        guard abs(terminal.font.pointSize - size) > 0.01 else { return }
+        terminal.font = NSFont(descriptor: baseFont.fontDescriptor, size: size) ?? baseFont
     }
 
     func focusTerminal() {

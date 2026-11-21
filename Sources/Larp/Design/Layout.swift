@@ -37,15 +37,16 @@ extension View {
 /// sidebar is hidden, at the start of the editor's tab strip.
 struct SidebarToggle: View {
     @AppStorage(Layout.sidebarVisibleKey) private var isVisible = true
+    @Environment(\.uiZoom) private var zoom
 
     var body: some View {
         Button {
             withAnimation(.easeInOut(duration: 0.18)) { isVisible.toggle() }
         } label: {
             Image(systemName: "sidebar.left")
-                .font(.system(size: 13))
+                .font(.system(size: 13 * zoom))
                 .foregroundStyle(.secondary)
-                .frame(width: 28, height: 24)
+                .frame(width: 28 * zoom, height: 24 * zoom)
                 .contentShape(.rect)
         }
         .buttonStyle(.plain)

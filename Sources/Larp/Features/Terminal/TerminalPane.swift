@@ -30,6 +30,8 @@ private struct TerminalTabBar: View {
     let onRename: (TerminalSession.ID, String) -> Void
     let onAdd: () -> Void
 
+    @Environment(\.uiZoom) private var zoom
+
     var body: some View {
         HStack(spacing: 0) {
             ScrollView(.horizontal) {
@@ -44,9 +46,9 @@ private struct TerminalTabBar: View {
                     }
                     Button(action: onAdd) {
                         Image(systemName: "plus")
-                            .font(.system(size: 11, weight: .medium))
+                            .font(.system(size: 11 * zoom, weight: .medium))
                             .foregroundStyle(.secondary)
-                            .frame(width: 32, height: Chrome.tabBarHeight)
+                            .frame(width: 32 * zoom, height: Chrome.tabBarHeight * zoom)
                             .contentShape(.rect)
                     }
                     .buttonStyle(.plain)
@@ -56,7 +58,7 @@ private struct TerminalTabBar: View {
             .scrollIndicators(.never)
             Spacer(minLength: 0)
         }
-        .frame(height: Chrome.tabBarHeight)
+        .frame(height: Chrome.tabBarHeight * zoom)
         .background(Color(nsColor: Chrome.barBackground), ignoresSafeAreaEdges: [])
         .overlay(alignment: .bottom) { Rectangle().fill(Color(nsColor: Chrome.separator)).frame(height: 1) }
     }
@@ -72,12 +74,13 @@ private struct TerminalTab: View {
     @State private var isRenaming = false
     @State private var draft = ""
     @FocusState private var fieldIsFocused: Bool
+    @Environment(\.uiZoom) private var zoom
 
     var body: some View {
         PaneTab(isActive: isActive) { isHovered in
             HStack(spacing: 6) {
                 Image(systemName: "terminal")
-                    .font(.system(size: 11))
+                    .font(.system(size: 11 * zoom))
                 if isRenaming {
                     TextField("", text: $draft)
                         .textFieldStyle(.plain)

@@ -59,13 +59,14 @@ struct PaneTab<Content: View>: View {
 
     @State private var isHovered = false
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.uiZoom) private var zoom
 
     var body: some View {
         content(isHovered)
-            .font(.system(size: 12))
+            .font(.system(size: 12 * zoom))
             .foregroundStyle(isActive ? .primary : .secondary)
-            .padding(.horizontal, 12)
-            .frame(height: Chrome.tabBarHeight)
+            .padding(.horizontal, 12 * zoom)
+            .frame(height: Chrome.tabBarHeight * zoom)
             .background(background, ignoresSafeAreaEdges: [])
             .overlay(alignment: .top) {
                 if isActive {
@@ -96,21 +97,23 @@ struct TabCloseButton: View {
     var showsDirtyDot = false
     let action: () -> Void
 
+    @Environment(\.uiZoom) private var zoom
+
     var body: some View {
         ZStack {
             if isVisible {
                 Button(action: action) {
                     Image(systemName: "xmark")
-                        .font(.system(size: 8, weight: .bold))
-                        .frame(width: 16, height: 16)
+                        .font(.system(size: 8 * zoom, weight: .bold))
+                        .frame(width: 16 * zoom, height: 16 * zoom)
                         .contentShape(.rect)
                 }
                 .buttonStyle(.plain)
                 .help("Close")
             } else if showsDirtyDot {
-                Circle().fill(.secondary).frame(width: 7, height: 7)
+                Circle().fill(.secondary).frame(width: 7 * zoom, height: 7 * zoom)
             }
         }
-        .frame(width: 16, height: 16)
+        .frame(width: 16 * zoom, height: 16 * zoom)
     }
 }

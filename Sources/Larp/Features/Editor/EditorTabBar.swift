@@ -9,6 +9,7 @@ struct EditorTabBar: View {
     let onClose: (URL) -> Void
 
     @Environment(\.tabStripLeadingInset) private var leadingInset
+    @Environment(\.uiZoom) private var zoom
 
     /// Always shown, even with no files open: it is the top of the window,
     /// and its empty part is where the window is dragged from.
@@ -34,7 +35,7 @@ struct EditorTabBar: View {
                 .contentShape(.rect)
                 .dragsWindow()
         }
-        .frame(height: Chrome.tabBarHeight)
+        .frame(height: Chrome.tabBarHeight * zoom)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color(nsColor: Chrome.barBackground), ignoresSafeAreaEdges: [])
         .overlay(alignment: .bottom) { Rectangle().fill(Color(nsColor: Chrome.separator)).frame(height: 1) }
@@ -47,11 +48,13 @@ private struct EditorTab: View {
     let isPreview: Bool
     let onClose: () -> Void
 
+    @Environment(\.uiZoom) private var zoom
+
     var body: some View {
         PaneTab(isActive: isActive) { isHovered in
-            HStack(spacing: 6) {
+            HStack(spacing: 6 * zoom) {
                 FileIcon.image(for: document.url)
-                    .font(.system(size: 11))
+                    .font(.system(size: 11 * zoom))
                 Text(document.name)
                     .italic(isPreview)
                     .lineLimit(1)

@@ -8,11 +8,13 @@ struct MarkdownPreview: View {
     let document: OpenDocument
     let openFile: (URL) -> Void
 
+    @Environment(\.uiZoom) private var zoom
+
     var body: some View {
         let folder = document.url.deletingLastPathComponent()
         ScrollView {
             Markdown(document.text, baseURL: folder, imageBaseURL: folder)
-                .markdownTheme(.larp)
+                .markdownTheme(.larp(fontSize: 15 * zoom * document.zoom))
                 .textSelection(.enabled)
                 .frame(maxWidth: 860, alignment: .leading)
                 .padding(.horizontal, 40)

@@ -10,6 +10,10 @@ While the major version is `0`, minor bumps may include breaking changes.
 ## [Unreleased]
 
 ### Added
+- Zoom. ⌘+ / ⌘− / ⌘0 scale the whole app — fonts, tabs, bars, editor and
+  terminal — and the level is remembered. ⌘-scroll or a pinch over the editor
+  zooms the active file, and over the terminal the active shell, on top of the
+  app zoom; the status bar shows a file's own zoom when it isn't 100%.
 - Dark mode, and View ▸ Appearance to choose System, Light or Dark. Dark is
   neon on true black; light is Apple-calm, after Xcode and apple.com.
 - A markdown preview, rendered natively, on by default for `.md` files. ⇧⌘V or
@@ -24,6 +28,8 @@ While the major version is `0`, minor bumps may include breaking changes.
   a Mermaid diagram, and deliberate binary and Latin-1 files.
 
 ### Changed
+- Refusals state the rule instead of speaking as the app: "Only UTF-8 text
+  is supported.", "Only files up to 4 MB are supported."
 - The title bar and toolbar are gone. The sidebar has its own header with the
   window buttons, project name and a toggle (⌃⌘S); the editor's tab strip runs
   to the top of the window, stays as an empty strip with no file open, and

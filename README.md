@@ -226,6 +226,8 @@ README lists which larp features each part exercises.
 | Show or hide the sidebar | ⌃⌘S, or the sidebar button; drag its edge to resize |
 | Move the window | drag the empty part of the tab strip or the sidebar header |
 | Markdown preview / source | ⇧⌘V |
+| Zoom the whole app | ⌘+ / ⌘− / ⌘0 — remembered |
+| Zoom one file or terminal | ⌘-scroll or pinch over it |
 | Light, dark or system appearance | View ▸ Appearance |
 | Close tab | ⌘W — closes the terminal tab if the terminal has focus, otherwise the editor tab |
 | Close folder | ⇧⌘W |

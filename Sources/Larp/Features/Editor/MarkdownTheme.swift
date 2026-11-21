@@ -5,7 +5,7 @@ extension Theme {
     /// GitHub's layout with larp's colours: Apple greys and a red inline code
     /// in light, neon links and green inline code on black in dark. Every
     /// colour comes from Chrome, so the page matches the panes around it.
-    @MainActor static var larp: Theme {
+    @MainActor static func larp(fontSize: Double) -> Theme {
         let separator = Color(nsColor: Chrome.separator)
         let codeBackground = Color(nsColor: Chrome.codeBackground)
 
@@ -13,7 +13,7 @@ extension Theme {
             .text {
                 ForegroundColor(.primary)
                 BackgroundColor(nil)
-                FontSize(15)
+                FontSize(fontSize)
             }
             .code {
                 FontFamilyVariant(.monospaced)

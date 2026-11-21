@@ -24,6 +24,9 @@ final class OpenDocument: Identifiable {
     /// Read once on open; saving keeps whatever endings the text has.
     let usesCRLF: Bool
 
+    /// This file's own zoom, on top of the app's; ⌘-scroll over the editor.
+    var zoom = 1.0
+
     /// Markdown opens rendered; ⇧⌘V flips to the source and back.
     var showsPreview: Bool
 

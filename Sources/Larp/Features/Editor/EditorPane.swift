@@ -6,6 +6,7 @@ import SwiftUI
 struct EditorPane: View {
     @Environment(Workspace.self) private var workspace
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.uiZoom) private var zoom
 
     @State private var editorState = SourceEditorState()
 
@@ -67,7 +68,7 @@ struct EditorPane: View {
             configuration: SourceEditorConfiguration(
                 appearance: .init(
                     theme: colorScheme == .dark ? .larpDark : .larpLight,
-                    font: .monospacedSystemFont(ofSize: 12.5, weight: .regular),
+                    font: .monospacedSystemFont(ofSize: 12.5 * zoom * document.zoom, weight: .regular),
                     lineHeightMultiple: 1.35,
                     wrapLines: false,
                     tabWidth: 4),

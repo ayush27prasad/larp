@@ -59,6 +59,11 @@ final class TerminalStore {
         close(id)
     }
 
+    func zoom(_ id: TerminalSession.ID, by steps: Int) {
+        guard let index = sessions.firstIndex(where: { $0.id == id }) else { return }
+        sessions[index].zoom = Zoom.stepped(sessions[index].zoom, by: steps)
+    }
+
     func closeAll() {
         sessions.removeAll()
         activeSessionID = nil

@@ -7,12 +7,14 @@ struct PathBar: View {
     @Bindable var document: OpenDocument
     let root: URL?
 
+    @Environment(\.uiZoom) private var zoom
+
     var body: some View {
         HStack(spacing: 4) {
             ForEach(Array(segments.enumerated()), id: \.offset) { index, segment in
                 if index > 0 {
                     Image(systemName: "chevron.right")
-                        .font(.system(size: 8, weight: .semibold))
+                        .font(.system(size: 8 * zoom, weight: .semibold))
                         .foregroundStyle(.tertiary)
                 }
                 Text(segment)
@@ -31,10 +33,10 @@ struct PathBar: View {
                 .help("Toggle Markdown Preview (⇧⌘V)")
             }
         }
-        .font(.system(size: 11))
+        .font(.system(size: 11 * zoom))
         .lineLimit(1)
         .padding(.horizontal, 12)
-        .frame(height: 28)
+        .frame(height: 28 * zoom)
         .background(Color(nsColor: Chrome.contentBackground), ignoresSafeAreaEdges: [])
     }
 
@@ -50,9 +52,16 @@ struct StatusBar: View {
     let document: OpenDocument
     let cursor: CursorPosition?
 
+    @Environment(\.uiZoom) private var zoom
+
     var body: some View {
         HStack(spacing: 16) {
             Spacer()
+            if document.zoom != 1 {
+                Text(Zoom.percent(document.zoom))
+                    .monospacedDigit()
+                    .help("File zoom. ⌘-scroll to change.")
+            }
             if let cursor, !(document.isMarkdown && document.showsPreview) {
                 Text("Ln \(cursor.start.line), Col \(cursor.start.column)")
                     .monospacedDigit()
@@ -61,10 +70,10 @@ struct StatusBar: View {
             Text("UTF-8")
             Text(document.usesCRLF ? "CRLF" : "LF")
         }
-        .font(.system(size: 11))
+        .font(.system(size: 11 * zoom))
         .foregroundStyle(.secondary)
         .padding(.horizontal, 12)
-        .frame(height: Chrome.statusBarHeight)
+        .frame(height: Chrome.statusBarHeight * zoom)
         .background(Color(nsColor: Chrome.barBackground), ignoresSafeAreaEdges: [])
         .overlay(alignment: .top) { Rectangle().fill(Color(nsColor: Chrome.separator)).frame(height: 1) }
     }
