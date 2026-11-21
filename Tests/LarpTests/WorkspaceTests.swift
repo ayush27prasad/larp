@@ -14,7 +14,7 @@ struct WorkspaceTests {
     @Test func startsWithNoOpenFolder() {
         let workspace = makeWorkspace()
         #expect(workspace.rootURL == nil)
-        #expect(workspace.selectedFileURL == nil)
+        #expect(workspace.selectedURL == nil)
         #expect(workspace.hasOpenFolder == false)
         #expect(workspace.treeState == .empty)
     }

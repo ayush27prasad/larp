@@ -21,6 +21,9 @@ While the major version is `0`, minor bumps may include breaking changes.
   versions instead of whatever is newest in each allowed range.
 
 ### Fixed
+- Clicking a folder in the explorer tried to open it as a file and showed
+  "couldn't be opened" in the editor. Selecting a folder now only highlights
+  it, and double-clicking a folder expands or collapses it, as its arrow does.
 - A fresh clone failed to build: SwiftPM resolved SwiftTerm 1.99, whose
   delegate protocol is main-actor isolated, and the code still targeted 1.20.
   larp now requires 1.99.2.

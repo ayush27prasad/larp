@@ -197,6 +197,21 @@ struct WorkspaceTerminalTests {
         #expect(workspace.editor.openURLs == [a, b])
     }
 
+    @Test func selectingAFolderOnlyHighlightsIt() async throws {
+        let temp = try TempDirectory()
+        let folder = try temp.makeDirectory("Sources")
+
+        let workspace = makeWorkspace()
+        await workspace.open(folder: temp.url)
+        workspace.selectedURL = folder
+        // A preview, if one were wrongly started, runs in its own task.
+        try await Task.sleep(for: .milliseconds(200))
+
+        #expect(workspace.selectedURL == folder)
+        #expect(workspace.editor.hasOpenDocuments == false)
+        #expect(workspace.editor.refusal == nil)
+    }
+
     @Test func closingFocusedTabFallsBackToTheEditor() async throws {
         let temp = try TempDirectory()
         let a = try temp.write("1", to: "a.txt")

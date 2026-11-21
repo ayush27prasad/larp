@@ -16,13 +16,20 @@ final class Workspace {
     private(set) var rootURL: URL?
     private(set) var treeState: TreeState = .empty
 
-    /// Highlighted row in the explorer. Selecting a file opens it in a preview
-    /// tab, or focuses the tab it is already in.
-    var selectedFileURL: URL? {
+    /// Highlighted row in the explorer, file or folder. Selecting a file opens
+    /// it in a preview tab, or focuses the tab it is already in; selecting a
+    /// folder only highlights it.
+    var selectedURL: URL? {
         didSet {
-            guard oldValue != selectedFileURL, let url = selectedFileURL else { return }
+            guard oldValue != selectedURL, let url = selectedURL, !Self.isDirectory(url) else { return }
             Task { await previewSelection(url) }
         }
+    }
+
+    private static func isDirectory(_ url: URL) -> Bool {
+        var isDirectory: ObjCBool = false
+        return FileManager.default.fileExists(atPath: url.path, isDirectory: &isDirectory)
+            && isDirectory.boolValue
     }
 
     let editor = DocumentStore()
@@ -48,7 +55,7 @@ final class Workspace {
 
     func open(folder url: URL) async {
         rootURL = url
-        selectedFileURL = nil
+        selectedURL = nil
         editor.closeAll()
         // Shells are rooted at the project, so a new project means new shells.
         terminals.closeAll()
@@ -86,7 +93,7 @@ final class Workspace {
 
     func closeFolder() {
         rootURL = nil
-        selectedFileURL = nil
+        selectedURL = nil
         editor.closeAll()
         treeState = .empty
         defaults.removeObject(forKey: Self.lastFolderKey)
@@ -96,7 +103,7 @@ final class Workspace {
     // MARK: - Documents
 
     /// What a single click in the explorer does: preview the file, or focus the
-    /// tab it is already in. Separate from the `selectedFileURL` observer so it
+    /// tab it is already in. Separate from the `selectedURL` observer so it
     /// can be awaited rather than raced.
     func previewSelection(_ url: URL) async {
         await openFile(url, preview: true)
@@ -108,7 +115,7 @@ final class Workspace {
     func openFile(_ url: URL, preview: Bool = false) async -> Bool {
         do {
             try await editor.open(url, preview: preview)
-            selectedFileURL = url
+            selectedURL = url
             persistSession()
             return true
         } catch {

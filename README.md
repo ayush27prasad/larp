@@ -191,6 +191,7 @@ mixed-language tree kept in the repo for exactly this.
 | Open a folder | ⌘O |
 | Preview a file | click it in the explorer |
 | Keep a file open in its own tab | double-click it in the explorer |
+| Expand or collapse a folder | double-click it, or click its arrow |
 | Save | ⌘S |
 | New terminal | ⌘T |
 | Rename a terminal | double-click its tab |
