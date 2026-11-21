@@ -30,16 +30,17 @@ final class OpenDocument: Identifiable {
     /// Markdown opens rendered; ⇧⌘V flips to the source and back.
     var showsPreview: Bool
 
-    private let hasByteOrderMark: Bool
+    /// Read on open and used again on save, so the bytes round-trip.
+    let encoding: TextEncoding
 
     nonisolated var id: URL { url }
     var name: String { url.lastPathComponent }
 
-    init(url: URL, text: String, hasByteOrderMark: Bool = false) {
+    init(url: URL, text: String, encoding: TextEncoding = .utf8) {
         self.url = url
         self.text = text
         self.savedText = text
-        self.hasByteOrderMark = hasByteOrderMark
+        self.encoding = encoding
         // The prefix lets extensionless files be detected by shebang or modeline.
         let language = LanguageDetection.language(for: url, prefix: String(text.prefix(1_024)))
         self.language = language
@@ -48,9 +49,7 @@ final class OpenDocument: Identifiable {
     }
 
     func save() throws {
-        var data = hasByteOrderMark ? TextFileLoader.byteOrderMark : Data()
-        data.append(contentsOf: text.utf8)
-        try data.write(to: url, options: .atomic)
+        try encoding.encode(text).write(to: url, options: .atomic)
         savedText = text
         isDirty = false
     }

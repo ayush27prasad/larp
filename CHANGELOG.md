@@ -10,6 +10,11 @@ While the major version is `0`, minor bumps may include breaking changes.
 ## [Unreleased]
 
 ### Added
+- Files in other encodings open instead of being refused. UTF-16 with a
+  byte-order mark, and Windows 1252 / Latin-1 for text that isn't valid UTF-8,
+  are read and saved back in the same encoding, byte for byte; the status bar
+  shows the encoding. A save needing a character the encoding can't hold is
+  refused: "Only characters in Windows 1252 can be saved to this file."
 - Zoom. ⌘+ / ⌘− / ⌘0 scale the whole app — fonts, tabs, bars, editor and
   terminal — and the level is remembered. ⌘-scroll or a pinch over the editor
   zooms the active file, and over the terminal the active shell, on top of the

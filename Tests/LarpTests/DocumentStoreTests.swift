@@ -166,10 +166,13 @@ struct OpenDocumentTests {
         #expect(try String(contentsOf: file, encoding: .utf8) == "hello world")
     }
 
-    /// Saving an untouched file must reproduce it byte for byte.
+    /// Saving an untouched file must reproduce it byte for byte, whatever its
+    /// encoding.
     @Test(arguments: [
         Data("line one\r\nline two — ünïcode\r\n".utf8),
-        TextFileLoader.byteOrderMark + Data("// with BOM\n".utf8),
+        TextEncoding.utf8WithBOM.byteOrderMark + Data("// with BOM\n".utf8),
+        "café naïve — €5\n".data(using: .windowsCP1252)!,
+        Data([0xFF, 0xFE]) + "日本語\n".data(using: .utf16LittleEndian)!,
     ])
     func savingRoundTripsTheBytes(_ original: Data) async throws {
         let temp = try TempDirectory()
@@ -184,14 +187,40 @@ struct OpenDocumentTests {
 
     @Test func editsKeepTheByteOrderMark() async throws {
         let temp = try TempDirectory()
-        let file = try temp.write(TextFileLoader.byteOrderMark + Data("hi".utf8), to: "a.txt")
+        let file = try temp.write(TextEncoding.utf8WithBOM.byteOrderMark + Data("hi".utf8), to: "a.txt")
 
         let store = DocumentStore()
         let document = try await store.open(file)
         document.text = "hi there"
         try document.save()
 
-        #expect(try Data(contentsOf: file) == TextFileLoader.byteOrderMark + Data("hi there".utf8))
+        #expect(try Data(contentsOf: file) == TextEncoding.utf8WithBOM.byteOrderMark + Data("hi there".utf8))
+    }
+
+    @Test func editsKeepALegacyEncoding() async throws {
+        let temp = try TempDirectory()
+        let file = try temp.write("café".data(using: .windowsCP1252)!, to: "a.txt")
+
+        let store = DocumentStore()
+        let document = try await store.open(file)
+        document.text = "café crème"
+        try document.save()
+
+        #expect(try Data(contentsOf: file) == "café crème".data(using: .windowsCP1252)!)
+    }
+
+    @Test func refusesToSaveACharacterTheEncodingCannotHold() async throws {
+        let temp = try TempDirectory()
+        let original = "café".data(using: .windowsCP1252)!
+        let file = try temp.write(original, to: "a.txt")
+
+        let store = DocumentStore()
+        let document = try await store.open(file)
+        document.text = "café 日本"
+
+        #expect(throws: TextEncoding.Unrepresentable(encoding: "Windows 1252")) { try document.save() }
+        #expect(document.isDirty)
+        #expect(try Data(contentsOf: file) == original)
     }
 
     @Test func editingBackToTheSavedContentClearsDirty() async throws {

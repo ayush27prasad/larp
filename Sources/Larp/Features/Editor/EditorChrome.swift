@@ -67,7 +67,7 @@ struct StatusBar: View {
                     .monospacedDigit()
             }
             Text(LanguageDetection.displayName(of: document.language))
-            Text("UTF-8")
+            Text(document.encoding.name)
             Text(document.usesCRLF ? "CRLF" : "LF")
         }
         .font(.system(size: 11 * zoom))

@@ -4,60 +4,52 @@ import Testing
 @testable import Larp
 
 struct TextFileLoaderTests {
-    @Test func readsUTF8Text() async throws {
+    private func load(_ data: Data) async throws -> TextFileLoader.Contents {
         let temp = try TempDirectory()
-        let file = try temp.write("hello — world\n", to: "notes.md")
+        return try await TextFileLoader.load(try temp.write(data, to: "file.txt"))
+    }
 
-        #expect(try await TextFileLoader.load(file) == .init(text: "hello — world\n", hasByteOrderMark: false))
+    @Test func readsUTF8Text() async throws {
+        let contents = try await load(Data("hello — world\n".utf8))
+        #expect(contents == .init(text: "hello — world\n", encoding: .utf8))
     }
 
     @Test func keepsTheByteOrderMarkOutOfTheText() async throws {
-        let temp = try TempDirectory()
-        let file = try temp.write(TextFileLoader.byteOrderMark + Data("hi\n".utf8), to: "bom.txt")
-
-        #expect(try await TextFileLoader.load(file) == .init(text: "hi\n", hasByteOrderMark: true))
+        let contents = try await load(TextEncoding.utf8WithBOM.byteOrderMark + Data("hi\n".utf8))
+        #expect(contents == .init(text: "hi\n", encoding: .utf8WithBOM))
     }
 
-    /// Both used to "succeed" via a UTF-16 fallback, and saving then rewrote
-    /// the file as UTF-8 — garbling the Latin-1 one outright.
-    @Test(arguments: [
-        "café naïve\n".data(using: .isoLatin1)!,
-        Data([0xFF, 0xFE]) + "日本語".data(using: .utf16LittleEndian)!,
-    ])
-    func refusesOtherEncodings(_ data: Data) async throws {
-        let temp = try TempDirectory()
-        let file = try temp.write(data, to: "legacy.txt")
+    /// These used to be refused; before that, mis-decoded and corrupted on save.
+    @Test func readsLatin1AsWindows1252() async throws {
+        let contents = try await load("café naïve\n".data(using: .isoLatin1)!)
+        #expect(contents == .init(text: "café naïve\n", encoding: .windows1252))
+    }
 
-        await #expect(throws: TextFileLoader.Failure.notUTF8) {
-            try await TextFileLoader.load(file)
-        }
+    @Test func readsUTF16ByItsByteOrderMark() async throws {
+        let little = try await load(Data([0xFF, 0xFE]) + "日本語 ok".data(using: .utf16LittleEndian)!)
+        #expect(little == .init(text: "日本語 ok", encoding: .utf16LittleEndian))
+
+        let big = try await load(Data([0xFE, 0xFF]) + "ok".data(using: .utf16BigEndian)!)
+        #expect(big == .init(text: "ok", encoding: .utf16BigEndian))
     }
 
     @Test func rejectsBinaryContent() async throws {
-        let temp = try TempDirectory()
-        let file = try temp.write(Data([0x89, 0x50, 0x4E, 0x47, 0x00, 0x01]), to: "image.png")
-
         await #expect(throws: TextFileLoader.Failure.notText) {
-            try await TextFileLoader.load(file)
+            try await load(Data([0x89, 0x50, 0x4E, 0x47, 0x00, 0x01]))
         }
     }
 
     @Test func rejectsFilesOverTheSizeLimit() async throws {
-        let temp = try TempDirectory()
         let byteCount = TextFileLoader.maximumByteCount + 1
-        let file = try temp.write(Data(repeating: 0x41, count: byteCount), to: "huge.txt")
-
         await #expect(throws: TextFileLoader.Failure.tooLarge(byteCount: byteCount)) {
-            try await TextFileLoader.load(file)
+            try await load(Data(repeating: 0x41, count: byteCount))
         }
     }
 
     @Test func reportsUnreadableFiles() async throws {
         let temp = try TempDirectory()
-        let missing = temp.url.appendingPathComponent("absent.txt")
-
         await #expect(throws: TextFileLoader.Failure.self) {
-            try await TextFileLoader.load(missing)
+            try await TextFileLoader.load(temp.url.appendingPathComponent("absent.txt"))
         }
     }
 }

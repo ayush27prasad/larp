@@ -33,8 +33,10 @@ larp is built for that half of the job.
   chat open, measured with `footprint`. Today's build uses about 71 MB.
 
 Target file types are text and code: Markdown, Python, JavaScript, Java, Swift,
-and similar. Binary formats are out of scope. Files must be UTF-8 — other
-encodings are refused rather than risk being rewritten as UTF-8 on save.
+and similar. Binary formats are out of scope. UTF-8, UTF-16 (with a byte-order
+mark) and Windows 1252 / Latin-1 files open and save in their own encoding,
+byte for byte; the status bar shows which. A save that would need a character
+the file's encoding can't hold is refused rather than written lossily.
 
 ## Requirements
 

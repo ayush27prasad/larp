@@ -1,23 +1,19 @@
 import Foundation
 
-/// Reads a file into a string, refusing anything that isn't editable text.
+/// Reads a file into a string and works out its encoding, refusing what isn't
+/// editable text.
 enum TextFileLoader {
     /// Files above this are refused rather than loaded into a single `String`.
     static let maximumByteCount = 4 * 1024 * 1024
 
-    /// UTF-8's byte-order mark. Kept out of the editable text and written back
-    /// on save, so saving never adds or strips one.
-    static let byteOrderMark = Data([0xEF, 0xBB, 0xBF])
-
     struct Contents: Equatable, Sendable {
         let text: String
-        let hasByteOrderMark: Bool
+        let encoding: TextEncoding
     }
 
     enum Failure: Error, Equatable {
         case tooLarge(byteCount: Int)
         case notText
-        case notUTF8
         case unreadable(String)
     }
 
@@ -32,16 +28,27 @@ enum TextFileLoader {
         guard data.count <= maximumByteCount else {
             throw Failure.tooLarge(byteCount: data.count)
         }
+        return try decode(data)
+    }
+
+    /// A byte-order mark wins. Otherwise NUL bytes mean binary, valid UTF-8 is
+    /// UTF-8, and anything else is read as Windows 1252 — never guessed as
+    /// UTF-16, whose decoder accepts almost any bytes and once turned Latin-1
+    /// files into mojibake.
+    static func decode(_ data: Data) throws -> Contents {
+        if let marked = TextEncoding.marked.first(where: { data.starts(with: $0.byteOrderMark) }) {
+            guard let text = marked.decode(data) else { throw Failure.notText }
+            return Contents(text: text, encoding: marked)
+        }
+
         // A NUL byte in the leading bytes is the usual cheap binary tell.
+        // UTF-16 is full of them, which is why its mark is checked first.
         guard !data.prefix(8_192).contains(0) else { throw Failure.notText }
 
-        // UTF-8 only, because saving writes UTF-8. A fallback to UTF-16 once
-        // stood here, but it accepts almost any bytes: Latin-1 files decoded
-        // as mojibake, and ⌘S then overwrote the original with it.
-        let hasByteOrderMark = data.starts(with: byteOrderMark)
-        let body = hasByteOrderMark ? data.dropFirst(byteOrderMark.count) : data
-        guard let text = String(validating: body, as: UTF8.self) else { throw Failure.notUTF8 }
-        return Contents(text: text, hasByteOrderMark: hasByteOrderMark)
+        for encoding in [TextEncoding.utf8, .windows1252, .latin1] {
+            if let text = encoding.decode(data) { return Contents(text: text, encoding: encoding) }
+        }
+        throw Failure.notText
     }
 
     static func describe(_ failure: Failure) -> String {
@@ -52,8 +59,6 @@ enum TextFileLoader {
             return "Only files up to \(limit) are supported. This one is \(actual)."
         case .notText:
             return "Only text files are supported."
-        case .notUTF8:
-            return "Only UTF-8 text is supported."
         case .unreadable(let reason):
             return reason
         }

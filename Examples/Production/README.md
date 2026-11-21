@@ -25,7 +25,8 @@ Every service speaks the same `Order`: `id`, `customer_id`, `items`,
 - **Navigation and find-usages:** `calculate_total` (Python), `Reserve` (Go),
   `PaymentService.charge` (Java), `OrderStatus` everywhere.
 - **Natural sort:** `db/migrations/V2__…` must come before `V10__…`.
-- **Refusals:** `db/dev.sqlite` is binary; `legacy/latin1-notes.txt` is not UTF-8.
+- **Encodings:** `legacy/latin1-notes.txt` is Latin-1 and must open and save as such.
+- **Refusals:** `db/dev.sqlite` is binary.
 - **JSON viewer:** `data/catalog.json` is large and deeply nested.
 - **Database viewer:** `db/dev.sqlite`, built from `db/migrations` and `db/seed.sql`.
 - **Diagrams:** `docs/architecture.md` carries a Mermaid diagram.

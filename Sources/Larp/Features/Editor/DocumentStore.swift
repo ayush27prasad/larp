@@ -67,7 +67,7 @@ final class DocumentStore {
         let document = OpenDocument(
             url: url,
             text: contents.text,
-            hasByteOrderMark: contents.hasByteOrderMark)
+            encoding: contents.encoding)
 
         if preview,
            let replacing = previewDocumentID,
