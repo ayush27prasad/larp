@@ -158,6 +158,16 @@ struct WorkspaceView: View {
             // ⌘F in the terminal stays the terminal's.
             guard !workspace.terminals.hasFocus else { return false }
             return workspace.showFind(replace: replace)
+        case .toggleFindOption(let option):
+            // Whichever search is showing: Find in Files, then the find bar.
+            if workspace.search.isPresented {
+                toggle(option, in: &workspace.search.options)
+            } else if workspace.editor.find.isVisible {
+                toggle(option, in: &workspace.editor.find.options)
+            } else {
+                return false
+            }
+            return true
         case .findAgain(let forward):
             let find = workspace.editor.find
             guard find.isVisible, !find.matches.isEmpty else { return false }
@@ -178,6 +188,14 @@ struct WorkspaceView: View {
             // A trackpad reports many tiny deltas per step; only whole steps zoom.
             if steps != 0 { zoom(target, by: steps) }
             return true
+        }
+    }
+
+    private func toggle(_ option: InputMonitor.FindOption, in options: inout ProjectSearch.Options) {
+        switch option {
+        case .matchCase: options.matchCase.toggle()
+        case .wholeWord: options.wholeWord.toggle()
+        case .regex: options.regex.toggle()
         }
     }
 

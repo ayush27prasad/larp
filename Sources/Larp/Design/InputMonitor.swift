@@ -1,7 +1,8 @@
 import AppKit
 
 /// Shortcuts and gestures larp handles before any view does: zoom (⌘+ / ⌘− /
-/// ⌘0, ⌘-scroll, pinch) and find (⌘F, ⌥⌘F, ⌘G, ⇧⌘G).
+/// ⌘0, ⌘-scroll, pinch) and find (⌘F, ⌥⌘F, ⌘G, ⇧⌘G, and ⌥⌘C / ⌥⌘W / ⌥⌘R
+/// for the match-case, whole-word and regex toggles).
 ///
 /// A local event monitor rather than menu shortcuts alone: ⌘+ is ⌘⇧= on most
 /// keyboards, which a menu item keyed to "=" never sees; scroll and pinch have
@@ -17,7 +18,10 @@ final class InputMonitor {
         case appZoom(steps: Int?)
         case find(replace: Bool)
         case findAgain(forward: Bool)
+        case toggleFindOption(FindOption)
     }
+
+    enum FindOption { case matchCase, wholeWord, regex }
 
     private var monitor: Any?
     private var handle: (@MainActor (Command) -> Bool)?
@@ -91,6 +95,13 @@ final class InputMonitor {
             return .findAgain(forward: true)
         case ([.command, .shift], "g"):
             return .findAgain(forward: false)
+        // VS Code's Mac shortcuts for the same toggles.
+        case ([.command, .option], "c"):
+            return .toggleFindOption(.matchCase)
+        case ([.command, .option], "w"):
+            return .toggleFindOption(.wholeWord)
+        case ([.command, .option], "r"):
+            return .toggleFindOption(.regex)
         default:
             return nil
         }

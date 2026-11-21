@@ -230,6 +230,7 @@ README lists which larp features each part exercises.
 | Markdown preview / source | ⇧⌘V |
 | Find in the file | ⌘F — ↩ / ⇧↩ or ⌘G / ⇧⌘G to move, esc to close |
 | Find and replace | ⌥⌘F — regex replacements take `$1` groups |
+| Match case / whole words / regex | ⌥⌘C / ⌥⌘W / ⌥⌘R, in either find |
 | Find in files | ⇧⌘F — ↑↓ to move, ↩ to open at the match |
 | Zoom the whole app | ⌘+ / ⌘− / ⌘0, 90%–150% — remembered |
 | Zoom one file or terminal | ⌘-scroll or pinch over it, 50%–300% |

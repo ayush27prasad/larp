@@ -14,15 +14,11 @@ struct FindBar: View {
     var body: some View {
         VStack(spacing: 6 * zoom) {
             HStack(spacing: 8 * zoom) {
-                Button { find.showsReplace.toggle() } label: {
-                    Image(systemName: find.showsReplace ? "chevron.down" : "chevron.right")
-                        .font(.system(size: 10 * zoom, weight: .semibold))
-                        .frame(width: 16 * zoom, height: 16 * zoom)
-                        .contentShape(.rect)
-                }
-                .buttonStyle(.plain)
-                .foregroundStyle(.secondary)
-                .help(find.showsReplace ? "Hide Replace" : "Replace (⌥⌘F)")
+                IconButton(
+                    symbol: find.showsReplace ? "chevron.down" : "chevron.right",
+                    help: find.showsReplace ? "Hide Replace" : "Show Replace (⌥⌘F)",
+                    size: 20
+                ) { find.showsReplace.toggle() }
 
                 field(icon: "magnifyingglass", placeholder: "Find", text: $find.query, focus: .query) {
                     Text(find.status)
@@ -31,14 +27,14 @@ struct FindBar: View {
                         .lineLimit(1)
                         .fixedSize()
                 }
-                OptionToggle(label: "Aa", help: "Match Case", isOn: $find.options.matchCase)
-                OptionToggle(label: "W", help: "Whole Words", isOn: $find.options.wholeWord)
-                OptionToggle(label: ".*", help: "Regex", isOn: $find.options.regex)
-                iconButton("chevron.up", help: "Previous (⇧⌘G)", action: find.previous)
+                OptionToggle(label: "Aa", help: "Match Case (⌥⌘C)", isOn: $find.options.matchCase)
+                OptionToggle(label: "W", help: "Whole Words (⌥⌘W)", isOn: $find.options.wholeWord)
+                OptionToggle(label: ".*", help: "Regex (⌥⌘R)", isOn: $find.options.regex)
+                IconButton(symbol: "chevron.up", help: "Previous Match (⇧↩ or ⇧⌘G)", action: find.previous)
                     .disabled(find.matches.isEmpty)
-                iconButton("chevron.down", help: "Next (⌘G)", action: find.next)
+                IconButton(symbol: "chevron.down", help: "Next Match (↩ or ⌘G)", action: find.next)
                     .disabled(find.matches.isEmpty)
-                iconButton("xmark", help: "Close (esc)", action: find.hide)
+                IconButton(symbol: "xmark", help: "Close (esc)", action: find.hide)
             }
 
             if find.showsReplace {
@@ -49,9 +45,10 @@ struct FindBar: View {
                     }
                     Button("Replace", action: find.replaceCurrent)
                         .disabled(find.currentIndex == nil)
+                        .help("Replace This Match (↩ in the replace field)")
                     Button("All", action: find.replaceAll)
                         .disabled(find.matches.isEmpty)
-                        .help("Replace All")
+                        .help("Replace All Matches")
                 }
                 .buttonStyle(PillButtonStyle())
             }
@@ -93,18 +90,6 @@ struct FindBar: View {
         .overlay(
             RoundedRectangle(cornerRadius: 7)
                 .stroke(focused == focus ? Color(nsColor: Chrome.accent) : Color(nsColor: Chrome.separator)))
-    }
-
-    private func iconButton(_ symbol: String, help: String, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            Image(systemName: symbol)
-                .font(.system(size: 11 * zoom, weight: .semibold))
-                .frame(width: 24 * zoom, height: 24 * zoom)
-                .contentShape(.rect)
-        }
-        .buttonStyle(.plain)
-        .foregroundStyle(.secondary)
-        .help(help)
     }
 }
 
