@@ -1,0 +1,7513 @@
+{
+  "catalog": {
+    "version": "2026-11-01",
+    "store": {
+      "name": "Orderly",
+      "regions": [
+        "US",
+        "CA"
+      ]
+    },
+    "categories": [
+      {
+        "name": "Kitchen",
+        "kinds": [
+          "Mug",
+          "Bowl",
+          "Plate",
+          "Kettle",
+          "Teapot"
+        ]
+      },
+      {
+        "name": "Apparel",
+        "kinds": [
+          "Tee",
+          "Hoodie",
+          "Cap",
+          "Scarf",
+          "Socks"
+        ]
+      },
+      {
+        "name": "Bags",
+        "kinds": [
+          "Tote",
+          "Backpack",
+          "Duffel",
+          "Pouch"
+        ]
+      },
+      {
+        "name": "Home",
+        "kinds": [
+          "Candle",
+          "Throw",
+          "Vase",
+          "Lamp",
+          "Rug"
+        ]
+      }
+    ],
+    "products": [
+      {
+        "sku": "MUG-001",
+        "name": "Sand Mug",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 5000,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "MUG-001-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 38,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 50
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 6
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Sand",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 57,
+            "h": 39,
+            "d": 7
+          }
+        },
+        "tags": [
+          "gift",
+          "limited"
+        ],
+        "active": false
+      },
+      {
+        "sku": "MUG-002",
+        "name": "Moss Mug",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 7300,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "MUG-002-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 54,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 4
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 11
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Moss",
+          "material": "wool",
+          "dimensions_cm": {
+            "w": 31,
+            "h": 9,
+            "d": 16
+          }
+        },
+        "tags": [
+          "new",
+          "limited"
+        ],
+        "active": true
+      },
+      {
+        "sku": "MUG-003",
+        "name": "Ink Mug",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 11400,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "MUG-003-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 144,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 15
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 28
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Ink",
+          "material": "glass",
+          "dimensions_cm": {
+            "w": 8,
+            "h": 41,
+            "d": 38
+          }
+        },
+        "tags": [
+          "eco",
+          "new"
+        ],
+        "active": true
+      },
+      {
+        "sku": "MUG-004",
+        "name": "Rust Mug",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 1400,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "MUG-004-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 142,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 17
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 37
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Rust",
+          "material": "wool",
+          "dimensions_cm": {
+            "w": 14,
+            "h": 39,
+            "d": 8
+          }
+        },
+        "tags": [
+          "limited",
+          "gift"
+        ],
+        "active": true
+      },
+      {
+        "sku": "MUG-005",
+        "name": "Fog Mug",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 9600,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "MUG-005-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 46,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 13
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 74
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Fog",
+          "material": "glass",
+          "dimensions_cm": {
+            "w": 45,
+            "h": 17,
+            "d": 24
+          }
+        },
+        "tags": [
+          "new",
+          "limited"
+        ],
+        "active": true
+      },
+      {
+        "sku": "MUG-006",
+        "name": "Clay Mug",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 8100,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "MUG-006-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 15,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 79
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 26
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Clay",
+          "material": "wool",
+          "dimensions_cm": {
+            "w": 48,
+            "h": 39,
+            "d": 28
+          }
+        },
+        "tags": [
+          "gift",
+          "eco"
+        ],
+        "active": true
+      },
+      {
+        "sku": "BOW-007",
+        "name": "Sand Bowl",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 6700,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "BOW-007-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 92,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 38
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 31
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Sand",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 49,
+            "h": 54,
+            "d": 16
+          }
+        },
+        "tags": [
+          "new",
+          "limited"
+        ],
+        "active": true
+      },
+      {
+        "sku": "BOW-008",
+        "name": "Moss Bowl",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 7200,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "BOW-008-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 87,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 57
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 36
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Moss",
+          "material": "glass",
+          "dimensions_cm": {
+            "w": 9,
+            "h": 12,
+            "d": 33
+          }
+        },
+        "tags": [
+          "eco",
+          "bestseller"
+        ],
+        "active": true
+      },
+      {
+        "sku": "BOW-009",
+        "name": "Ink Bowl",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 2800,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "BOW-009-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 125,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 53
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 5
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Ink",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 53,
+            "h": 40,
+            "d": 37
+          }
+        },
+        "tags": [
+          "gift",
+          "sale"
+        ],
+        "active": true
+      },
+      {
+        "sku": "BOW-010",
+        "name": "Rust Bowl",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 8500,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "BOW-010-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 127,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 74
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 58
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Rust",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 58,
+            "h": 10,
+            "d": 18
+          }
+        },
+        "tags": [
+          "eco",
+          "new"
+        ],
+        "active": false
+      },
+      {
+        "sku": "BOW-011",
+        "name": "Fog Bowl",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 9800,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "BOW-011-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 79,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 73
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 57
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Fog",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 50,
+            "h": 29,
+            "d": 23
+          }
+        },
+        "tags": [
+          "new",
+          "eco"
+        ],
+        "active": true
+      },
+      {
+        "sku": "BOW-012",
+        "name": "Clay Bowl",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 8700,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "BOW-012-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 29,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 63
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 7
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Clay",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 54,
+            "h": 23,
+            "d": 9
+          }
+        },
+        "tags": [
+          "sale",
+          "bestseller"
+        ],
+        "active": true
+      },
+      {
+        "sku": "PLA-013",
+        "name": "Sand Plate",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 7200,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "PLA-013-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 20,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 21
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 57
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Sand",
+          "material": "wool",
+          "dimensions_cm": {
+            "w": 40,
+            "h": 22,
+            "d": 9
+          }
+        },
+        "tags": [
+          "eco",
+          "limited"
+        ],
+        "active": true
+      },
+      {
+        "sku": "PLA-014",
+        "name": "Moss Plate",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 6200,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "PLA-014-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 91,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 48
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 29
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Moss",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 10,
+            "h": 16,
+            "d": 10
+          }
+        },
+        "tags": [
+          "bestseller",
+          "sale"
+        ],
+        "active": false
+      },
+      {
+        "sku": "PLA-015",
+        "name": "Ink Plate",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 11500,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "PLA-015-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 150,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 23
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 33
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Ink",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 5,
+            "h": 14,
+            "d": 27
+          }
+        },
+        "tags": [
+          "limited",
+          "gift"
+        ],
+        "active": true
+      },
+      {
+        "sku": "PLA-016",
+        "name": "Rust Plate",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 4900,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "PLA-016-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 32,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 65
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 79
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Rust",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 34,
+            "h": 60,
+            "d": 36
+          }
+        },
+        "tags": [
+          "eco",
+          "sale"
+        ],
+        "active": true
+      },
+      {
+        "sku": "PLA-017",
+        "name": "Fog Plate",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 2200,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "PLA-017-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 123,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 51
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 7
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Fog",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 9,
+            "h": 18,
+            "d": 29
+          }
+        },
+        "tags": [
+          "bestseller",
+          "new"
+        ],
+        "active": true
+      },
+      {
+        "sku": "PLA-018",
+        "name": "Clay Plate",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 1500,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "PLA-018-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 26,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 0
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 72
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Clay",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 39,
+            "h": 11,
+            "d": 24
+          }
+        },
+        "tags": [
+          "limited",
+          "new"
+        ],
+        "active": false
+      },
+      {
+        "sku": "KET-019",
+        "name": "Sand Kettle",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 3500,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "KET-019-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 157,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 48
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 19
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Sand",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 27,
+            "h": 43,
+            "d": 24
+          }
+        },
+        "tags": [
+          "eco",
+          "new"
+        ],
+        "active": true
+      },
+      {
+        "sku": "KET-020",
+        "name": "Moss Kettle",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 7100,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "KET-020-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 119,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 61
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 61
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Moss",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 10,
+            "h": 14,
+            "d": 7
+          }
+        },
+        "tags": [
+          "sale",
+          "gift"
+        ],
+        "active": true
+      },
+      {
+        "sku": "KET-021",
+        "name": "Ink Kettle",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 7000,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "KET-021-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 177,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 20
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 66
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Ink",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 18,
+            "h": 38,
+            "d": 24
+          }
+        },
+        "tags": [
+          "bestseller",
+          "limited"
+        ],
+        "active": true
+      },
+      {
+        "sku": "KET-022",
+        "name": "Rust Kettle",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 10600,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "KET-022-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 135,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 38
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 11
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Rust",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 38,
+            "h": 28,
+            "d": 11
+          }
+        },
+        "tags": [
+          "gift",
+          "bestseller"
+        ],
+        "active": true
+      },
+      {
+        "sku": "KET-023",
+        "name": "Fog Kettle",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 10800,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "KET-023-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 128,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 42
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 28
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Fog",
+          "material": "glass",
+          "dimensions_cm": {
+            "w": 56,
+            "h": 55,
+            "d": 13
+          }
+        },
+        "tags": [
+          "bestseller",
+          "eco"
+        ],
+        "active": true
+      },
+      {
+        "sku": "KET-024",
+        "name": "Clay Kettle",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 3800,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "KET-024-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 51,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 66
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 63
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Clay",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 51,
+            "h": 6,
+            "d": 2
+          }
+        },
+        "tags": [
+          "gift",
+          "eco"
+        ],
+        "active": true
+      },
+      {
+        "sku": "TEA-025",
+        "name": "Sand Teapot",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 9700,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "TEA-025-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 154,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 44
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 57
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Sand",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 28,
+            "h": 10,
+            "d": 15
+          }
+        },
+        "tags": [
+          "new",
+          "bestseller"
+        ],
+        "active": true
+      },
+      {
+        "sku": "TEA-026",
+        "name": "Moss Teapot",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 5200,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "TEA-026-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 52,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 61
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 79
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Moss",
+          "material": "glass",
+          "dimensions_cm": {
+            "w": 58,
+            "h": 5,
+            "d": 31
+          }
+        },
+        "tags": [
+          "sale",
+          "gift"
+        ],
+        "active": true
+      },
+      {
+        "sku": "TEA-027",
+        "name": "Ink Teapot",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 1900,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "TEA-027-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 169,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 15
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 49
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Ink",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 35,
+            "h": 16,
+            "d": 28
+          }
+        },
+        "tags": [
+          "sale",
+          "gift"
+        ],
+        "active": false
+      },
+      {
+        "sku": "TEA-028",
+        "name": "Rust Teapot",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 10100,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "TEA-028-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 101,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 59
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 51
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Rust",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 51,
+            "h": 15,
+            "d": 11
+          }
+        },
+        "tags": [
+          "bestseller",
+          "new"
+        ],
+        "active": true
+      },
+      {
+        "sku": "TEA-029",
+        "name": "Fog Teapot",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 6800,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "TEA-029-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 167,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 18
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 78
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Fog",
+          "material": "glass",
+          "dimensions_cm": {
+            "w": 35,
+            "h": 47,
+            "d": 23
+          }
+        },
+        "tags": [
+          "bestseller",
+          "limited"
+        ],
+        "active": true
+      },
+      {
+        "sku": "TEA-030",
+        "name": "Clay Teapot",
+        "category": "Kitchen",
+        "price": {
+          "unit_price_cents": 1100,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "TEA-030-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 3,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 13
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 67
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Clay",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 32,
+            "h": 60,
+            "d": 13
+          }
+        },
+        "tags": [
+          "bestseller",
+          "new"
+        ],
+        "active": true
+      },
+      {
+        "sku": "TEE-031",
+        "name": "Sand Tee",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 4600,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "TEE-031-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 128,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 30
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 75
+                }
+              ]
+            }
+          },
+          {
+            "sku": "TEE-031-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 83,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 33
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 69
+                }
+              ]
+            }
+          },
+          {
+            "sku": "TEE-031-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 107,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 16
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 7
+                }
+              ]
+            }
+          },
+          {
+            "sku": "TEE-031-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 189,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 45
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 58
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Sand",
+          "material": "glass",
+          "dimensions_cm": {
+            "w": 57,
+            "h": 38,
+            "d": 27
+          }
+        },
+        "tags": [
+          "limited",
+          "bestseller"
+        ],
+        "active": true
+      },
+      {
+        "sku": "TEE-032",
+        "name": "Moss Tee",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 7600,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "TEE-032-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 130,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 2
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 56
+                }
+              ]
+            }
+          },
+          {
+            "sku": "TEE-032-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 198,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 23
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 77
+                }
+              ]
+            }
+          },
+          {
+            "sku": "TEE-032-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 1,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 19
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 22
+                }
+              ]
+            }
+          },
+          {
+            "sku": "TEE-032-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 36,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 60
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 79
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Moss",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 40,
+            "h": 8,
+            "d": 21
+          }
+        },
+        "tags": [
+          "sale",
+          "limited"
+        ],
+        "active": true
+      },
+      {
+        "sku": "TEE-033",
+        "name": "Ink Tee",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 7000,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "TEE-033-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 200,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 13
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 71
+                }
+              ]
+            }
+          },
+          {
+            "sku": "TEE-033-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 14,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 31
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 24
+                }
+              ]
+            }
+          },
+          {
+            "sku": "TEE-033-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 70,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 5
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 12
+                }
+              ]
+            }
+          },
+          {
+            "sku": "TEE-033-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 129,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 57
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 71
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Ink",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 53,
+            "h": 9,
+            "d": 29
+          }
+        },
+        "tags": [
+          "gift",
+          "limited"
+        ],
+        "active": true
+      },
+      {
+        "sku": "TEE-034",
+        "name": "Rust Tee",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 8600,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "TEE-034-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 131,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 25
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 35
+                }
+              ]
+            }
+          },
+          {
+            "sku": "TEE-034-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 115,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 65
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 68
+                }
+              ]
+            }
+          },
+          {
+            "sku": "TEE-034-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 122,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 64
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 31
+                }
+              ]
+            }
+          },
+          {
+            "sku": "TEE-034-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 178,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 66
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 33
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Rust",
+          "material": "glass",
+          "dimensions_cm": {
+            "w": 17,
+            "h": 58,
+            "d": 29
+          }
+        },
+        "tags": [
+          "bestseller",
+          "eco"
+        ],
+        "active": true
+      },
+      {
+        "sku": "TEE-035",
+        "name": "Fog Tee",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 6500,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "TEE-035-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 80,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 9
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 30
+                }
+              ]
+            }
+          },
+          {
+            "sku": "TEE-035-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 109,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 9
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 27
+                }
+              ]
+            }
+          },
+          {
+            "sku": "TEE-035-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 171,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 38
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 15
+                }
+              ]
+            }
+          },
+          {
+            "sku": "TEE-035-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 198,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 19
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 46
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Fog",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 21,
+            "h": 13,
+            "d": 30
+          }
+        },
+        "tags": [
+          "bestseller",
+          "new"
+        ],
+        "active": true
+      },
+      {
+        "sku": "TEE-036",
+        "name": "Clay Tee",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 7100,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "TEE-036-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 41,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 28
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 20
+                }
+              ]
+            }
+          },
+          {
+            "sku": "TEE-036-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 180,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 55
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 65
+                }
+              ]
+            }
+          },
+          {
+            "sku": "TEE-036-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 103,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 43
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 53
+                }
+              ]
+            }
+          },
+          {
+            "sku": "TEE-036-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 50,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 45
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 40
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Clay",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 51,
+            "h": 28,
+            "d": 2
+          }
+        },
+        "tags": [
+          "gift",
+          "limited"
+        ],
+        "active": true
+      },
+      {
+        "sku": "HOO-037",
+        "name": "Sand Hoodie",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 9900,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "HOO-037-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 4,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 49
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 42
+                }
+              ]
+            }
+          },
+          {
+            "sku": "HOO-037-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 132,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 79
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 37
+                }
+              ]
+            }
+          },
+          {
+            "sku": "HOO-037-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 131,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 8
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 14
+                }
+              ]
+            }
+          },
+          {
+            "sku": "HOO-037-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 58,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 13
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 10
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Sand",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 22,
+            "h": 7,
+            "d": 12
+          }
+        },
+        "tags": [
+          "gift",
+          "bestseller"
+        ],
+        "active": true
+      },
+      {
+        "sku": "HOO-038",
+        "name": "Moss Hoodie",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 11700,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "HOO-038-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 173,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 33
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 51
+                }
+              ]
+            }
+          },
+          {
+            "sku": "HOO-038-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 38,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 68
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 65
+                }
+              ]
+            }
+          },
+          {
+            "sku": "HOO-038-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 146,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 63
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 41
+                }
+              ]
+            }
+          },
+          {
+            "sku": "HOO-038-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 22,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 35
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 7
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Moss",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 32,
+            "h": 9,
+            "d": 18
+          }
+        },
+        "tags": [
+          "new",
+          "sale"
+        ],
+        "active": true
+      },
+      {
+        "sku": "HOO-039",
+        "name": "Ink Hoodie",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 1900,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "HOO-039-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 155,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 28
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 8
+                }
+              ]
+            }
+          },
+          {
+            "sku": "HOO-039-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 67,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 15
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 58
+                }
+              ]
+            }
+          },
+          {
+            "sku": "HOO-039-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 2,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 43
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 70
+                }
+              ]
+            }
+          },
+          {
+            "sku": "HOO-039-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 106,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 34
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 79
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Ink",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 7,
+            "h": 38,
+            "d": 16
+          }
+        },
+        "tags": [
+          "new",
+          "bestseller"
+        ],
+        "active": true
+      },
+      {
+        "sku": "HOO-040",
+        "name": "Rust Hoodie",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 3200,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "HOO-040-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 51,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 39
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 80
+                }
+              ]
+            }
+          },
+          {
+            "sku": "HOO-040-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 78,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 67
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 26
+                }
+              ]
+            }
+          },
+          {
+            "sku": "HOO-040-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 74,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 57
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 64
+                }
+              ]
+            }
+          },
+          {
+            "sku": "HOO-040-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 172,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 22
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 34
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Rust",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 56,
+            "h": 6,
+            "d": 17
+          }
+        },
+        "tags": [
+          "new",
+          "sale"
+        ],
+        "active": false
+      },
+      {
+        "sku": "HOO-041",
+        "name": "Fog Hoodie",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 7300,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "HOO-041-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 141,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 24
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 65
+                }
+              ]
+            }
+          },
+          {
+            "sku": "HOO-041-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 121,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 31
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 57
+                }
+              ]
+            }
+          },
+          {
+            "sku": "HOO-041-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 27,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 55
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 63
+                }
+              ]
+            }
+          },
+          {
+            "sku": "HOO-041-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 139,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 50
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 64
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Fog",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 49,
+            "h": 18,
+            "d": 15
+          }
+        },
+        "tags": [
+          "gift",
+          "bestseller"
+        ],
+        "active": true
+      },
+      {
+        "sku": "HOO-042",
+        "name": "Clay Hoodie",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 9900,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "HOO-042-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 186,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 17
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 51
+                }
+              ]
+            }
+          },
+          {
+            "sku": "HOO-042-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 88,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 6
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 16
+                }
+              ]
+            }
+          },
+          {
+            "sku": "HOO-042-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 3,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 9
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 80
+                }
+              ]
+            }
+          },
+          {
+            "sku": "HOO-042-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 189,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 32
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 55
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Clay",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 8,
+            "h": 10,
+            "d": 25
+          }
+        },
+        "tags": [
+          "limited",
+          "gift"
+        ],
+        "active": true
+      },
+      {
+        "sku": "CAP-043",
+        "name": "Sand Cap",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 9700,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "CAP-043-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 75,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 5
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 58
+                }
+              ]
+            }
+          },
+          {
+            "sku": "CAP-043-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 47,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 20
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 34
+                }
+              ]
+            }
+          },
+          {
+            "sku": "CAP-043-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 114,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 0
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 33
+                }
+              ]
+            }
+          },
+          {
+            "sku": "CAP-043-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 93,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 42
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 70
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Sand",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 20,
+            "h": 7,
+            "d": 20
+          }
+        },
+        "tags": [
+          "bestseller",
+          "gift"
+        ],
+        "active": true
+      },
+      {
+        "sku": "CAP-044",
+        "name": "Moss Cap",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 5100,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "CAP-044-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 97,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 10
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 60
+                }
+              ]
+            }
+          },
+          {
+            "sku": "CAP-044-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 71,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 64
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 25
+                }
+              ]
+            }
+          },
+          {
+            "sku": "CAP-044-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 63,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 64
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 0
+                }
+              ]
+            }
+          },
+          {
+            "sku": "CAP-044-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 23,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 33
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 11
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Moss",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 30,
+            "h": 42,
+            "d": 3
+          }
+        },
+        "tags": [
+          "eco",
+          "new"
+        ],
+        "active": true
+      },
+      {
+        "sku": "CAP-045",
+        "name": "Ink Cap",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 8900,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "CAP-045-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 59,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 10
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 74
+                }
+              ]
+            }
+          },
+          {
+            "sku": "CAP-045-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 135,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 19
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 76
+                }
+              ]
+            }
+          },
+          {
+            "sku": "CAP-045-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 99,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 41
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 63
+                }
+              ]
+            }
+          },
+          {
+            "sku": "CAP-045-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 38,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 36
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 79
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Ink",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 7,
+            "h": 57,
+            "d": 33
+          }
+        },
+        "tags": [
+          "sale",
+          "eco"
+        ],
+        "active": true
+      },
+      {
+        "sku": "CAP-046",
+        "name": "Rust Cap",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 11200,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "CAP-046-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 129,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 17
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 67
+                }
+              ]
+            }
+          },
+          {
+            "sku": "CAP-046-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 192,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 64
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 72
+                }
+              ]
+            }
+          },
+          {
+            "sku": "CAP-046-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 4,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 74
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 29
+                }
+              ]
+            }
+          },
+          {
+            "sku": "CAP-046-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 21,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 3
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 5
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Rust",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 45,
+            "h": 28,
+            "d": 7
+          }
+        },
+        "tags": [
+          "eco",
+          "sale"
+        ],
+        "active": true
+      },
+      {
+        "sku": "CAP-047",
+        "name": "Fog Cap",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 8900,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "CAP-047-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 4,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 80
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 68
+                }
+              ]
+            }
+          },
+          {
+            "sku": "CAP-047-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 174,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 31
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 62
+                }
+              ]
+            }
+          },
+          {
+            "sku": "CAP-047-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 67,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 0
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 58
+                }
+              ]
+            }
+          },
+          {
+            "sku": "CAP-047-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 17,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 64
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 68
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Fog",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 47,
+            "h": 38,
+            "d": 5
+          }
+        },
+        "tags": [
+          "sale",
+          "eco"
+        ],
+        "active": true
+      },
+      {
+        "sku": "CAP-048",
+        "name": "Clay Cap",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 1800,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "CAP-048-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 67,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 30
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 26
+                }
+              ]
+            }
+          },
+          {
+            "sku": "CAP-048-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 59,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 58
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 63
+                }
+              ]
+            }
+          },
+          {
+            "sku": "CAP-048-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 97,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 9
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 61
+                }
+              ]
+            }
+          },
+          {
+            "sku": "CAP-048-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 175,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 36
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 5
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Clay",
+          "material": "glass",
+          "dimensions_cm": {
+            "w": 45,
+            "h": 46,
+            "d": 13
+          }
+        },
+        "tags": [
+          "new",
+          "limited"
+        ],
+        "active": true
+      },
+      {
+        "sku": "SCA-049",
+        "name": "Sand Scarf",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 4100,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "SCA-049-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 166,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 38
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 79
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SCA-049-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 145,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 17
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 1
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SCA-049-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 123,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 7
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 62
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SCA-049-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 68,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 12
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 27
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Sand",
+          "material": "wool",
+          "dimensions_cm": {
+            "w": 23,
+            "h": 50,
+            "d": 34
+          }
+        },
+        "tags": [
+          "gift",
+          "eco"
+        ],
+        "active": true
+      },
+      {
+        "sku": "SCA-050",
+        "name": "Moss Scarf",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 10700,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "SCA-050-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 30,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 70
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 25
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SCA-050-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 79,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 10
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 60
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SCA-050-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 4,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 37
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 58
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SCA-050-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 19,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 64
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 57
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Moss",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 29,
+            "h": 18,
+            "d": 14
+          }
+        },
+        "tags": [
+          "new",
+          "limited"
+        ],
+        "active": false
+      },
+      {
+        "sku": "SCA-051",
+        "name": "Ink Scarf",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 10400,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "SCA-051-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 134,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 33
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 46
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SCA-051-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 33,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 77
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 80
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SCA-051-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 130,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 35
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 14
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SCA-051-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 180,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 46
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 29
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Ink",
+          "material": "wool",
+          "dimensions_cm": {
+            "w": 36,
+            "h": 30,
+            "d": 2
+          }
+        },
+        "tags": [
+          "bestseller",
+          "new"
+        ],
+        "active": true
+      },
+      {
+        "sku": "SCA-052",
+        "name": "Rust Scarf",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 9600,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "SCA-052-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 115,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 51
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 38
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SCA-052-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 186,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 18
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 53
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SCA-052-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 88,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 48
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 40
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SCA-052-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 30,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 42
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 0
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Rust",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 53,
+            "h": 26,
+            "d": 26
+          }
+        },
+        "tags": [
+          "new",
+          "bestseller"
+        ],
+        "active": true
+      },
+      {
+        "sku": "SCA-053",
+        "name": "Fog Scarf",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 10300,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "SCA-053-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 74,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 32
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 47
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SCA-053-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 16,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 50
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 49
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SCA-053-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 150,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 9
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 46
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SCA-053-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 109,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 35
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 6
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Fog",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 11,
+            "h": 8,
+            "d": 19
+          }
+        },
+        "tags": [
+          "sale",
+          "bestseller"
+        ],
+        "active": true
+      },
+      {
+        "sku": "SCA-054",
+        "name": "Clay Scarf",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 4300,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "SCA-054-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 111,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 65
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 40
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SCA-054-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 48,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 47
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 54
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SCA-054-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 7,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 80
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 51
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SCA-054-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 141,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 70
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 26
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Clay",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 8,
+            "h": 51,
+            "d": 27
+          }
+        },
+        "tags": [
+          "eco",
+          "limited"
+        ],
+        "active": true
+      },
+      {
+        "sku": "SOC-055",
+        "name": "Sand Socks",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 9100,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "SOC-055-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 73,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 62
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 6
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SOC-055-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 140,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 16
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 21
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SOC-055-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 120,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 53
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 43
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SOC-055-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 72,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 38
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 32
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Sand",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 30,
+            "h": 46,
+            "d": 16
+          }
+        },
+        "tags": [
+          "gift",
+          "eco"
+        ],
+        "active": true
+      },
+      {
+        "sku": "SOC-056",
+        "name": "Moss Socks",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 5900,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "SOC-056-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 30,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 21
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 20
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SOC-056-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 19,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 26
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 64
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SOC-056-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 127,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 70
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 28
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SOC-056-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 115,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 42
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 57
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Moss",
+          "material": "wool",
+          "dimensions_cm": {
+            "w": 13,
+            "h": 40,
+            "d": 13
+          }
+        },
+        "tags": [
+          "bestseller",
+          "new"
+        ],
+        "active": true
+      },
+      {
+        "sku": "SOC-057",
+        "name": "Ink Socks",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 8000,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "SOC-057-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 23,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 40
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 30
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SOC-057-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 94,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 33
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 72
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SOC-057-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 51,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 2
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 52
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SOC-057-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 98,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 52
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 67
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Ink",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 29,
+            "h": 22,
+            "d": 22
+          }
+        },
+        "tags": [
+          "new",
+          "eco"
+        ],
+        "active": true
+      },
+      {
+        "sku": "SOC-058",
+        "name": "Rust Socks",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 5500,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "SOC-058-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 32,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 64
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 67
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SOC-058-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 161,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 27
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 11
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SOC-058-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 69,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 31
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 49
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SOC-058-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 102,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 57
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 55
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Rust",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 59,
+            "h": 57,
+            "d": 2
+          }
+        },
+        "tags": [
+          "bestseller",
+          "new"
+        ],
+        "active": true
+      },
+      {
+        "sku": "SOC-059",
+        "name": "Fog Socks",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 10600,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "SOC-059-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 121,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 75
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 62
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SOC-059-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 0,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 9
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 50
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SOC-059-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 135,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 59
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 57
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SOC-059-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 63,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 13
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 28
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Fog",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 14,
+            "h": 38,
+            "d": 7
+          }
+        },
+        "tags": [
+          "sale",
+          "eco"
+        ],
+        "active": false
+      },
+      {
+        "sku": "SOC-060",
+        "name": "Clay Socks",
+        "category": "Apparel",
+        "price": {
+          "unit_price_cents": 10800,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "SOC-060-S",
+            "size": "S",
+            "stock": {
+              "on_hand": 10,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 0
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 16
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SOC-060-M",
+            "size": "M",
+            "stock": {
+              "on_hand": 59,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 72
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 4
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SOC-060-L",
+            "size": "L",
+            "stock": {
+              "on_hand": 165,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 38
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 16
+                }
+              ]
+            }
+          },
+          {
+            "sku": "SOC-060-XL",
+            "size": "XL",
+            "stock": {
+              "on_hand": 160,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 32
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 67
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Clay",
+          "material": "wool",
+          "dimensions_cm": {
+            "w": 49,
+            "h": 53,
+            "d": 8
+          }
+        },
+        "tags": [
+          "new",
+          "sale"
+        ],
+        "active": true
+      },
+      {
+        "sku": "TOT-061",
+        "name": "Sand Tote",
+        "category": "Bags",
+        "price": {
+          "unit_price_cents": 8300,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "TOT-061-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 49,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 49
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 33
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Sand",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 55,
+            "h": 43,
+            "d": 1
+          }
+        },
+        "tags": [
+          "new",
+          "limited"
+        ],
+        "active": true
+      },
+      {
+        "sku": "TOT-062",
+        "name": "Moss Tote",
+        "category": "Bags",
+        "price": {
+          "unit_price_cents": 6700,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "TOT-062-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 71,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 40
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 31
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Moss",
+          "material": "wool",
+          "dimensions_cm": {
+            "w": 38,
+            "h": 20,
+            "d": 36
+          }
+        },
+        "tags": [
+          "bestseller",
+          "new"
+        ],
+        "active": true
+      },
+      {
+        "sku": "TOT-063",
+        "name": "Ink Tote",
+        "category": "Bags",
+        "price": {
+          "unit_price_cents": 9900,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "TOT-063-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 166,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 39
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 7
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Ink",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 17,
+            "h": 36,
+            "d": 27
+          }
+        },
+        "tags": [
+          "new",
+          "gift"
+        ],
+        "active": true
+      },
+      {
+        "sku": "TOT-064",
+        "name": "Rust Tote",
+        "category": "Bags",
+        "price": {
+          "unit_price_cents": 6300,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "TOT-064-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 94,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 29
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 63
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Rust",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 49,
+            "h": 26,
+            "d": 27
+          }
+        },
+        "tags": [
+          "gift",
+          "eco"
+        ],
+        "active": true
+      },
+      {
+        "sku": "TOT-065",
+        "name": "Fog Tote",
+        "category": "Bags",
+        "price": {
+          "unit_price_cents": 11100,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "TOT-065-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 74,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 64
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 8
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Fog",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 36,
+            "h": 17,
+            "d": 20
+          }
+        },
+        "tags": [
+          "bestseller",
+          "sale"
+        ],
+        "active": true
+      },
+      {
+        "sku": "TOT-066",
+        "name": "Clay Tote",
+        "category": "Bags",
+        "price": {
+          "unit_price_cents": 4200,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "TOT-066-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 194,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 37
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 13
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Clay",
+          "material": "glass",
+          "dimensions_cm": {
+            "w": 36,
+            "h": 44,
+            "d": 12
+          }
+        },
+        "tags": [
+          "bestseller",
+          "eco"
+        ],
+        "active": true
+      },
+      {
+        "sku": "BAC-067",
+        "name": "Sand Backpack",
+        "category": "Bags",
+        "price": {
+          "unit_price_cents": 9400,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "BAC-067-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 14,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 76
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 18
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Sand",
+          "material": "wool",
+          "dimensions_cm": {
+            "w": 8,
+            "h": 18,
+            "d": 2
+          }
+        },
+        "tags": [
+          "limited",
+          "bestseller"
+        ],
+        "active": true
+      },
+      {
+        "sku": "BAC-068",
+        "name": "Moss Backpack",
+        "category": "Bags",
+        "price": {
+          "unit_price_cents": 9900,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "BAC-068-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 15,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 23
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 50
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Moss",
+          "material": "wool",
+          "dimensions_cm": {
+            "w": 50,
+            "h": 25,
+            "d": 8
+          }
+        },
+        "tags": [
+          "new",
+          "bestseller"
+        ],
+        "active": true
+      },
+      {
+        "sku": "BAC-069",
+        "name": "Ink Backpack",
+        "category": "Bags",
+        "price": {
+          "unit_price_cents": 3200,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "BAC-069-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 167,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 67
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 59
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Ink",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 24,
+            "h": 47,
+            "d": 25
+          }
+        },
+        "tags": [
+          "gift",
+          "sale"
+        ],
+        "active": true
+      },
+      {
+        "sku": "BAC-070",
+        "name": "Rust Backpack",
+        "category": "Bags",
+        "price": {
+          "unit_price_cents": 2200,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "BAC-070-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 0,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 10
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 35
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Rust",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 27,
+            "h": 31,
+            "d": 8
+          }
+        },
+        "tags": [
+          "limited",
+          "bestseller"
+        ],
+        "active": true
+      },
+      {
+        "sku": "BAC-071",
+        "name": "Fog Backpack",
+        "category": "Bags",
+        "price": {
+          "unit_price_cents": 10700,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "BAC-071-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 79,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 55
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 11
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Fog",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 50,
+            "h": 35,
+            "d": 13
+          }
+        },
+        "tags": [
+          "gift",
+          "limited"
+        ],
+        "active": true
+      },
+      {
+        "sku": "BAC-072",
+        "name": "Clay Backpack",
+        "category": "Bags",
+        "price": {
+          "unit_price_cents": 3300,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "BAC-072-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 82,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 46
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 60
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Clay",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 45,
+            "h": 31,
+            "d": 16
+          }
+        },
+        "tags": [
+          "sale",
+          "eco"
+        ],
+        "active": false
+      },
+      {
+        "sku": "DUF-073",
+        "name": "Sand Duffel",
+        "category": "Bags",
+        "price": {
+          "unit_price_cents": 1300,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "DUF-073-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 118,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 8
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 7
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Sand",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 17,
+            "h": 52,
+            "d": 5
+          }
+        },
+        "tags": [
+          "limited",
+          "gift"
+        ],
+        "active": true
+      },
+      {
+        "sku": "DUF-074",
+        "name": "Moss Duffel",
+        "category": "Bags",
+        "price": {
+          "unit_price_cents": 5100,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "DUF-074-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 157,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 5
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 33
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Moss",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 22,
+            "h": 24,
+            "d": 1
+          }
+        },
+        "tags": [
+          "sale",
+          "limited"
+        ],
+        "active": true
+      },
+      {
+        "sku": "DUF-075",
+        "name": "Ink Duffel",
+        "category": "Bags",
+        "price": {
+          "unit_price_cents": 9000,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "DUF-075-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 16,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 3
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 29
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Ink",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 35,
+            "h": 50,
+            "d": 30
+          }
+        },
+        "tags": [
+          "eco",
+          "gift"
+        ],
+        "active": true
+      },
+      {
+        "sku": "DUF-076",
+        "name": "Rust Duffel",
+        "category": "Bags",
+        "price": {
+          "unit_price_cents": 11300,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "DUF-076-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 126,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 16
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 63
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Rust",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 5,
+            "h": 56,
+            "d": 20
+          }
+        },
+        "tags": [
+          "sale",
+          "bestseller"
+        ],
+        "active": true
+      },
+      {
+        "sku": "DUF-077",
+        "name": "Fog Duffel",
+        "category": "Bags",
+        "price": {
+          "unit_price_cents": 5000,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "DUF-077-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 81,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 58
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 46
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Fog",
+          "material": "glass",
+          "dimensions_cm": {
+            "w": 10,
+            "h": 37,
+            "d": 13
+          }
+        },
+        "tags": [
+          "eco",
+          "bestseller"
+        ],
+        "active": true
+      },
+      {
+        "sku": "DUF-078",
+        "name": "Clay Duffel",
+        "category": "Bags",
+        "price": {
+          "unit_price_cents": 1700,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "DUF-078-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 166,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 4
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 61
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Clay",
+          "material": "glass",
+          "dimensions_cm": {
+            "w": 39,
+            "h": 25,
+            "d": 11
+          }
+        },
+        "tags": [
+          "eco",
+          "new"
+        ],
+        "active": true
+      },
+      {
+        "sku": "POU-079",
+        "name": "Sand Pouch",
+        "category": "Bags",
+        "price": {
+          "unit_price_cents": 4200,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "POU-079-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 159,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 10
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 26
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Sand",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 31,
+            "h": 36,
+            "d": 29
+          }
+        },
+        "tags": [
+          "bestseller",
+          "sale"
+        ],
+        "active": true
+      },
+      {
+        "sku": "POU-080",
+        "name": "Moss Pouch",
+        "category": "Bags",
+        "price": {
+          "unit_price_cents": 6700,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "POU-080-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 158,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 30
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 68
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Moss",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 54,
+            "h": 58,
+            "d": 19
+          }
+        },
+        "tags": [
+          "gift",
+          "sale"
+        ],
+        "active": true
+      },
+      {
+        "sku": "POU-081",
+        "name": "Ink Pouch",
+        "category": "Bags",
+        "price": {
+          "unit_price_cents": 5600,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "POU-081-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 65,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 33
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 25
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Ink",
+          "material": "wool",
+          "dimensions_cm": {
+            "w": 20,
+            "h": 16,
+            "d": 16
+          }
+        },
+        "tags": [
+          "bestseller",
+          "sale"
+        ],
+        "active": true
+      },
+      {
+        "sku": "POU-082",
+        "name": "Rust Pouch",
+        "category": "Bags",
+        "price": {
+          "unit_price_cents": 8300,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "POU-082-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 48,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 41
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 8
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Rust",
+          "material": "wool",
+          "dimensions_cm": {
+            "w": 21,
+            "h": 20,
+            "d": 33
+          }
+        },
+        "tags": [
+          "limited",
+          "bestseller"
+        ],
+        "active": true
+      },
+      {
+        "sku": "POU-083",
+        "name": "Fog Pouch",
+        "category": "Bags",
+        "price": {
+          "unit_price_cents": 2100,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "POU-083-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 167,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 59
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 4
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Fog",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 5,
+            "h": 35,
+            "d": 15
+          }
+        },
+        "tags": [
+          "eco",
+          "gift"
+        ],
+        "active": false
+      },
+      {
+        "sku": "POU-084",
+        "name": "Clay Pouch",
+        "category": "Bags",
+        "price": {
+          "unit_price_cents": 4600,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "POU-084-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 59,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 15
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 6
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Clay",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 43,
+            "h": 57,
+            "d": 38
+          }
+        },
+        "tags": [
+          "bestseller",
+          "new"
+        ],
+        "active": true
+      },
+      {
+        "sku": "CAN-085",
+        "name": "Sand Candle",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 11900,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "CAN-085-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 45,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 57
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 77
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Sand",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 54,
+            "h": 54,
+            "d": 1
+          }
+        },
+        "tags": [
+          "new",
+          "limited"
+        ],
+        "active": true
+      },
+      {
+        "sku": "CAN-086",
+        "name": "Moss Candle",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 5300,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "CAN-086-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 55,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 4
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 47
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Moss",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 14,
+            "h": 7,
+            "d": 14
+          }
+        },
+        "tags": [
+          "gift",
+          "new"
+        ],
+        "active": true
+      },
+      {
+        "sku": "CAN-087",
+        "name": "Ink Candle",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 9200,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "CAN-087-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 52,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 1
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 41
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Ink",
+          "material": "wool",
+          "dimensions_cm": {
+            "w": 48,
+            "h": 28,
+            "d": 12
+          }
+        },
+        "tags": [
+          "limited",
+          "gift"
+        ],
+        "active": false
+      },
+      {
+        "sku": "CAN-088",
+        "name": "Rust Candle",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 1300,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "CAN-088-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 126,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 70
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 61
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Rust",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 31,
+            "h": 11,
+            "d": 26
+          }
+        },
+        "tags": [
+          "sale",
+          "limited"
+        ],
+        "active": true
+      },
+      {
+        "sku": "CAN-089",
+        "name": "Fog Candle",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 7700,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "CAN-089-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 23,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 20
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 50
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Fog",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 31,
+            "h": 23,
+            "d": 20
+          }
+        },
+        "tags": [
+          "eco",
+          "new"
+        ],
+        "active": true
+      },
+      {
+        "sku": "CAN-090",
+        "name": "Clay Candle",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 8100,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "CAN-090-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 91,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 53
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 53
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Clay",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 60,
+            "h": 54,
+            "d": 24
+          }
+        },
+        "tags": [
+          "sale",
+          "bestseller"
+        ],
+        "active": true
+      },
+      {
+        "sku": "THR-091",
+        "name": "Sand Throw",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 6000,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "THR-091-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 52,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 0
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 55
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Sand",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 32,
+            "h": 12,
+            "d": 6
+          }
+        },
+        "tags": [
+          "eco",
+          "limited"
+        ],
+        "active": true
+      },
+      {
+        "sku": "THR-092",
+        "name": "Moss Throw",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 6700,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "THR-092-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 197,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 20
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 16
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Moss",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 8,
+            "h": 40,
+            "d": 10
+          }
+        },
+        "tags": [
+          "sale",
+          "eco"
+        ],
+        "active": false
+      },
+      {
+        "sku": "THR-093",
+        "name": "Ink Throw",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 8800,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "THR-093-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 94,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 64
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 21
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Ink",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 27,
+            "h": 23,
+            "d": 11
+          }
+        },
+        "tags": [
+          "limited",
+          "bestseller"
+        ],
+        "active": true
+      },
+      {
+        "sku": "THR-094",
+        "name": "Rust Throw",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 2200,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "THR-094-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 98,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 62
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 25
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Rust",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 13,
+            "h": 58,
+            "d": 3
+          }
+        },
+        "tags": [
+          "eco",
+          "gift"
+        ],
+        "active": false
+      },
+      {
+        "sku": "THR-095",
+        "name": "Fog Throw",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 9000,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "THR-095-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 99,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 11
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 79
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Fog",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 45,
+            "h": 55,
+            "d": 15
+          }
+        },
+        "tags": [
+          "limited",
+          "eco"
+        ],
+        "active": true
+      },
+      {
+        "sku": "THR-096",
+        "name": "Clay Throw",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 3400,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "THR-096-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 121,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 23
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 72
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Clay",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 7,
+            "h": 30,
+            "d": 34
+          }
+        },
+        "tags": [
+          "bestseller",
+          "eco"
+        ],
+        "active": true
+      },
+      {
+        "sku": "VAS-097",
+        "name": "Sand Vase",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 2800,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "VAS-097-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 63,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 24
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 5
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Sand",
+          "material": "glass",
+          "dimensions_cm": {
+            "w": 58,
+            "h": 53,
+            "d": 3
+          }
+        },
+        "tags": [
+          "sale",
+          "gift"
+        ],
+        "active": true
+      },
+      {
+        "sku": "VAS-098",
+        "name": "Moss Vase",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 8500,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "VAS-098-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 116,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 70
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 80
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Moss",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 46,
+            "h": 31,
+            "d": 20
+          }
+        },
+        "tags": [
+          "limited",
+          "bestseller"
+        ],
+        "active": true
+      },
+      {
+        "sku": "VAS-099",
+        "name": "Ink Vase",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 9300,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "VAS-099-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 94,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 57
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 64
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Ink",
+          "material": "wool",
+          "dimensions_cm": {
+            "w": 16,
+            "h": 6,
+            "d": 1
+          }
+        },
+        "tags": [
+          "limited",
+          "eco"
+        ],
+        "active": true
+      },
+      {
+        "sku": "VAS-100",
+        "name": "Rust Vase",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 6600,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "VAS-100-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 195,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 79
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 58
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Rust",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 56,
+            "h": 35,
+            "d": 26
+          }
+        },
+        "tags": [
+          "new",
+          "sale"
+        ],
+        "active": true
+      },
+      {
+        "sku": "VAS-101",
+        "name": "Fog Vase",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 6400,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "VAS-101-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 93,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 11
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 56
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Fog",
+          "material": "glass",
+          "dimensions_cm": {
+            "w": 37,
+            "h": 47,
+            "d": 3
+          }
+        },
+        "tags": [
+          "new",
+          "bestseller"
+        ],
+        "active": false
+      },
+      {
+        "sku": "VAS-102",
+        "name": "Clay Vase",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 10200,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "VAS-102-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 80,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 65
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 10
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Clay",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 53,
+            "h": 37,
+            "d": 25
+          }
+        },
+        "tags": [
+          "sale",
+          "bestseller"
+        ],
+        "active": false
+      },
+      {
+        "sku": "LAM-103",
+        "name": "Sand Lamp",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 1700,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "LAM-103-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 157,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 14
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 24
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Sand",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 36,
+            "h": 23,
+            "d": 11
+          }
+        },
+        "tags": [
+          "sale",
+          "bestseller"
+        ],
+        "active": false
+      },
+      {
+        "sku": "LAM-104",
+        "name": "Moss Lamp",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 5300,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "LAM-104-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 156,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 32
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 20
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Moss",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 44,
+            "h": 22,
+            "d": 30
+          }
+        },
+        "tags": [
+          "bestseller",
+          "gift"
+        ],
+        "active": true
+      },
+      {
+        "sku": "LAM-105",
+        "name": "Ink Lamp",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 7000,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "LAM-105-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 53,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 75
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 33
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Ink",
+          "material": "glass",
+          "dimensions_cm": {
+            "w": 37,
+            "h": 20,
+            "d": 21
+          }
+        },
+        "tags": [
+          "gift",
+          "new"
+        ],
+        "active": true
+      },
+      {
+        "sku": "LAM-106",
+        "name": "Rust Lamp",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 6000,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "LAM-106-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 41,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 35
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 41
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Rust",
+          "material": "wool",
+          "dimensions_cm": {
+            "w": 15,
+            "h": 55,
+            "d": 17
+          }
+        },
+        "tags": [
+          "new",
+          "limited"
+        ],
+        "active": false
+      },
+      {
+        "sku": "LAM-107",
+        "name": "Fog Lamp",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 11800,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "LAM-107-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 92,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 57
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 71
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Fog",
+          "material": "glass",
+          "dimensions_cm": {
+            "w": 42,
+            "h": 49,
+            "d": 7
+          }
+        },
+        "tags": [
+          "gift",
+          "limited"
+        ],
+        "active": true
+      },
+      {
+        "sku": "LAM-108",
+        "name": "Clay Lamp",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 5900,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "LAM-108-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 188,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 47
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 33
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Clay",
+          "material": "wool",
+          "dimensions_cm": {
+            "w": 28,
+            "h": 41,
+            "d": 10
+          }
+        },
+        "tags": [
+          "gift",
+          "sale"
+        ],
+        "active": true
+      },
+      {
+        "sku": "RUG-109",
+        "name": "Sand Rug",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 6500,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "RUG-109-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 58,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 22
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 78
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Sand",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 23,
+            "h": 57,
+            "d": 34
+          }
+        },
+        "tags": [
+          "gift",
+          "sale"
+        ],
+        "active": true
+      },
+      {
+        "sku": "RUG-110",
+        "name": "Moss Rug",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 8300,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "RUG-110-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 169,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 40
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 0
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Moss",
+          "material": "cotton",
+          "dimensions_cm": {
+            "w": 19,
+            "h": 14,
+            "d": 19
+          }
+        },
+        "tags": [
+          "limited",
+          "eco"
+        ],
+        "active": true
+      },
+      {
+        "sku": "RUG-111",
+        "name": "Ink Rug",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 5500,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "RUG-111-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 12,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 16
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 62
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Ink",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 44,
+            "h": 46,
+            "d": 3
+          }
+        },
+        "tags": [
+          "new",
+          "sale"
+        ],
+        "active": false
+      },
+      {
+        "sku": "RUG-112",
+        "name": "Rust Rug",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 5400,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "RUG-112-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 77,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 13
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 66
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Rust",
+          "material": "canvas",
+          "dimensions_cm": {
+            "w": 39,
+            "h": 19,
+            "d": 27
+          }
+        },
+        "tags": [
+          "limited",
+          "gift"
+        ],
+        "active": true
+      },
+      {
+        "sku": "RUG-113",
+        "name": "Fog Rug",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 3500,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "RUG-113-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 93,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 79
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 60
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Fog",
+          "material": "stoneware",
+          "dimensions_cm": {
+            "w": 13,
+            "h": 5,
+            "d": 16
+          }
+        },
+        "tags": [
+          "sale",
+          "bestseller"
+        ],
+        "active": true
+      },
+      {
+        "sku": "RUG-114",
+        "name": "Clay Rug",
+        "category": "Home",
+        "price": {
+          "unit_price_cents": 1700,
+          "currency": "USD",
+          "tiers": [
+            {
+              "min_quantity": 10,
+              "percent_off": 5
+            },
+            {
+              "min_quantity": 50,
+              "percent_off": 10
+            }
+          ]
+        },
+        "variants": [
+          {
+            "sku": "RUG-114-ONE",
+            "size": "ONE",
+            "stock": {
+              "on_hand": 163,
+              "warehouses": [
+                {
+                  "id": "SFO",
+                  "on_hand": 18
+                },
+                {
+                  "id": "JFK",
+                  "on_hand": 34
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "color": "Clay",
+          "material": "wool",
+          "dimensions_cm": {
+            "w": 56,
+            "h": 21,
+            "d": 1
+          }
+        },
+        "tags": [
+          "new",
+          "limited"
+        ],
+        "active": true
+      }
+    ]
+  }
+}

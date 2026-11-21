@@ -1,0 +1,2 @@
+Notes de migration - café du système hérité.
+Naïve totals were stored in francs.

@@ -1,0 +1,15 @@
+{
+  "version": 3,
+  "flags": {
+    "new_checkout": { "enabled": true, "rollout_percent": 25, "owners": ["web"] },
+    "apple_pay": { "enabled": false, "rollout_percent": 0, "owners": ["mobile", "payments"] },
+    "bulk_discounts": {
+      "enabled": true,
+      "rollout_percent": 100,
+      "rules": [
+        { "min_quantity": 10, "percent_off": 5 },
+        { "min_quantity": 50, "percent_off": 10 }
+      ]
+    }
+  }
+}

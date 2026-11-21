@@ -9,6 +9,12 @@ While the major version is `0`, minor bumps may include breaking changes.
 
 ## [Unreleased]
 
+### Added
+- `Examples/Production/`: Orderly, a realistic multi-language monorepo to test
+  larp on — services in Python, Go, Java and Rust, web, iOS and Android
+  clients, SQL migrations with a SQLite dev database, a large JSON catalogue,
+  a Mermaid diagram, and deliberate binary and Latin-1 files.
+
 ### Changed
 - Renamed iKhalacy to larp — Your Local Agent Review Pal — and refocused it on
   reviewing and walking through code written by Claude Code and Codex. The app

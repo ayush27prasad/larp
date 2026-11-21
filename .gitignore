@@ -62,3 +62,4 @@ Icon?
 Local.xcconfig
 .env
 .env.*
+!.env.example

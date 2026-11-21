@@ -1,0 +1,9 @@
+[notifier]
+from_address = "orders@orderly.example"
+retry_attempts = 3
+retry_backoff_seconds = 30
+
+[notifier.templates]
+paid = "order_paid"
+shipped = "order_shipped"
+cancelled = "order_cancelled"

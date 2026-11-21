@@ -51,6 +51,12 @@ holds new state — a view, a cache, scrollback, a chat history — should say h
 it stays bounded. Measure with `footprint <pid>` on a running app, not RSS;
 launch it in the foreground, since a background launch never builds the window.
 
+## Testing by hand
+
+`Examples/Production/` (Orderly) is the project to try every feature on. When
+a feature needs a case it lacks — a language, a file shape, a database table —
+add it there, coherent with the rest, and note it in its README.
+
 ## Docs move with the code
 
 Every user-visible change updates `CHANGELOG.md` under `[Unreleased]`, and the

@@ -1,0 +1,15 @@
+server:
+  port: 8080
+  request_timeout_seconds: 10
+
+pricing:
+  tax_rate: 0.08
+  free_shipping_threshold_cents: 5000
+  shipping_cents: 499
+
+inventory:
+  reservation_ttl_minutes: 15
+
+logging:
+  level: info
+  format: json

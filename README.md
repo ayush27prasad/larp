@@ -172,7 +172,9 @@ larp/
 │   │   ├── Editor/           # Middle pane — active file
 │   │   └── Terminal/         # Bottom pane — shell session
 │   └── Resources/            # Info.plist, asset catalog
-├── Examples/SampleProject/   # Mixed-language fixture for manual browsing
+├── Examples/
+│   ├── Production/           # Orderly: the realistic project larp is tested on
+│   └── SampleProject/        # Tiny mixed-language fixture
 └── Tests/LarpTests/      # Swift Testing suites
 ```
 
@@ -183,8 +185,10 @@ folder and the active file. Adding a feature means adding a folder under
 
 ## Trying it
 
-Press ⌘O and pick any folder — or point it at `Examples/SampleProject/`, a small
-mixed-language tree kept in the repo for exactly this.
+Press ⌘O and pick any folder — or point it at `Examples/Production/`. That is
+Orderly, a realistic multi-language monorepo (Python, Go, Java, Rust,
+TypeScript, Swift, Kotlin, SQL) kept here as the project larp is tested on; its
+README lists which larp features each part exercises.
 
 | | |
 |---|---|
