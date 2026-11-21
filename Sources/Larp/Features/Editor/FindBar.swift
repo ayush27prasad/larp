@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// ⌘F's bar under the path bar, in larp's own style rather than the editor's
-/// stock panel: query, "3 of 12", Aa / W / .*, previous and next, close; and a
+/// stock panel: query, "3 of 12", the search options, previous and next, close; and a
 /// replace row from the chevron or ⌥⌘F. ↩ next, ⇧↩ previous, esc closes.
 struct FindBar: View {
     @Bindable var find: FindModel
@@ -27,9 +27,7 @@ struct FindBar: View {
                         .lineLimit(1)
                         .fixedSize()
                 }
-                OptionToggle(label: "Aa", help: "Match Case (⌥⌘C)", isOn: $find.options.matchCase)
-                OptionToggle(label: "W", help: "Whole Words (⌥⌘W)", isOn: $find.options.wholeWord)
-                OptionToggle(label: ".*", help: "Regex (⌥⌘R)", isOn: $find.options.regex)
+                SearchOptionToggles(options: $find.options)
                 IconButton(symbol: "chevron.up", help: "Previous Match (⇧↩ or ⇧⌘G)", action: find.previous)
                     .disabled(find.matches.isEmpty)
                 IconButton(symbol: "chevron.down", help: "Next Match (↩ or ⌘G)", action: find.next)

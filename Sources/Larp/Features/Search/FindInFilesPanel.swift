@@ -41,9 +41,7 @@ struct FindInFilesPanel: View {
                 .onKeyPress(.downArrow) { search.moveSelection(by: 1); return .handled }
                 .onKeyPress(.upArrow) { search.moveSelection(by: -1); return .handled }
                 .onExitCommand { search.dismiss() }
-            OptionToggle(label: "Aa", help: "Match Case (⌥⌘C)", isOn: $search.options.matchCase)
-            OptionToggle(label: "W", help: "Whole Words (⌥⌘W)", isOn: $search.options.wholeWord)
-            OptionToggle(label: ".*", help: "Regex (⌥⌘R)", isOn: $search.options.regex)
+            SearchOptionToggles(options: $search.options)
         }
         .padding(.horizontal, 14)
         .frame(height: 50)
