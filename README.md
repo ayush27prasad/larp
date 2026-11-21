@@ -102,6 +102,11 @@ continuous-corner mask for older systems. It crops to a centred square by
 default so the art reaches every edge; `MODE=fit ./Scripts/make-icon.sh`
 letterboxes instead, cropping nothing.
 
+The window has no title bar. The sidebar header — window buttons, project name,
+sidebar toggle — and the editor's tab strip are its top edge, and their empty
+parts drag the window. With the sidebar hidden, the toggle moves to the start
+of the tab strip.
+
 **View ▸ Appearance** picks System, Light or Dark; System follows macOS.
 
 - **Light** is Apple-calm: white content on apple.com's `#F5F5F7` greys, Apple
@@ -218,6 +223,8 @@ README lists which larp features each part exercises.
 | New terminal | ⌘T |
 | Rename a terminal | double-click its tab |
 | Resize the terminal | drag the line above it — the height is remembered |
+| Show or hide the sidebar | ⌃⌘S, or the sidebar button; drag its edge to resize |
+| Move the window | drag the empty part of the tab strip or the sidebar header |
 | Markdown preview / source | ⇧⌘V |
 | Light, dark or system appearance | View ▸ Appearance |
 | Close tab | ⌘W — closes the terminal tab if the terminal has focus, otherwise the editor tab |

@@ -32,7 +32,8 @@ enum Chrome {
     /// Hairlines between regions.
     static var separator: NSColor { dynamic(light: 0xD2D2D7, dark: 0x1D1D26) }
 
-    static let tabBarHeight: CGFloat = 32
+    /// Also the sidebar header's height, so the two line up across the top.
+    static let tabBarHeight: CGFloat = 36
     static let statusBarHeight: CGFloat = 24
 
     static func dynamic(light: UInt32, dark: UInt32) -> NSColor {

@@ -6,6 +6,8 @@ struct LarpApp: App {
     @State private var workspace = Workspace()
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @AppStorage(Appearance.defaultsKey) private var appearance: Appearance = .system
+    @AppStorage(Layout.sidebarVisibleKey) private var sidebarIsVisible = true
+    @Environment(\.openWindow) private var openWindow
 
     var body: some Scene {
         // A single Window, not a WindowGroup: a WindowGroup opens an extra
@@ -14,13 +16,18 @@ struct LarpApp: App {
         Window("Larp", id: "main") {
             WorkspaceView()
                 .environment(workspace)
-                .task { appDelegate.attach(workspace) }
+                .task { appDelegate.attach(workspace, openWindow: openWindow) }
                 .onChange(of: appearance, initial: true) {
                     NSApp.appearance = appearance.nsAppearance
                 }
         }
-        .windowToolbarStyle(.unified)
+        // No title bar: the sidebar header and the editor's tab strip run to
+        // the top of the window, and the window buttons sit over the sidebar.
+        .windowStyle(.hiddenTitleBar)
         .defaultSize(width: 1_280, height: 800)
+        // Always open the window at launch, even if it was closed when the
+        // app last quit: a single-window app with no window is just a menu bar.
+        .defaultLaunchBehavior(.presented)
         .commands {
             CommandGroup(replacing: .newItem) {
                 Button("Open Folder…") { openFolder() }
@@ -38,7 +45,12 @@ struct LarpApp: App {
                 Button("Close Tab") { workspace.closeFocusedTab() }
                     .keyboardShortcut("w")
             }
-            CommandGroup(after: .sidebar) {
+            CommandGroup(replacing: .sidebar) {
+                Button(sidebarIsVisible ? "Hide Sidebar" : "Show Sidebar") {
+                    withAnimation(.easeInOut(duration: 0.18)) { sidebarIsVisible.toggle() }
+                }
+                .keyboardShortcut("s", modifiers: [.control, .command])
+
                 Button("Toggle Markdown Preview") {
                     workspace.editor.activeDocument?.showsPreview.toggle()
                 }

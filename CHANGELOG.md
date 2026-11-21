@@ -24,6 +24,11 @@ While the major version is `0`, minor bumps may include breaking changes.
   a Mermaid diagram, and deliberate binary and Latin-1 files.
 
 ### Changed
+- The title bar and toolbar are gone. The sidebar has its own header with the
+  window buttons, project name and a toggle (⌃⌘S); the editor's tab strip runs
+  to the top of the window, stays as an empty strip with no file open, and
+  drags the window. The sidebar is resized by dragging its edge, and its width
+  and visibility are remembered.
 - The interface is redesigned: tabs carry file-type icons and a clear active
   state, the explorer's icons are coloured by language, and the editor,
   markdown preview and terminal share one background. The terminal gets
@@ -42,6 +47,9 @@ While the major version is `0`, minor bumps may include breaking changes.
   versions instead of whatever is newest in each allowed range.
 
 ### Fixed
+- After its window had been closed, larp could relaunch with no window at all,
+  and a folder handed over by Finder opened invisibly. The window now always
+  opens at launch and is brought back for Finder opens.
 - Opening a file or folder from Finder, or with `open -a`, opened a second
   window on the same project, each with its own copies of the shells. larp is
   now a single window.

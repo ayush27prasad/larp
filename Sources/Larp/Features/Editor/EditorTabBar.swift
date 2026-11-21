@@ -8,20 +8,32 @@ struct EditorTabBar: View {
     let onSelect: (URL) -> Void
     let onClose: (URL) -> Void
 
+    @Environment(\.tabStripLeadingInset) private var leadingInset
+
+    /// Always shown, even with no files open: it is the top of the window,
+    /// and its empty part is where the window is dragged from.
     var body: some View {
-        ScrollView(.horizontal) {
-            HStack(spacing: 0) {
-                ForEach(documents) { document in
-                    EditorTab(
-                        document: document,
-                        isActive: document.id == activeID,
-                        isPreview: document.id == previewID,
-                        onClose: { onClose(document.id) })
-                        .onTapGesture { onSelect(document.id) }
+        HStack(spacing: 0) {
+            Color.clear.frame(width: leadingInset)
+            ScrollView(.horizontal) {
+                HStack(spacing: 0) {
+                    ForEach(documents) { document in
+                        EditorTab(
+                            document: document,
+                            isActive: document.id == activeID,
+                            isPreview: document.id == previewID,
+                            onClose: { onClose(document.id) })
+                            .onTapGesture { onSelect(document.id) }
+                    }
                 }
             }
+            .scrollIndicators(.never)
+            .fixedSize(horizontal: true, vertical: false)
+            Color.clear
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .contentShape(.rect)
+                .dragsWindow()
         }
-        .scrollIndicators(.never)
         .frame(height: Chrome.tabBarHeight)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color(nsColor: Chrome.barBackground), ignoresSafeAreaEdges: [])

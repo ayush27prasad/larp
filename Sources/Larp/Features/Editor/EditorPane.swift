@@ -11,15 +11,13 @@ struct EditorPane: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            if workspace.editor.hasOpenDocuments {
-                EditorTabBar(
-                    documents: workspace.editor.documents,
-                    // No tab looks selected while a refusal stands in for them.
-                    activeID: workspace.editor.refusal == nil ? workspace.editor.activeDocumentID : nil,
-                    previewID: workspace.editor.previewDocumentID,
-                    onSelect: { workspace.activate($0) },
-                    onClose: { workspace.closeFile($0) })
-            }
+            EditorTabBar(
+                documents: workspace.editor.documents,
+                // No tab looks selected while a refusal stands in for them.
+                activeID: workspace.editor.refusal == nil ? workspace.editor.activeDocumentID : nil,
+                previewID: workspace.editor.previewDocumentID,
+                onSelect: { workspace.activate($0) },
+                onClose: { workspace.closeFile($0) })
             content
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
