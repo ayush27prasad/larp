@@ -1,24 +1,16 @@
 import SwiftUI
 
 /// The match-case, whole-word and regex toggles, shared by the find bar and
-/// Find in Files. They read as words — "Match Case" — since the usual Aa / W
-/// / .* glyphs mean nothing until learned, and fall back to those glyphs only
-/// when there's no room for the words.
+/// Find in Files: the usual Aa / W / .* glyphs, each explained by a tooltip
+/// that names its shortcut (shown quickly; see LarpApp).
 struct SearchOptionToggles: View {
     @Binding var options: ProjectSearch.Options
 
     var body: some View {
-        ViewThatFits(in: .horizontal) {
-            toggles(compact: false)
-            toggles(compact: true)
-        }
-    }
-
-    private func toggles(compact: Bool) -> some View {
         HStack(spacing: 4) {
-            OptionToggle(label: compact ? "Aa" : "Match Case", help: "Match Case (⌥⌘C)", isOn: $options.matchCase)
-            OptionToggle(label: compact ? "W" : "Whole Word", help: "Whole Word (⌥⌘W)", isOn: $options.wholeWord)
-            OptionToggle(label: compact ? ".*" : "Regex", help: "Regular Expression (⌥⌘R)", isOn: $options.regex)
+            OptionToggle(label: "Aa", help: "Match Case (⌥⌘C)", isOn: $options.matchCase)
+            OptionToggle(label: "W", help: "Whole Word (⌥⌘W)", isOn: $options.wholeWord)
+            OptionToggle(label: ".*", help: "Regular Expression (⌥⌘R)", isOn: $options.regex)
         }
         .fixedSize()
     }
@@ -36,10 +28,9 @@ struct OptionToggle: View {
     var body: some View {
         Button { isOn.toggle() } label: {
             Text(label)
-                .font(.system(size: 11.5 * zoom, weight: .medium))
+                .font(.system(size: 12 * zoom, weight: .semibold, design: .monospaced))
                 .lineLimit(1)
-                .padding(.horizontal, 8 * zoom)
-                .frame(minWidth: 28 * zoom, minHeight: 24 * zoom)
+                .frame(width: 28 * zoom, height: 24 * zoom)
                 .foregroundStyle(isOn ? Color(nsColor: Chrome.accent) : isHovered ? .primary : .secondary)
                 .background(RoundedRectangle(cornerRadius: 6).fill(background))
                 .contentShape(.rect)

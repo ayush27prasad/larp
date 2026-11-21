@@ -15,10 +15,9 @@ While the major version is `0`, minor bumps may include breaking changes.
   and previous (↩, ⇧↩, ⌘G, ⇧⌘G), and a replace row (⌥⌘F) with Replace and
   Replace All, undoable, with `$1` groups for regex. Matches are highlighted
   in the text and follow edits; a single-line selection seeds the query.
-  The toggles read as words — Match Case, Whole Word, Regex — falling back to
-  Aa / W / .* only when narrow, and have VS Code's shortcuts — ⌥⌘C, ⌥⌘W, ⌥⌘R —
-  in both finds, and
+  The toggles have VS Code's shortcuts — ⌥⌘C, ⌥⌘W, ⌥⌘R — in both finds, and
   every icon button highlights on hover and names its shortcut in its tooltip.
+  Tooltips appear after 0.35 s rather than macOS's default of about a second.
 - Find in Files (⇧⌘F), after IntelliJ's: a floating panel with match-case,
   whole-word and regex options, results grouped by file with the hits
   highlighted, and the lines around the selected match. ↑↓ move, ↩ opens the

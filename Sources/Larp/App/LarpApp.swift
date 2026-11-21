@@ -11,6 +11,14 @@ struct LarpApp: App {
     @AppStorage(Zoom.appKey) private var storedAppZoom = 1.0
     private var appZoom: Double { Zoom.clamped(storedAppZoom, in: .app) }
 
+    init() {
+        // AppKit waits about a second before showing a tooltip, long enough
+        // that icon-only controls look unexplained. Its delay is a default an
+        // app may set for itself; 350 ms makes the native tooltips quick
+        // while keeping their placement and styling.
+        UserDefaults.standard.register(defaults: ["NSInitialToolTipDelay": 350])
+    }
+
     var body: some Scene {
         // A single Window, not a WindowGroup: a WindowGroup opens an extra
         // window for every folder or file handed over by Finder or `open -a`,

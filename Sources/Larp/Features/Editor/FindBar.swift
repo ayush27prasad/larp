@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// ⌘F's bar under the path bar, in larp's own style rather than the editor's
-/// stock panel: query, "3 of 12", the search options, previous and next, close; and a
+/// stock panel: query, "3 of 12", Aa / W / .*, previous and next, close; and a
 /// replace row from the chevron or ⌥⌘F. ↩ next, ⇧↩ previous, esc closes.
 struct FindBar: View {
     @Bindable var find: FindModel
