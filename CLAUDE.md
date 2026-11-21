@@ -42,6 +42,8 @@ xcodebuild -scheme Larp -destination 'platform=macOS' -skipPackagePluginValidati
   throwaway file tree; `Workspace` tests inject a fresh `UserDefaults` suite so
   they never touch the real app's defaults.
 - Comments explain *why*. Match the existing density, which is low.
+- UI text is short and impersonal. Never "Larp does …"; state the rule:
+  "Only UTF-8 text is supported.", "Only files up to 4 MB are supported."
 - UserDefaults keys are namespaced by feature: `workspace.*`, `terminal.*`.
 
 ## Memory is a feature
