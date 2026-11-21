@@ -1,10 +1,11 @@
 import SwiftUI
 
-/// The pill that appears while zooming — "App  −  110%  +  Reset" — like a
-/// browser's zoom bubble. It doesn't scale with the app zoom itself, so it
+/// The pill that appears while zooming — "−  110%  +  Reset", or with "File" /
+/// "Terminal" in front for a pane's own zoom — like a browser's zoom bubble. It doesn't scale with the app zoom itself, so it
 /// stays usable at either end of the range.
 struct ZoomHUD: View {
-    let title: String
+    /// Nil for the app zoom, which needs no label.
+    let title: String?
     let level: Double
     let range: ClosedRange<Double>
     let onStep: (Int) -> Void
@@ -12,9 +13,11 @@ struct ZoomHUD: View {
 
     var body: some View {
         HStack(spacing: 6) {
-            Text(title)
-                .foregroundStyle(.secondary)
-                .padding(.trailing, 2)
+            if let title {
+                Text(title)
+                    .foregroundStyle(.secondary)
+                    .padding(.trailing, 2)
+            }
             button("minus", help: "Zoom Out", disabled: level <= range.lowerBound) { onStep(-1) }
             Text(Zoom.percent(level))
                 .monospacedDigit()

@@ -176,8 +176,8 @@ struct WorkspaceView: View {
     }
 
     private func zoomPill(for target: ZoomTarget) -> some View {
-        let title = switch target {
-        case .app: "App"
+        let title: String? = switch target {
+        case .app: nil
         case .editor: "File"
         case .terminal: "Terminal"
         }
@@ -215,6 +215,11 @@ struct WorkspaceView: View {
         VStack(spacing: 0) {
             HStack(spacing: 6) {
                 Color.clear.frame(width: windowButtonsWidth - 8)
+                if workspace.hasOpenFolder {
+                    Image(systemName: "folder.fill")
+                        .font(.system(size: 11 * appZoom))
+                        .foregroundStyle(Color(nsColor: Chrome.accent))
+                }
                 Text(workspace.rootURL?.lastPathComponent ?? "Larp")
                     .font(.system(size: 12 * appZoom, weight: .semibold))
                     .lineLimit(1)
