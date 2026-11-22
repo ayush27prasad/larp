@@ -10,6 +10,10 @@ While the major version is `0`, minor bumps may include breaking changes.
 ## [Unreleased]
 
 ### Added
+- The terminal collapses to its tab bar and back (⌘J, the chevron at the right
+  of its tabs, or View ▸ Hide Terminal), animated. It always starts expanded;
+  clicking a tab, opening a terminal or dragging its edge expands it. Shells
+  keep running while collapsed, and aren't resized as it folds.
 - A find bar of larp's own for ⌘F, replacing the editor's stock panel: the
   query with an "N of M" count, match-case / whole-word / regex toggles, next
   and previous (↩, ⇧↩, ⌘G, ⇧⌘G), and a replace row (⌥⌘F) with Replace and

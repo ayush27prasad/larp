@@ -19,6 +19,7 @@ final class InputMonitor {
         case find(replace: Bool)
         case findAgain(forward: Bool)
         case toggleFindOption(FindOption)
+        case toggleTerminal
     }
 
     enum FindOption { case matchCase, wholeWord, regex }
@@ -87,6 +88,8 @@ final class InputMonitor {
             return .appZoom(steps: -1)
         case (.command, "0"):
             return .appZoom(steps: nil)
+        case (.command, "j"):
+            return .toggleTerminal
         case (.command, "f"):
             return .find(replace: false)
         case ([.command, .option], "f"):

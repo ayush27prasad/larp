@@ -225,6 +225,7 @@ README lists which larp features each part exercises.
 | New terminal | ⌘T |
 | Rename a terminal | double-click its tab |
 | Resize the terminal | drag the line above it — the height is remembered |
+| Collapse or expand the terminal | ⌘J, or the chevron at the right of its tabs |
 | Show or hide the sidebar | ⌃⌘S, or the sidebar button; drag its edge to resize |
 | Move the window | drag the empty part of the tab strip or the sidebar header |
 | Markdown preview / source | ⇧⌘V |

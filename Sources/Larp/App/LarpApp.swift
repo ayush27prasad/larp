@@ -83,6 +83,11 @@ struct LarpApp: App {
                 }
                 .keyboardShortcut("s", modifiers: [.control, .command])
 
+                Button(workspace.terminals.isCollapsed ? "Show Terminal" : "Hide Terminal") {
+                    workspace.terminals.isCollapsed.toggle()
+                }
+                .keyboardShortcut("j")
+
                 Button("Toggle Markdown Preview") {
                     workspace.editor.activeDocument?.showsPreview.toggle()
                 }

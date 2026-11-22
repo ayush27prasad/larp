@@ -91,11 +91,17 @@ struct WorkspaceView: View {
                 .frame(maxHeight: .infinity)
                 // Whatever toggles the sidebar — button, ⌃⌘S, the menu — it animates.
                 .animation(Self.sidebarAnimation, value: sidebarIsVisible)
+                // And the terminal folding, which resizes this area too.
+                .animation(Self.sidebarAnimation, value: workspace.terminals.isCollapsed)
 
                 divider(totalHeight: geometry.size.height)
 
-                TerminalPane()
-                    .frame(height: height)
+                TerminalPane(expandedHeight: height)
+                    .frame(
+                        height: workspace.terminals.isCollapsed ? Chrome.tabBarHeight * appZoom : height,
+                        alignment: .top)
+                    .clipped()
+                    .animation(Self.sidebarAnimation, value: workspace.terminals.isCollapsed)
                     .onHover { track(.terminal, isInside: $0) }
                     .overlay(alignment: .topTrailing) {
                         if zoomHUD == .terminal {
@@ -187,6 +193,9 @@ struct WorkspaceView: View {
             } else {
                 return false
             }
+            return true
+        case .toggleTerminal:
+            workspace.terminals.isCollapsed.toggle()
             return true
         case .findAgain(let forward):
             let find = workspace.editor.find
@@ -344,6 +353,11 @@ struct WorkspaceView: View {
             .gesture(
                 DragGesture(minimumDistance: 1, coordinateSpace: .global)
                     .onChanged { value in
+                        // Dragging a collapsed terminal's edge opens it again.
+                        if workspace.terminals.isCollapsed {
+                            workspace.terminals.isCollapsed = false
+                            dragStartHeight = Chrome.tabBarHeight * appZoom
+                        }
                         let start = dragStartHeight ?? clamped(terminalHeight, in: totalHeight)
                         dragStartHeight = start
                         terminalHeight = clamped(start - value.translation.height, in: totalHeight)

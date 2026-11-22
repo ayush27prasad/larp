@@ -9,6 +9,10 @@ final class TerminalStore {
     private(set) var sessions: [TerminalSession] = []
     var activeSessionID: TerminalSession.ID?
 
+    /// Folded down to its tab bar. Not remembered: the terminal always opens
+    /// expanded. Shells keep running while collapsed.
+    var isCollapsed = false
+
     /// Set by the hosting view so ⌘W can tell whether the terminal has focus.
     @ObservationIgnored weak var containerView: NSView?
 
@@ -29,6 +33,8 @@ final class TerminalStore {
         nextNumber += 1
         sessions.append(session)
         activeSessionID = session.id
+        // A new shell is one you want to see.
+        isCollapsed = false
         return session
     }
 

@@ -225,3 +225,17 @@ struct WorkspaceTerminalTests {
         #expect(workspace.editor.hasOpenDocuments == false)
     }
 }
+
+@MainActor
+struct TerminalCollapseTests {
+    @Test func startsExpanded() {
+        #expect(TerminalStore().isCollapsed == false)
+    }
+
+    @Test func aNewShellExpandsACollapsedTerminal() {
+        let store = TerminalStore()
+        store.isCollapsed = true
+        store.newSession(in: URL(fileURLWithPath: "/tmp"))
+        #expect(store.isCollapsed == false)
+    }
+}
