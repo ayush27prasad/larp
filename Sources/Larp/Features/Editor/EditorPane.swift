@@ -8,7 +8,6 @@ struct EditorPane: View {
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.uiZoom) private var zoom
 
-    @State private var editorState = SourceEditorState()
 
     var body: some View {
         VStack(spacing: 0) {
@@ -71,30 +70,13 @@ struct EditorPane: View {
             } else {
                 editor(for: document)
             }
-            StatusBar(document: document, cursor: editorState.cursorPositions?.first)
+            StatusBar(document: document, indexProgress: workspace.indexProgress)
         } else {
             ContentUnavailableView(
                 "No file open",
                 systemImage: "doc.text",
                 description: Text("Select a file in the explorer to open it."))
         }
-    }
-
-    /// The editor state minus its stock find panel's fields. That state is
-    /// shared by every file, so once the stock panel had opened, its open flag
-    /// and query were replayed onto each file opened after — grey, doubled
-    /// match boxes everywhere. Stripped, the editor is never told to show it;
-    /// larp's own find bar is the only one larp drives.
-    private var editorStateWithoutFind: Binding<SourceEditorState> {
-        Binding(
-            get: {
-                var state = editorState
-                state.findPanelVisible = nil
-                state.findText = nil
-                state.replaceText = nil
-                return state
-            },
-            set: { editorState = $0 })
     }
 
     private func editor(for document: OpenDocument) -> some View {
@@ -111,8 +93,14 @@ struct EditorPane: View {
                     wrapLines: false,
                     tabWidth: 4),
                 peripherals: .init(showMinimap: false)),
-            state: editorStateWithoutFind,
-            coordinators: [document.bridge])
+            // Empty and constant. A state shared by every file replayed one
+            // file's leftovers onto the next — the stock find panel, scroll
+            // position, cursor — and undid jumps to definitions and search
+            // results. Larp moves the editor through the document's bridge,
+            // which also reports the cursor back.
+            state: .constant(SourceEditorState()),
+            coordinators: [document.bridge],
+            jumpToDefinitionDelegate: workspace.navigator)
             // Rebuild per file so undo history and scroll don't leak across tabs.
             .id(document.id)
     }

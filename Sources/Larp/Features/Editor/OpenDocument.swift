@@ -30,6 +30,9 @@ final class OpenDocument: Identifiable {
         didSet { bridge.revealPending() }
     }
 
+    /// Where the cursor is, mirrored from the editor for the status bar.
+    var cursor: TextLocation?
+
     /// The find bar, while it is searching this document.
     @ObservationIgnored weak var findModel: FindModel?
 

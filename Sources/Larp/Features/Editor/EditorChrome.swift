@@ -50,20 +50,28 @@ struct PathBar: View {
 /// Below the editor: cursor position, language, encoding, line endings.
 struct StatusBar: View {
     let document: OpenDocument
-    let cursor: CursorPosition?
+    var indexProgress: (done: Int, total: Int)?
 
     @Environment(\.uiZoom) private var zoom
 
     var body: some View {
         HStack(spacing: 16) {
+            if let indexProgress {
+                HStack(spacing: 6) {
+                    ProgressView().controlSize(.mini)
+                    Text("Indexing \(indexProgress.done)/\(indexProgress.total)")
+                        .monospacedDigit()
+                }
+                .help("Building the index for ⌘-click")
+            }
             Spacer()
             if document.zoom != 1 {
                 Text(Zoom.percent(document.zoom))
                     .monospacedDigit()
                     .help("File zoom. ⌘-scroll to change.")
             }
-            if let cursor, !(document.isMarkdown && document.showsPreview) {
-                Text("Ln \(cursor.start.line), Col \(cursor.start.column)")
+            if let cursor = document.cursor, !(document.isMarkdown && document.showsPreview) {
+                Text("Ln \(cursor.line), Col \(cursor.column)")
                     .monospacedDigit()
             }
             Text(LanguageDetection.displayName(of: document.language))

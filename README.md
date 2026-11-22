@@ -229,6 +229,7 @@ README lists which larp features each part exercises.
 | Show or hide the sidebar | ⌃⌘S, or the sidebar button; drag its edge to resize |
 | Move the window | drag the empty part of the tab strip or the sidebar header |
 | Markdown preview / source | ⇧⌘V |
+| Go to definition | ⌘-click a name — several definitions offer a choice |
 | Find in the file | ⌘F — ↩ / ⇧↩ or ⌘G / ⇧⌘G to move, esc to close |
 | Find and replace | ⌥⌘F — regex replacements take `$1` groups |
 | Match case / whole words / regex | ⌥⌘C / ⌥⌘W / ⌥⌘R, in either find |
@@ -305,6 +306,15 @@ collector, so the same data costs the same in either, and most of the footprint
 is AppKit and SwiftUI themselves, which stay. A Rust core would only pay off
 alongside separate Linux and Windows UIs. A specific Rust library with no Swift
 equivalent can still come in behind a narrow interface.
+
+**Go to definition is name-based, from tree-sitter.** Opening a folder parses
+every file in the background with the grammars larp already ships, recording
+where each function, type, method and top-level constant is defined
+(`Features/Navigation/SymbolQueries.swift`, per language); saving re-indexes
+that file. ⌘-click looks the name up. Matching by name, as GitHub's code
+navigation does, means a common name can offer several candidates — the price
+of needing no language server. Opt-in language servers will give exact answers
+later and take over where enabled.
 
 **Generated project files.** `project.yml` is checked in; the `.xcodeproj` is
 not. The cost is one Homebrew dependency; the benefit is a reviewable diff every

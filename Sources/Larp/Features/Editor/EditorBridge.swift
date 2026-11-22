@@ -22,8 +22,42 @@ final class EditorBridge {
         document?.pendingReveal = nil
         let start = CursorPosition.Position(line: location.line, column: location.column)
         let end = CursorPosition.Position(line: location.line, column: location.column + location.length)
-        controller.setCursorPositions([CursorPosition(start: start, end: end)], scrollToVisible: true)
+        controller.setCursorPositions([CursorPosition(start: start, end: end)])
         controller.view.window?.makeFirstResponder(controller.textView)
+        // A freshly opened editor hasn't laid its text out yet, and the
+        // editor's own scroll-to-selection does nothing then; centre the
+        // match once the first layout pass has run.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            self?.centreSelection()
+        }
+    }
+
+    /// Centres the selection in the view, as IntelliJ does on a jump.
+    private func centreSelection() {
+        guard let controller, let range = controller.cursorPositions.first?.range else { return }
+        scroll(controller, toCentre: range)
+    }
+
+    /// Centres `range` vertically. Not the text view's scrollToRange: it moves
+    /// the clip view without telling the scroll view, so the floating
+    /// line-number gutter stayed put, and following it with
+    /// reflectScrolledClipView threw the whole window off screen. NSView's
+    /// scroll(_:) moves the clip view through AppKit's own path instead.
+    private func scroll(_ controller: TextViewController, toCentre range: NSRange) {
+        guard let textView = controller.textView else { return }
+        _ = textView.layoutManager.layoutLines()
+        guard let rect = textView.layoutManager.rectForOffset(range.location) else { return }
+        let visible = controller.scrollView.contentView.bounds
+        guard !visible.contains(rect) else { return reportCursor(controller.cursorPositions) }
+        let top = max(0, rect.midY - visible.height / 2)
+        textView.scroll(NSPoint(x: visible.origin.x, y: top))
+        reportCursor(controller.cursorPositions)
+    }
+
+    /// Mirrors the editor's cursor onto the document, for the status bar.
+    private func reportCursor(_ positions: [CursorPosition]) {
+        guard let start = positions.first?.start, start.line > 0 else { return }
+        document?.cursor = TextLocation(line: start.line, column: start.column)
     }
 
     /// Posted when an editor appears. The editor registers a key monitor as it
@@ -123,9 +157,11 @@ final class EditorBridge {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.08, execute: work)
     }
 
-    /// Selects and scrolls to `range` without taking focus from the find field.
+    /// Selects and centres `range` without taking focus from the find field.
     func select(_ range: NSRange) {
-        controller?.setCursorPositions([CursorPosition(range: range)], scrollToVisible: true)
+        guard let controller else { return }
+        controller.setCursorPositions([CursorPosition(range: range)])
+        scroll(controller, toCentre: range)
     }
 
     /// Through the text view, so the change is undoable like typing.
@@ -163,6 +199,10 @@ extension EditorBridge: @preconcurrency TextViewCoordinator {
             // The new editor starts without find highlights; restore them.
             self?.document?.findModel?.refresh(revealing: false)
         }
+    }
+
+    func textViewDidChangeSelection(controller: TextViewController, newPositions: [CursorPosition]) {
+        reportCursor(newPositions)
     }
 
     func destroy() {

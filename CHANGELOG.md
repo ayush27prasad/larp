@@ -10,6 +10,12 @@ While the major version is `0`, minor bumps may include breaking changes.
 ## [Unreleased]
 
 ### Added
+- ⌘-click a name to jump to its definition, in the same file or another; with
+  several definitions of the name, a chooser lists them, same-file first. A
+  tree-sitter symbol index is built in the background when a folder opens —
+  "Indexing 12/71" shows in the status bar — and updated on save. It covers
+  Python, Go, Java, Rust, TypeScript, TSX, JavaScript, Swift and Kotlin, and
+  matches by name.
 - The terminal collapses to its tab bar and back (⌘J, the chevron at the right
   of its tabs, or View ▸ Hide Terminal), animated. It always starts expanded;
   clicking a tab, opening a terminal or dragging its edge expands it. Shells
@@ -87,6 +93,9 @@ While the major version is `0`, minor bumps may include breaking changes.
   versions instead of whatever is newest in each allowed range.
 
 ### Fixed
+- Jumping to a search result or definition in a newly opened file could leave
+  the view at the top, and the line numbers out of step with the text. The
+  editor no longer shares one state across files, and reveals centre the target.
 - Scrolling the editor drew line numbers over the path bar and tabs. The
   gutter is as tall as the whole file and, since macOS 14, views no longer
   clip to their bounds by default; the editor now clips.

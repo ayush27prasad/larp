@@ -40,6 +40,14 @@ final class Workspace {
     let terminals = TerminalStore()
     let search = SearchStore()
 
+    /// Definitions across the project, for ⌘-click.
+    let symbols = SymbolIndex()
+    let navigator = DefinitionNavigator()
+
+    /// Progress of the index build, nil when idle.
+    private(set) var indexProgress: (done: Int, total: Int)?
+    @ObservationIgnored private var indexTask: Task<Void, Never>?
+
     private let defaults: UserDefaults
     private static let lastFolderKey = "workspace.lastFolderPath"
     private static let openFilesKey = "workspace.openFilePaths"
@@ -48,6 +56,28 @@ final class Workspace {
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
         search.files = { [weak self] in self?.projectFiles ?? [] }
+        navigator.workspace = self
+    }
+
+    /// Waits for the index build under way, if any; for tests.
+    func indexBuilt() async {
+        await indexTask?.value
+    }
+
+    /// Indexes the open folder in the background, replacing any build under
+    /// way for a previous one.
+    private func rebuildIndex() {
+        indexTask?.cancel()
+        let files = projectFiles
+        indexProgress = (0, files.count)
+        indexTask = Task { [symbols] in
+            await symbols.rebuild(files: files) { done, total in
+                await MainActor.run { [weak self] in
+                    guard !Task.isCancelled else { return }
+                    self?.indexProgress = done < total ? (done, total) : nil
+                }
+            }
+        }
     }
 
     /// Every file in the tree, in explorer order — what Find in Files searches.
@@ -116,6 +146,7 @@ final class Workspace {
             treeState = .loaded(tree.root, isTruncated: tree.isTruncated)
             // A search opened while the tree loaded saw no files; rerun it.
             search.refresh()
+            rebuildIndex()
         } catch {
             guard folderGeneration == generation else { return generation }
             treeState = .failed(error.localizedDescription)
@@ -211,6 +242,8 @@ final class Workspace {
         guard let document = editor.activeDocument else { return }
         do {
             try document.save()
+            let (url, text) = (document.url, document.text)
+            Task { [symbols] in await symbols.update(url, text: text) }
         } catch {
             saveFailure = SaveFailure(fileName: document.name, reason: error.localizedDescription)
         }
