@@ -40,16 +40,29 @@ struct WorkspaceView: View {
     private static let minimumTerminalHeight = 90.0
     private static let minimumEditorHeight = 200.0
     private static let sidebarWidthRange = 180.0...480.0
+    private static let sidebarAnimation = Animation.smooth(duration: 0.25)
+
+    private var clampedSidebarWidth: Double {
+        min(max(sidebarWidth, Self.sidebarWidthRange.lowerBound), Self.sidebarWidthRange.upperBound)
+    }
 
     var body: some View {
         GeometryReader { geometry in
             let height = clamped(terminalHeight, in: geometry.size.height)
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
+                    // Always laid out; collapsing animates its width to zero,
+                    // so the explorer slides out at the edge while the editor
+                    // widens in the same motion, as Xcode's and Finder's
+                    // sidebars do. Inserting and removing it instead made the
+                    // editor and terminal jump to their new widths.
+                    sidebar
+                        .frame(width: clampedSidebarWidth)
+                        .frame(width: sidebarIsVisible ? clampedSidebarWidth : 0, alignment: .trailing)
+                        .clipped()
+                        .allowsHitTesting(sidebarIsVisible)
+                        .accessibilityHidden(!sidebarIsVisible)
                     if sidebarIsVisible {
-                        sidebar
-                            .frame(width: min(max(sidebarWidth, Self.sidebarWidthRange.lowerBound), Self.sidebarWidthRange.upperBound))
-                            .transition(.move(edge: .leading))
                         verticalDivider
                     }
                     EditorPane()
@@ -67,10 +80,17 @@ struct WorkspaceView: View {
                                 SidebarToggle()
                                     .frame(height: Chrome.tabBarHeight * appZoom)
                                     .padding(.leading, windowButtonsWidth)
+                                    // Fades in once the sidebar has slid away, not
+                                    // while its own toggle is still passing beneath.
+                                    .transition(.asymmetric(
+                                        insertion: .opacity.animation(.easeOut(duration: 0.15).delay(0.18)),
+                                        removal: .opacity.animation(.easeIn(duration: 0.08))))
                             }
                         }
                 }
                 .frame(maxHeight: .infinity)
+                // Whatever toggles the sidebar — button, ⌃⌘S, the menu — it animates.
+                .animation(Self.sidebarAnimation, value: sidebarIsVisible)
 
                 divider(totalHeight: geometry.size.height)
 

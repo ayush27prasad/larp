@@ -41,7 +41,7 @@ struct SidebarToggle: View {
 
     var body: some View {
         Button {
-            withAnimation(.easeInOut(duration: 0.18)) { isVisible.toggle() }
+            isVisible.toggle()
         } label: {
             Image(systemName: "sidebar.left")
                 .font(.system(size: 13 * zoom))

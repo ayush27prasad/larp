@@ -79,7 +79,7 @@ struct LarpApp: App {
             }
             CommandGroup(replacing: .sidebar) {
                 Button(sidebarIsVisible ? "Hide Sidebar" : "Show Sidebar") {
-                    withAnimation(.easeInOut(duration: 0.18)) { sidebarIsVisible.toggle() }
+                    sidebarIsVisible.toggle()
                 }
                 .keyboardShortcut("s", modifiers: [.control, .command])
 

@@ -54,6 +54,8 @@ While the major version is `0`, minor bumps may include breaking changes.
   a Mermaid diagram, and deliberate binary and Latin-1 files.
 
 ### Changed
+- Showing and hiding the sidebar animates: it slides out at the edge while the
+  editor widens alongside, instead of the editor and terminal jumping.
 - The sidebar header marks the project name with a folder icon, and the app
   zoom pill shows just the level.
 - Refusals state the rule instead of speaking as the app: "Only UTF-8 text
