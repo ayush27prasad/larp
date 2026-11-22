@@ -86,6 +86,14 @@ final class EditorBridge {
         removeFindLayers()
     }
 
+    /// The stock find panel's emphasis group in CodeEditSourceEditor.
+    private static let stockFindGroup = "codeedit.find"
+
+    /// Removes matches the editor's own find panel emphasised, in case it ran.
+    func clearStockFindHighlights() {
+        controller?.textView.emphasisManager?.removeEmphases(for: Self.stockFindGroup)
+    }
+
     private func removeFindLayers() {
         findLayers.forEach { $0.removeFromSuperlayer() }
         findLayers = []

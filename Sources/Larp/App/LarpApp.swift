@@ -55,7 +55,10 @@ struct LarpApp: App {
                 Button("Close Tab") { workspace.closeFocusedTab() }
                     .keyboardShortcut("w")
             }
-            CommandGroup(after: .textEditing) {
+            // Replacing, not adding to, the system's text-editing commands: its
+            // Find submenu drives the editor's stock panel, and two Find menus
+            // would be confusing.
+            CommandGroup(replacing: .textEditing) {
                 // The keys reach InputMonitor first; these make them discoverable.
                 Button("Find…") { workspace.showFind(replace: false) }
                     .keyboardShortcut("f")

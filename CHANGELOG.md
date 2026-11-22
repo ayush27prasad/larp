@@ -81,6 +81,11 @@ While the major version is `0`, minor bumps may include breaking changes.
   versions instead of whatever is newest in each allowed range.
 
 ### Fixed
+- Grey, blurry match boxes could appear in every file opened after the editor's
+  stock find panel had been used once — its open state and query were kept in
+  editor state shared across files and replayed. That state is no longer passed
+  to the editor, and the Edit menu's system Find items, which opened the stock
+  panel, are replaced by larp's.
 - After its window had been closed, larp could relaunch with no window at all,
   and a folder handed over by Finder opened invisibly. The window now always
   opens at launch and is brought back for Finder opens.

@@ -70,6 +70,8 @@ final class Workspace {
         guard let document = editor.activeDocument else { return false }
         // Find works on the source; leave the rendered preview for it.
         if document.isMarkdown && document.showsPreview { document.showsPreview = false }
+        // Clear any grey matches the editor's stock panel left, if it ever ran.
+        document.bridge.clearStockFindHighlights()
         editor.find.show(replace: replace, prefill: document.bridge.selectedText)
         return true
     }

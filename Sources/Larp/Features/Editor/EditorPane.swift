@@ -80,6 +80,23 @@ struct EditorPane: View {
         }
     }
 
+    /// The editor state minus its stock find panel's fields. That state is
+    /// shared by every file, so once the stock panel had opened, its open flag
+    /// and query were replayed onto each file opened after — grey, doubled
+    /// match boxes everywhere. Stripped, the editor is never told to show it;
+    /// larp's own find bar is the only one larp drives.
+    private var editorStateWithoutFind: Binding<SourceEditorState> {
+        Binding(
+            get: {
+                var state = editorState
+                state.findPanelVisible = nil
+                state.findText = nil
+                state.replaceText = nil
+                return state
+            },
+            set: { editorState = $0 })
+    }
+
     private func editor(for document: OpenDocument) -> some View {
         @Bindable var document = document
 
@@ -94,7 +111,7 @@ struct EditorPane: View {
                     wrapLines: false,
                     tabWidth: 4),
                 peripherals: .init(showMinimap: false)),
-            state: $editorState,
+            state: editorStateWithoutFind,
             coordinators: [document.bridge])
             // Rebuild per file so undo history and scroll don't leak across tabs.
             .id(document.id)
