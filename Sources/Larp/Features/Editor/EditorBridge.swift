@@ -147,6 +147,12 @@ extension EditorBridge: @preconcurrency TextViewCoordinator {
 
     func controllerDidAppear(controller: TextViewController) {
         self.controller = controller
+        // The line-number gutter is a floating subview of the scroll view as
+        // tall as the whole document, and since macOS 14 views don't clip to
+        // their bounds by default: scrolled, its off-screen numbers drew over
+        // the path bar and tabs. Clip the scroll view and its container.
+        controller.scrollView.clipsToBounds = true
+        controller.view.clipsToBounds = true
         // Not in prepareCoordinator: the scroll view doesn't exist until the
         // view has loaded.
         observeScrolling(of: controller)

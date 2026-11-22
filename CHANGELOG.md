@@ -87,6 +87,9 @@ While the major version is `0`, minor bumps may include breaking changes.
   versions instead of whatever is newest in each allowed range.
 
 ### Fixed
+- Scrolling the editor drew line numbers over the path bar and tabs. The
+  gutter is as tall as the whole file and, since macOS 14, views no longer
+  clip to their bounds by default; the editor now clips.
 - Grey, blurry match boxes could appear in every file opened after the editor's
   stock find panel had been used once — its open state and query were kept in
   editor state shared across files and replayed. That state is no longer passed
