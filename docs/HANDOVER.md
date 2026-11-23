@@ -27,6 +27,11 @@ docs/product-reference ─────────────┴─ develop
 The user merges, never the agent (see CLAUDE.md, *How features ship*). New work
 branches off `develop` until it lands on `main`.
 
+**Fresh clone:** run `./Scripts/bootstrap.sh` before anything else. The
+Xcode project is generated and gitignored, so a clone has none until
+bootstrap makes it (it installs XcodeGen through Homebrew if missing). Then
+build and test as in CLAUDE.md.
+
 **Uncommitted on purpose:** `Examples/Production/services/orders-api/app/pricing.py`
 has the user's own experiment (`TAX_RATE = 0.85`). Never commit or revert it.
 

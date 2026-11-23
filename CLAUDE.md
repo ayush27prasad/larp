@@ -34,7 +34,7 @@ relitigate those without a reason neither document already answers.
 ## Build and test
 
 ```sh
-./Scripts/bootstrap.sh    # after adding, removing or renaming any file
+./Scripts/bootstrap.sh    # on a fresh clone, and after adding, removing or renaming any file
 xcodebuild -scheme Larp -destination 'platform=macOS' -skipPackagePluginValidation build
 xcodebuild -scheme Larp -destination 'platform=macOS' -skipPackagePluginValidation test
 ```
