@@ -347,10 +347,11 @@ Ordered, and deliberately narrow. Each milestone is independently usable.
 After that, in rough order: walkthroughs, the sidecar chat, and deeper
 integration with Claude Code and Codex. These get specified as they come up.
 
-Explicit non-goals: extensions, debugging, language servers, remote development,
-split editors. larp is not a Git client — diffs exist for review, and committing
-stays with your agent or the terminal. And it is not another coding agent: the
-sidecar works for the one you already run.
+The full feature list — IntelliJ-style navigation and refactoring via opt-in
+language servers, the agent harness and walkthroughs, manager mode, and modules
+for databases, diagrams and JSON — lives in [docs/PRODUCT.md](docs/PRODUCT.md),
+with the status of each. larp is macOS only, and it is not another coding agent:
+the sidecar works for the one you already run.
 
 ## Contributing
 
