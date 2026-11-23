@@ -99,7 +99,8 @@ final class FindModel {
     }
 
     func replaceCurrent() {
-        guard let document, let currentIndex, matches.indices.contains(currentIndex) else { return }
+        guard let document, !document.isReadOnly,
+              let currentIndex, matches.indices.contains(currentIndex) else { return }
         let range = matches[currentIndex]
         document.bridge.replace(range, with: replacementText(for: range, in: document.text))
         // The edit changes the text; refresh keeps the index, which now points
@@ -108,7 +109,7 @@ final class FindModel {
     }
 
     func replaceAll() {
-        guard let document, !matches.isEmpty else { return }
+        guard let document, !document.isReadOnly, !matches.isEmpty else { return }
         let text = document.text
         // Back to front, so earlier ranges stay valid as later ones change.
         for range in matches.reversed() {

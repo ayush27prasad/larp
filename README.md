@@ -229,7 +229,7 @@ README lists which larp features each part exercises.
 | Show or hide the sidebar | ⌃⌘S, or the sidebar button; drag its edge to resize |
 | Move the window | drag the empty part of the tab strip or the sidebar header |
 | Markdown preview / source | ⇧⌘V |
-| Go to definition | ⌘-click a name — several definitions offer a choice |
+| Go to definition | ⌘-click a name — several definitions offer a choice; library names open the library's source, read-only |
 | Find in the file | ⌘F — ↩ / ⇧↩ or ⌘G / ⇧⌘G to move, esc to close |
 | Find and replace | ⌥⌘F — regex replacements take `$1` groups |
 | Match case / whole words / regex | ⌥⌘C / ⌥⌘W / ⌥⌘R, in either find |
@@ -278,7 +278,8 @@ integration with the open folder.
 
 **The tree loads eagerly.** Lazy per-expansion loading needs expansion callbacks
 `OutlineGroup` does not provide, so the whole tree is walked on open. A skip list
-(`.git`, `node_modules`, `.build`, `DerivedData`, `__pycache__`) and a 20,000-entry
+(`.git`, `node_modules`, `.build`, `DerivedData`, `__pycache__`, Python
+virtualenvs `.venv`/`venv` and tool caches) and a 20,000-entry
 budget keep that bounded; the explorer says so when the budget is hit. Other
 dotfiles stay visible — `.gitignore` and `.env` are files people open.
 
@@ -315,6 +316,16 @@ that file. ⌘-click looks the name up. Matching by name, as GitHub's code
 navigation does, means a common name can offer several candidates — the price
 of needing no language server. Opt-in language servers will give exact answers
 later and take over where enabled.
+
+A name the project doesn't define is looked up in library source, on demand
+(`LibraryLocator`): the file's imports, plus the project's manifests, point at
+a few packages — a virtualenv's `site-packages` and the Python standard library
+beside it, `node_modules` and `@types`, Go's standard library and module cache
+(by `go.mod` version, or `vendor/`), Cargo's registry (by `Cargo.lock` version)
+and rustup's `rust-src`. Only files containing the name are parsed, at most
+4,000 per lookup, and the last 32 answers are cached. Library files open
+read-only. Java and Kotlin libraries are compiled jars with no source to find;
+those wait for language servers.
 
 **Generated project files.** `project.yml` is checked in; the `.xcodeproj` is
 not. The cost is one Homebrew dependency; the benefit is a reviewable diff every

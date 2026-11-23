@@ -132,6 +132,7 @@ final class Workspace {
         rootURL = url
         selectedURL = nil
         editor.closeAll()
+        editor.projectRoot = url
         // Shells are rooted at the project, so a new project means new shells.
         terminals.closeAll()
         terminals.newSession(in: url)
@@ -175,6 +176,7 @@ final class Workspace {
         rootURL = nil
         selectedURL = nil
         editor.closeAll()
+        editor.projectRoot = nil
         treeState = .empty
         defaults.removeObject(forKey: Self.lastFolderKey)
         persistSession()
@@ -239,7 +241,7 @@ final class Workspace {
     var saveFailure: SaveFailure?
 
     func saveActiveDocument() {
-        guard let document = editor.activeDocument else { return }
+        guard let document = editor.activeDocument, !document.isReadOnly else { return }
         do {
             try document.save()
             let (url, text) = (document.url, document.text)

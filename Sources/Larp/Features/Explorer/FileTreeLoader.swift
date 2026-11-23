@@ -10,6 +10,8 @@ enum FileTreeLoader {
     /// hidden in general — `.gitignore` and `.env` are files people want to open.
     static let ignoredDirectoryNames: Set<String> = [
         ".git", ".hg", ".svn", ".build", "node_modules", "DerivedData", "__pycache__",
+        // Python environments and caches: library code, reached by ⌘-click.
+        ".venv", "venv", ".tox", ".mypy_cache", ".pytest_cache",
     ]
 
     static let ignoredFileNames: Set<String> = [".DS_Store"]

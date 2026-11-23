@@ -22,6 +22,10 @@ final class DocumentStore {
     let find = FindModel()
     private(set) var previewDocumentID: URL?
 
+    /// The open project. Files outside it — library source reached by
+    /// ⌘-click — open read-only.
+    var projectRoot: URL?
+
     /// Bumped by closeAll, so a load still in flight from before is dropped
     /// rather than landing as a tab in whatever folder is open now.
     private var generation = 0
@@ -71,6 +75,10 @@ final class DocumentStore {
             url: url,
             text: contents.text,
             encoding: contents.encoding)
+        if let projectRoot {
+            let root = projectRoot.standardizedFileURL.path
+            document.isReadOnly = !url.standardizedFileURL.path.hasPrefix(root + "/")
+        }
 
         if preview,
            let replacing = previewDocumentID,

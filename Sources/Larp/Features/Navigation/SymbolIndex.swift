@@ -57,18 +57,88 @@ actor SymbolIndex {
     }
 
     private func index(_ url: URL, text: String? = nil) {
-        guard let text = text ?? Self.read(url) else {
-            symbolsByFile[url] = nil
-            return
-        }
+        symbolsByFile[url] = (text ?? Self.read(url)).flatMap { parse(url, text: $0) }
+    }
+
+    private func parse(_ url: URL, text: String) -> [Symbol]? {
         let language = LanguageDetection.language(for: url, prefix: String(text.prefix(1_024)))
         guard let grammar = language.language, let query = query(for: language.id, grammar: grammar) else {
-            symbolsByFile[url] = nil
-            return
+            return nil
         }
         let parser = Parser()
-        guard (try? parser.setLanguage(grammar)) != nil, let tree = parser.parse(text) else { return }
-        symbolsByFile[url] = Self.symbols(in: text, url: url, tree: tree, query: query)
+        guard (try? parser.setLanguage(grammar)) != nil, let tree = parser.parse(text) else { return nil }
+        return Self.symbols(in: text, url: url, tree: tree, query: query)
+    }
+
+    // MARK: - Libraries
+
+    /// Files read per library lookup at most, so a huge package can't stall a click.
+    static let libraryFileLimit = 4_000
+
+    /// Recent library lookups. Library source rarely changes while the app
+    /// runs, and a handful of answers is all a reading session revisits.
+    private var libraryCache: [String: [Symbol]] = [:]
+    private var libraryCacheOrder: [String] = []
+    private static let libraryCacheSize = 32
+
+    /// Definitions of `name` in library source, searched on demand: files
+    /// that don't contain the name are skipped before parsing.
+    func libraryDefinitions(
+        named name: String, in locations: [LibraryLocator.Location], extensions: Set<String>
+    ) -> [Symbol] {
+        let key = name + "|" + locations.map(\.url.path).joined(separator: "|")
+        if let cached = libraryCache[key] { return cached }
+
+        let needle = Data(name.utf8)
+        var symbols: [Symbol] = []
+        var budget = Self.libraryFileLimit
+        for file in Self.files(in: locations, extensions: extensions) {
+            budget -= 1
+            if budget < 0 || Task.isCancelled { break }
+            guard let data = try? Data(contentsOf: file, options: .mappedIfSafe),
+                  data.count <= TextFileLoader.maximumByteCount,
+                  data.range(of: needle) != nil,
+                  let text = try? TextFileLoader.decode(data).text
+            else { continue }
+            symbols += (parse(file, text: text) ?? []).filter { $0.name == name }
+        }
+
+        libraryCache[key] = symbols
+        libraryCacheOrder.append(key)
+        if libraryCacheOrder.count > Self.libraryCacheSize {
+            libraryCache[libraryCacheOrder.removeFirst()] = nil
+        }
+        return symbols
+    }
+
+    private static func files(in locations: [LibraryLocator.Location], extensions: Set<String>) -> [URL] {
+        let fm = FileManager.default
+        var files: [URL] = []
+        for location in locations {
+            var isDirectory: ObjCBool = false
+            guard fm.fileExists(atPath: location.url.path, isDirectory: &isDirectory) else { continue }
+            guard isDirectory.boolValue else {
+                files.append(location.url)
+                continue
+            }
+            let options: FileManager.DirectoryEnumerationOptions = location.recursive
+                ? [.skipsHiddenFiles] : [.skipsHiddenFiles, .skipsSubdirectoryDescendants]
+            guard let enumerator = fm.enumerator(
+                at: location.url, includingPropertiesForKeys: [.isDirectoryKey], options: options)
+            else { continue }
+            for case let url as URL in enumerator {
+                // A package's own dependencies and its tests aren't its API.
+                if ["node_modules", "tests", "test", "__tests__", "testdata"].contains(url.lastPathComponent) {
+                    enumerator.skipDescendants()
+                    continue
+                }
+                let name = url.lastPathComponent
+                guard extensions.contains(url.pathExtension), !name.hasSuffix("_test.go") else { continue }
+                files.append(url)
+                if files.count >= libraryFileLimit { return files }
+            }
+        }
+        return files
     }
 
     private func query(for language: TreeSitterLanguage, grammar: Language) -> Query? {

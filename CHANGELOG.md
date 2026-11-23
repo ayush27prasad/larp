@@ -16,6 +16,13 @@ While the major version is `0`, minor bumps may include breaking changes.
   "Indexing 12/71" shows in the status bar — and updated on save. It covers
   Python, Go, Java, Rust, TypeScript, TSX, JavaScript, Swift and Kotlin, and
   matches by name.
+- ⌘-click also reaches into libraries: a name the project doesn't define is
+  found in the source of the packages the file imports — a project virtualenv
+  and the Python standard library, `node_modules` and `@types`, Go's standard
+  library and module cache, Cargo's registry and Rust's standard library.
+  Files outside the project open read-only, marked with a lock in the status
+  bar, and show their full path. Java and Kotlin libraries ship as jars
+  without source, so they aren't reachable yet.
 - The terminal collapses to its tab bar and back (⌘J, the chevron at the right
   of its tabs, or View ▸ Hide Terminal), animated. It always starts expanded;
   clicking a tab, opening a terminal or dragging its edge expands it. Shells
@@ -64,6 +71,10 @@ While the major version is `0`, minor bumps may include breaking changes.
   a Mermaid diagram, and deliberate binary and Latin-1 files.
 
 ### Changed
+- Python virtualenvs (`.venv`, `venv`) and the `.tox`, `.mypy_cache` and
+  `.pytest_cache` folders are skipped like `node_modules`: kept out of the
+  explorer, Find in Files and the index, so library names don't crowd the
+  project's own in the ⌘-click chooser.
 - Showing and hiding the sidebar animates: it slides out at the edge while the
   editor widens alongside, instead of the editor and terminal jumping.
 - The sidebar header marks the project name with a folder icon, and the app

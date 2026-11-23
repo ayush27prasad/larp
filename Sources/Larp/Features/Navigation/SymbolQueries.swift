@@ -48,6 +48,9 @@ enum SymbolQueries {
         case .typescript, .tsx:
             return [
                 "(function_declaration name: (identifier) @function)",
+                // Declarations without bodies, as in .d.ts files.
+                "(function_signature name: (identifier) @function)",
+                "(method_signature name: (property_identifier) @method)",
                 "(class_declaration name: (type_identifier) @class)",
                 "(abstract_class_declaration name: (type_identifier) @class)",
                 "(interface_declaration name: (type_identifier) @type)",

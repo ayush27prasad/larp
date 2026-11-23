@@ -92,6 +92,7 @@ struct EditorPane: View {
                     lineHeightMultiple: 1.35,
                     wrapLines: false,
                     tabWidth: 4),
+                behavior: .init(isEditable: !document.isReadOnly),
                 peripherals: .init(showMinimap: false)),
             // Empty and constant. A state shared by every file replayed one
             // file's leftovers onto the next — the stock find panel, scroll

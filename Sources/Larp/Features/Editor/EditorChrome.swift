@@ -40,9 +40,13 @@ struct PathBar: View {
         .background(Color(nsColor: Chrome.contentBackground), ignoresSafeAreaEdges: [])
     }
 
-    /// The path below the project folder, or just the name outside one.
+    /// The path below the project folder; outside it, the full path, so
+    /// library source shows which package it came from.
     private var segments: [String] {
-        guard let root, document.url.path.hasPrefix(root.path + "/") else { return [document.name] }
+        guard let root, document.url.path.hasPrefix(root.path + "/") else {
+            return (document.url.path as NSString).abbreviatingWithTildeInPath
+                .split(separator: "/").map(String.init)
+        }
         return document.url.path.dropFirst(root.path.count + 1).split(separator: "/").map(String.init)
     }
 }
@@ -65,6 +69,10 @@ struct StatusBar: View {
                 .help("Building the index for ⌘-click")
             }
             Spacer()
+            if document.isReadOnly {
+                Label("Read-only", systemImage: "lock.fill")
+                    .help("Outside the project. Only project files can be edited.")
+            }
             if document.zoom != 1 {
                 Text(Zoom.percent(document.zoom))
                     .monospacedDigit()

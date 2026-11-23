@@ -39,6 +39,9 @@ final class OpenDocument: Identifiable {
     /// Connects this document to its editor view while one is showing.
     @ObservationIgnored let bridge = EditorBridge()
 
+    /// Outside the project, as library source is: viewable, never saved.
+    var isReadOnly = false
+
     /// This file's own zoom, on top of the app's; ⌘-scroll over the editor.
     var zoom = 1.0
 
@@ -65,6 +68,7 @@ final class OpenDocument: Identifiable {
     }
 
     func save() throws {
+        guard !isReadOnly else { return }
         try encoding.encode(text).write(to: url, options: .atomic)
         savedText = text
         isDirty = false
