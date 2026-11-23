@@ -10,7 +10,8 @@ Status words used below:
 - **Proposed** — Claude's recommendation, not yet confirmed by the user.
 - **Shipped / In progress / Planned / Idea** — feature state.
 
-Last reviewed: 2026-11-18.
+Last reviewed: 2026-11-23. "On develop" means built and pushed on the
+`develop` branch, awaiting the user's merge; see [HANDOVER.md](HANDOVER.md).
 
 ## 1. What larp is
 
@@ -50,12 +51,12 @@ Two ways to use it:
 | # | Feature | Status | Notes |
 |---|---|---|---|
 | F1 | Explorer: open a folder, file tree, session restore | Shipped (0.2) | Eager walk, 20k-entry cap. |
-| F2 | Editor: tabs (VS Code preview model), editing, saving, tree-sitter highlighting | Shipped (0.3) | UTF-8 only; refusals explained. |
-| F3 | Terminal: multiple PTY tabs, rename, close on clean exit | Shipped (0.3) | SwiftTerm 1.99. |
+| F2 | Editor: tabs (VS Code preview model), editing, saving, tree-sitter highlighting | Shipped (0.3) | Since then, on develop: UTF-16/Windows-1252/Latin-1 round-trip, markdown preview, path and status bars, zoom, dark neon / light Apple themes. |
+| F3 | Terminal: multiple PTY tabs, rename, close on clean exit | Shipped (0.3) | SwiftTerm 1.99. On develop: collapse to the tab bar (⌘J), animated; per-shell zoom. |
 | F4 | Keep up with the agent: tree and open tabs reload on external changes; unsaved edits never silently lost (prompts on close/quit, conflict when disk and buffer both changed) | Planned (0.4) | Prerequisite for everything agentic. |
-| F5 | Find in file, pane show/hide | Planned (0.4) | |
+| F5 | Find in file, pane show/hide | On develop | larp's own ⌘F bar (case/word/regex, replace with `$1`), Find in Files ⇧⌘F, animated sidebar (⌃⌘S) and terminal (⌘J). |
 | F6 | **Diff checker / review**: what changed, file by file and hunk by hunk; accept/reject; comment back to the agent | Planned (0.5) | Core differentiator. |
-| F7 | **Code navigation à la IntelliJ**: ⌘-click go-to-definition, find usages, symbol search, call hierarchy | Planned | Via LSP (P1/P2) per enabled language. |
+| F7 | **Code navigation à la IntelliJ**: ⌘-click go-to-definition, find usages, symbol search, call hierarchy | In progress | On develop: ⌘-click from a name-based tree-sitter index, plus on-demand lookup in library source (venv, node_modules, Go, Cargo; read-only). Next: find usages, symbol search; exact answers via LSP (P1/P2) per enabled language. |
 | F8 | **Refactoring**: rename, extract, code actions | Planned | LSP gives rename/extract/code actions; IntelliJ's deepest per-language refactorings are out of reach without its engines — agents cover the rest. |
 | F9 | **Per-language opt-in** (LSP install/enable per language) | Planned | D4, P1. |
 | F10 | **Agent harness**: master agent (Claude Code or Codex) + sidecar agent working alongside, sharing context | Planned | P4, P5. Sidecar serves the master; it doesn't compete for the code. |

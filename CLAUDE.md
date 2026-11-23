@@ -12,6 +12,10 @@ it is only proposed), and the status of every feature. Features are built one
 at a time; when one is specified, changed or shipped, update its row there in
 the same commit. Never treat a *Proposed* item as decided.
 
+**Then [docs/HANDOVER.md](docs/HANDOVER.md)**: where the work stands, which
+branch to build on, the editor pitfalls already paid for, how to verify UI
+without input access, and how each remaining feature plugs in.
+
 Then [README.md](README.md): *Architecture decisions* explains why the app is
 unsandboxed, all Swift, and built on CodeEditSourceEditor and SwiftTerm. Don't
 relitigate those without a reason neither document already answers.

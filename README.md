@@ -341,7 +341,8 @@ Ordered, and deliberately narrow. Each milestone is independently usable.
   PTY terminal rooted at the open folder
 - [ ] **0.4** — Keeping up with the agent: the tree and open tabs pick up files
   created, changed or deleted outside the app, and unsaved edits are never
-  silently discarded or overwritten. Also find in file and pane show/hide.
+  silently discarded or overwritten. Also find in file and pane show/hide
+  (built, on `develop`), and ⌘-click go to definition (built, name-based).
 - [ ] **0.5** — Review: what the agent changed, file by file and hunk by hunk.
 
 After that, in rough order: walkthroughs, the sidecar chat, and deeper
